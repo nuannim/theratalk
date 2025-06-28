@@ -1,4 +1,4 @@
-# install node & express
+# how to install node & express
 
 download node.js (LTS version recommended)  
 https://nodejs.org/en/download
@@ -56,10 +56,8 @@ npm install -g nodemon
 ```
 ---
 <br>
-<br>
 
-
-# install express ejs sqlite3
+# how to install express ejs sqlite3
 ```bash
 npm init -y
 npm install express ejs sqlite3
