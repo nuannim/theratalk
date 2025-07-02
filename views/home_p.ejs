@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home_p.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+    <%- include("nav") %>
+    <div class="main">
+        <div class="label">
+            <h2>แบบฝึกหัดทั้งหมด</h2>
+            <i class="fa-solid fa-square-plus" onclick="sho()"></i>
+        </div>
+        <div class="lesson">
+            <a href="/lesson">
+                <div id="l1">
+                    <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                    <p>ผู้รับการบำบัด 15 คน</p>
+                </div>
+            </a>
+            <div id="l1">
+                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                <p>ผู้รับการบำบัด 15 คน</p>
+            </div>
+            <div id="l1">
+                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                <p>ผู้รับการบำบัด 15 คน</p>
+            </div>
+            <div id="l1">
+                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                <p>ผู้รับการบำบัด 15 คน</p>
+            </div>
+            <div id="l1">
+                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                <p>ผู้รับการบำบัด 15 คน</p>
+            </div>
+            <div id="l1">
+                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
+                <p>ผู้รับการบำบัด 15 คน</p>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div id="toppop">
+            <i class="fa-solid fa-xmark" onclick="bac()"></i>
+            <h2>สร้างแบบฝึกหัดใหม่</h2>
+            <p>ตั้งชื่อแบบฝึกหัด</p>
+            <input type="text" name="lesname" id="lesname">
+            <p>เลือกประเภทแบบฝึกหัด</p>
+            <select name="lescat" id="lescat">
+                <option value="" selected>ประเภทแบบฝึกหัด</option>
+            </select>
+            <button type="button" class="btnsolid" id="next">ถัดไป</button>
+        </div>
+        <div id="botpop">
+            <h2>เชิญผู้ป่วยของคุณผ่านลิงก์</h2>
+            <div class="link">
+                <p>www.theratalk.com/lesson/code</p>
+                <button type="button" id="copy">คัดลอก</button>
+            </div>
+            <div class="forbut">
+                <button type="button" class="btntrans" id="back">ย้อนกลับ</button>
+                <button type="button" class="btnsolid" id="finish">เสร็จสิ้น</button>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" onclick="bac()"></div>
+</body>
+<script src="home_p.js"></script>
+</html>

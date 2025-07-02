@@ -1,0 +1,54 @@
+*{
+    font-family: "Prompt";
+    text-decoration: none;
+    scroll-behavior: smooth;
+    color: #7293DF;
+    font-weight: 550;
+}
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+#progress{
+    color: #7293DF;
+}
+.main{
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+.top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.top i{
+    display: flex;
+    align-self: center;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 1em;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #BEC9D5;
+}
+th{
+    padding: 5px;
+    text-align: start;
+    color: white;
+}
+td{
+    font-size: 15px;
+    padding: 5px;
+    border-top: 1px solid #BEC9D5;
+    font-weight: 400;
+}
+thead{
+    background-color: #7293DF;
+    height: 40px;
+}

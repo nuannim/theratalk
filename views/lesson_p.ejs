@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lesson_p.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>Lesson</title>
+</head>
+<body>
+    <%- include("nav") %>
+    <div class="main">
+        <div class="fori">
+            <a href="/">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="contain">
+            <div class="top">
+                <h3>การฟังและออกเสียงพยัญชนะและสระ</h3>
+            </div>
+            <input type="radio" name="tab" id="tab1" checked="checked">
+            <input type="radio" name="tab" id="tab2">
+            <div class="mode">
+                <label for="tab1">ผู้ป่วย</label>
+                <label for="tab2">มอบหมายแบบฝึกหัด</label>
+            </div>
+            <div class="content">
+                <div class="abovetable">
+                    <h2>n คน</h2>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ชื่อ</th>
+                            <th>คะแนนที่ได้รับ</th>
+                            <th>เวลาที่ใช้</th>
+                            <th>จำนวนครั้งที่ทำแบบฝึกหัด</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>แจ๋ม สโมสรชิมิ</td>
+                            <td>40</td>
+                            <td>3 ชั่วโมง</td>
+                            <td>65</td>
+                        </tr>
+                        <tr>
+                            <td>แจ๋ม</td>
+                            <td>40</td>
+                            <td>3 ชั่วโมง</td>
+                            <td>65</td>
+                        </tr>
+                        <tr>
+                            <td>แจ๋ม</td>
+                            <td>40</td>
+                            <td>3 ชั่วโมง</td>
+                            <td>65</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="les">
+                <h3>กำหนดจำนวนคะแนน</h3>
+                <div class="score">
+                    <div class="first">
+                        <h4>10 คะแนน</h4>
+                        <p>ใช้เวลา 5 นาที</p>
+                    </div>
+                    <div class="thirst">
+                        <h4>30 คะแนน</h4>
+                        <p>ใช้เวลา 15 นาที</p>
+                    </div>
+                    <div class="fif">
+                        <h4>50 คะแนน</h4>
+                        <p>ใช้เวลา 25 นาที</p>
+                    </div>
+                    <div class="ten">
+                        <input type="text" name="custom" id="custom" placeholder="กำหนดเอง">
+                        <p>คะแนน</p>
+                    </div>
+                </div>
+                <h3>กำหนดส่ง</h3>
+                <div class="submitday">
+                    <h4>เริ่มต้น</h4>
+                    <div class="dt-start">
+                        <input type="date" name="d-start" id="d-start">
+                        <input type="time" name="t-start" id="t-start">
+                    </div>
+                    <h4>กำหนดส่ง</h4>
+                    <div class="dt-end">
+                        <input type="date" name="d-end" id="d-end">
+                        <input type="time" name="t-end" id="t-end">
+                    </div>
+                    <h4>ความถี่</h4>
+                    <select name="freq" id="freq">
+                        <option selected></option>
+                        <option value="once">ครั้งเดียว</option>
+                    </select>
+                </div>
+                <div class="but">
+                    <button type="submit">เสร็จสิ้น</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

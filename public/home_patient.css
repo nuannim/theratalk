@@ -1,0 +1,11 @@
+*{
+    font-family: "Prompt";
+    text-decoration: none;
+    scroll-behavior: smooth;
+    color: #7293DF;
+    font-weight: 550;
+}
+body{
+    margin: 0;
+    overflow-x: hidden;
+}

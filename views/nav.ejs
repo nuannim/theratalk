@@ -1,0 +1,87 @@
+<div class="nav">
+    <div class="logo">
+        <h4>TheraTalk</h4>
+    </div>
+    <div class="mid">
+        <a href="/" id="home">หน้าหลัก</a>
+        <a href="/progress" id="progress">พัฒนาการของผู้ป่วย</a>
+    </div>
+    <div class="las">
+        <div class="txt">
+            <h4>name</h4>
+            <p>username</p>
+        </div>
+        <img src="img/audio-book_10089822.png" alt="">
+    </div>
+</div>
+<style>
+    .nav {
+        width: 98%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 12px;
+        padding-right: 12px;
+        box-shadow: 1px 1px 5px #0000001a;
+        background-color: white;
+        position: fixed;
+        top: 0;
+    }
+
+    .mid {
+        display: flex;
+        justify-content: center;
+        width: 60%;
+        gap: 20px;
+    }
+
+    .mid a,
+    .txt p {
+        color: #BEC9D5;
+    }
+
+    .mid a {
+        cursor: pointer;
+        transition: ease-in-out 0.2s;
+    }
+
+    .mid a:hover {
+        color: #7293DF;
+    }
+
+    .las {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .las img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .las p,
+    h4 {
+        margin: 0;
+    }
+
+    .las div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .logo {
+        width: 20%;
+    }
+
+    .txt p {
+        font-weight: 400;
+        font-size: 13px;
+    }
+</style>
