@@ -128,6 +128,15 @@ h4 {
   justify-content: center;
   align-items: end;
 }
+.las a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: end;
+  gap: 10px;
+}
 
 .logo {
   width: 20%;

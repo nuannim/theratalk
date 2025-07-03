@@ -86,6 +86,16 @@ body {
   gap: 10px;
 }
 
+.las a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: end;
+  gap: 10px;
+}
+
 .las img {
   height: 40px;
   width: 40px;
