@@ -1,0 +1,276 @@
+* {
+  font-family: "Prompt";
+  text-decoration: none;
+  scroll-behavior: smooth;
+  color: #7293df;
+  font-weight: 550;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+#home {
+  color: #7293df;
+}
+.main {
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 70px;
+}
+.top {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.top h3 {
+  margin: 0;
+}
+.fori {
+  width: 5%;
+  padding-top: 7px;
+}
+.fori i {
+  display: flex;
+  align-items: center;
+  color: #bec9d5;
+}
+.mode {
+  display: flex;
+  gap: 30px;
+  border-bottom: 1.5px solid #ececec;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.contain {
+  width: 95%;
+  margin-bottom: 30px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1em;
+  overflow: hidden;
+  width: 100%;
+  border: 1.5px solid #ececec;
+}
+th {
+  padding: 5px;
+  text-align: start;
+  color: white;
+}
+td {
+  font-size: 15px;
+  padding: 5px;
+  border-top: 1.5px solid #ececec;
+  font-weight: 400;
+}
+thead {
+  background-color: #7293df;
+  height: 40px;
+}
+.abovetable {
+  display: flex;
+  justify-content: space-between;
+}
+.abovetable i {
+  display: flex;
+  align-items: center;
+  transition: ease-in-out 0.2s;
+  color: #bec9d5;
+}
+.abovetable i:hover {
+  color: #7293df;
+}
+
+.score,
+.submitday {
+  padding-left: 20px;
+}
+.score {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* justify-content: center; */
+}
+.score p {
+  font-weight: 400;
+  margin: 0;
+  font-size: 15px;
+}
+.first,
+.thirst,
+.fif {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ececec;
+  border-radius: 15px;
+  width: 180px;
+  height: 60px;
+  padding: 5px;
+  background-color: #f7f9fe;
+}
+.submitday {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  gap: 10px;
+  border-bottom: 1.5px solid #ececec;
+}
+.but {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.but button {
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #7293df;
+  color: white;
+}
+.ten {
+  display: flex;
+  gap: 10px;
+  border: 1.5px solid #ececec;
+  border-radius: 15px;
+  width: 180px;
+  height: 60px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f9fe;
+}
+#custom {
+  border: 1.5px solid #ececec;
+  border-radius: 10px;
+  padding: 5px;
+  width: 100px;
+  height: 25px;
+}
+#d-start,
+#t-start,
+#d-end,
+#t-end {
+  width: 150px;
+  height: 30px;
+  border: 1.5px solid #ececec;
+  border-radius: 10px;
+  padding: 3px;
+}
+#freq {
+  width: 155px;
+  height: 35px;
+  border: 1.5px solid #ececec;
+  border-radius: 10px;
+}
+.mode label[for="tab1"],
+.mode label[for="tab2"] {
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  color: #bec9d5;
+  /* font-weight: 400; */
+}
+
+#tab2,
+#tab1 {
+  display: none;
+}
+#tab2:checked ~ .les {
+  display: block;
+}
+#tab1:checked ~ .content {
+  display: block;
+}
+.les,
+.content {
+  display: none;
+}
+#tab1:checked ~ .mode label[for="tab1"],
+#tab2:checked ~ .mode label[for="tab2"] {
+  background-color: #7293df;
+  color: white;
+  border-radius: 10px;
+}
+.but button {
+  cursor: pointer;
+}
+i {
+  cursor: pointer;
+}
+.nav {
+  width: 98%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-shadow: 1px 1px 5px #0000001a;
+  background-color: white;
+  position: fixed;
+  top: 0;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  gap: 20px;
+}
+
+.mid a,
+.txt p {
+  color: #bec9d5;
+}
+
+.mid a {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.mid a:hover {
+  color: #7293df;
+}
+
+.las {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+
+.las img {
+  height: 40px;
+  width: 40px;
+}
+
+.las p,
+h4 {
+  margin: 0;
+}
+
+.las div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.logo {
+  width: 20%;
+}
+
+.txt p {
+  font-weight: 400;
+  font-size: 13px;
+}
