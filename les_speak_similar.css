@@ -142,29 +142,28 @@ h4 {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
 }
-.listen-box {
+.picture-box{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 20px;
+}
+.picture-box img{
+  width: 80px;
+  height: 80px;
+}
+.picture-box div{
+  width: 130px;
+  height: 130px;
   border: 1.5px solid #ececec;
-  width: 150px;
-  height: 55px;
-  border-radius: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.listen-box i {
-  display: flex;
-  align-self: center;
-  width: 15%;
-  cursor: pointer;
-}
-.listen-box p {
   display: flex;
   justify-content: center;
-  margin: 0;
-  margin-top: 6px;
-  /* border-bottom: 1.5px solid #ececec; */
+  align-items: center;
+  border-radius: 15px;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+.picture-box div:hover{
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
 }
 .word {
   width: 85%;
@@ -174,6 +173,7 @@ h4 {
 .exercise-box{
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 button{
