@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Whisper STT + TTS</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; }
+    #transcript { margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+
+<h1>Record and Transcribe Speech (Thai supported)</h1>
+
+<button id="recordBtn">Start Recording</button>
+<button id="stopBtn" disabled>Stop Recording</button>
+
+<div id="status"></div>
+
+<form id="uploadForm" style="display:none;">
+  <input type="file" id="audioFile" name="file" accept="audio/*" />
+  <button type="submit">Upload & Transcribe</button>
+</form>
+
+<div id="transcript"></div>
+
+<script>
+  let mediaRecorder;
+  let audioChunks = [];
+
+  const recordBtn = document.getElementById("recordBtn");
+  const stopBtn = document.getElementById("stopBtn");
+  const status = document.getElementById("status");
+  const transcriptDiv = document.getElementById("transcript");
+
+  recordBtn.onclick = async () => {
+    transcriptDiv.textContent = "";
+    if (!navigator.mediaDevices) {
+      alert("Your browser does not support audio recording.");
+      return;
+    }
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.start();
+    audioChunks = [];
+    status.textContent = "Recording...";
+    recordBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    mediaRecorder.ondataavailable = e => {
+      audioChunks.push(e.data);
+    };
+  };
+
+  stopBtn.onclick = () => {
+    mediaRecorder.stop();
+    status.textContent = "Stopped recording, processing audio...";
+    recordBtn.disabled = false;
+    stopBtn.disabled = true;
+
+    mediaRecorder.onstop = async () => {
+      const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+      const file = new File([audioBlob], "recorded_audio.webm", { type: 'audio/webm' });
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/stt", {
+        method: "POST",
+        body: formData
+      });
+
+      const html = await response.text();
+
+      document.open();
+      document.write(html);
+      document.close();
+    };
+  };
+
+  function speakText(text) {
+    if (!window.speechSynthesis) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "th-TH";
+    window.speechSynthesis.speak(utterance);
+  }
+</script>
+
+{% if transcript %}
+  <h2>Transcription:</h2>
+  <pre>{{ transcript }}</pre>
+  <script>
+    speakText({{ transcript | tojson | safe }});
+  </script>
+{% endif %}
+
+</body>
+</html>
