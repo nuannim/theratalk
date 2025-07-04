@@ -1,3 +1,8 @@
+# how to run uvicorn
+```bash
+uvicorn main:app --reload
+```
+
 # how to install node & express
 
 download node.js (LTS version recommended)  
