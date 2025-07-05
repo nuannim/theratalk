@@ -70,8 +70,8 @@ async def login(
 @app.get("/logout")
 async def logout(request: Request):
     res = RedirectResponse(url="/login", status_code=302)
-    res.delete_cookie("user_id")
-    res.delete_cookie("role")
+    res.delete_cookie("user_id", path="/")
+    res.delete_cookie("role", path="/")
     return res
 
 # @app.get("/create-user")
