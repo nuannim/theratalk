@@ -37,32 +37,14 @@
             <i class="fa-solid fa-square-plus" onclick="sho()"></i>
         </div>
         <div class="lesson">
-            <a href="/doc/lession">
-                <div id="l1">
-                    <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                    <p>ผู้รับการบำบัด 15 คน</p>
-                </div>
-            </a>
-            <div id="l1">
-                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                <p>ผู้รับการบำบัด 15 คน</p>
-            </div>
-            <div id="l1">
-                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                <p>ผู้รับการบำบัด 15 คน</p>
-            </div>
-            <div id="l1">
-                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                <p>ผู้รับการบำบัด 15 คน</p>
-            </div>
-            <div id="l1">
-                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                <p>ผู้รับการบำบัด 15 คน</p>
-            </div>
-            <div id="l1">
-                <h4>การฟังและออกเสียงพยัญชนะและสระ</h4>
-                <p>ผู้รับการบำบัด 15 คน</p>
-            </div>
+            {% for lesson in lessons %}
+                <a href="{{ lesson.url or '#' }}">
+                    <div class="lesson-box">
+                        <h4>{{ lesson.activityname }}</h4>
+                        <p>ผู้รับการบำบัด x คน</p>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
     </div>
     <div class="popup" id="popup">

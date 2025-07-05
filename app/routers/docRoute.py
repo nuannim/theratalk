@@ -1,14 +1,18 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from app.db.db import supabase
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/")
+@router.get("/", response_class=HTMLResponse)
 async def showHome(request: Request):
+    response = supabase.table("activities").select("*").execute()
+    lessons = response.data
     return templates.TemplateResponse("home_p.html", {
-        "request": request
+        "request": request,
+        "lessons": lessons
     })
 
 @router.get("/progress")
