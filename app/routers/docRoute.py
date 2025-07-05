@@ -6,6 +6,7 @@ from app.db.db import supabase
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
+#^ slp 
 @router.get("/", response_class=HTMLResponse)
 async def showHome(request: Request):
     response = supabase.table("activities").select("*").execute()
