@@ -103,3 +103,60 @@ h4 {
   align-items: center;
   gap: 50px;
 }
+
+.box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1.5px solid #dae5ff;
+  width: 250px;
+  border-radius: 15px;
+}
+
+.box h1, h3{
+  margin: 0;
+}
+
+.box h3{
+  color: white;
+}
+
+.top{
+  width: 100%;
+  border-bottom: 1.5px solid #dae5ff;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: #7293df;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.bot{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+button{
+  width: 110px;
+  height: 40px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+#review{
+  border: 1.5px solid #ececec;
+  background-color: white;
+}
+
+#finish{
+  border: 0;
+  background-color: #7293df;
+  color: white;
+}
+
+.but{
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
