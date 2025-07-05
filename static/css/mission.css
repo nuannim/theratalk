@@ -43,17 +43,16 @@ body {
   border-radius: 10px;
 }
 .nav {
-  width: 98%;
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
   box-shadow: 1px 1px 5px #0000001a;
   background-color: white;
   position: fixed;
   top: 0;
+  z-index: 100;
 }
 
 .mid {
@@ -76,8 +75,7 @@ body {
 .mid a:hover {
   color: #7293df;
 }
-
-#mission{
+#home{
   color: #7293df;
 }
 
@@ -88,16 +86,7 @@ body {
   justify-content: end;
   align-items: center;
   gap: 10px;
-}
-
-.las a {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  text-align: end;
-  gap: 10px;
+  padding-right: 12px;
 }
 
 .las img {
@@ -117,7 +106,18 @@ h4 {
   align-items: end;
 }
 
+.las a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: end;
+  gap: 10px;
+}
+
 .logo {
+  padding-left: 12px;
   width: 20%;
 }
 

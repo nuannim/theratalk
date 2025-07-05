@@ -64,7 +64,7 @@ i {
   width: 100%;
   display: flex;
   gap: 10px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
 }
 #popup {
@@ -170,17 +170,16 @@ i {
   font-size: 13px;
 }
 .nav {
-  width: 98%;
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
   box-shadow: 1px 1px 5px #0000001a;
   background-color: white;
   position: fixed;
   top: 0;
+  z-index: 100;
 }
 
 .mid {
@@ -203,6 +202,9 @@ i {
 .mid a:hover {
   color: #7293df;
 }
+#home{
+  color: #7293df;
+}
 
 .las {
   width: 20%;
@@ -211,6 +213,7 @@ i {
   justify-content: end;
   align-items: center;
   gap: 10px;
+  padding-right: 12px;
 }
 
 .las img {
@@ -241,6 +244,7 @@ h4 {
 }
 
 .logo {
+  padding-left: 12px;
   width: 20%;
 }
 

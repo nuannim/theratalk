@@ -58,28 +58,28 @@ h3 {
 .achi {
   border: 1.5px solid #ececec;
   border-radius: 15px;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
+  width: 120px;
 }
 .achievement {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 .nav {
-  width: 98%;
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
   box-shadow: 1px 1px 5px #0000001a;
   background-color: white;
   position: fixed;
   top: 0;
+  z-index: 100;
 }
 
 .mid {
@@ -102,6 +102,9 @@ h3 {
 .mid a:hover {
   color: #7293df;
 }
+#home{
+  color: #7293df;
+}
 
 .las {
   width: 20%;
@@ -110,6 +113,7 @@ h3 {
   justify-content: end;
   align-items: center;
   gap: 10px;
+  padding-right: 12px;
 }
 
 .las img {
@@ -128,6 +132,7 @@ h4 {
   justify-content: center;
   align-items: end;
 }
+
 .las a {
   width: 100%;
   height: 100%;
@@ -139,10 +144,34 @@ h4 {
 }
 
 .logo {
+  padding-left: 12px;
   width: 20%;
 }
 
 .txt p {
   font-weight: 400;
   font-size: 13px;
+}
+.graph{
+  border: 1.5px solid #ececec;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 230px;
+}
+.content{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 10px;
+}
+.graph-box, .achi-box{
+  width: 50%;
+}
+.graph-box{
+  border-right: 1.5px solid #ececec;
 }
