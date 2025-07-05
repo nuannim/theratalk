@@ -129,6 +129,9 @@ h4 {
   filter: grayscale(100%);
   cursor: default;
 }
+.node.lock img{
+  content: url("/static/img/padlock_11820483.png");
+}
 .node.complete img{
   content: url("/static/img/check_1721539.png");
 }
