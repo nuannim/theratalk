@@ -21,6 +21,7 @@ body {
   background-color: white;
   position: fixed;
   top: 0;
+  z-index: 100;
 }
 
 .mid {
@@ -91,3 +92,101 @@ h4 {
   font-weight: 400;
   font-size: 13px;
 }
+
+.main {
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  align-items: center;
+  gap: 50px;
+  justify-content: space-between;
+}
+.node{
+  width: 200px;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: white;
+  border: 1.5px solid #ececec;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+.node img{
+  width: 60px;
+  height: 60px;
+}
+.node:hover{
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+}
+.node.lock{
+  filter: grayscale(100%);
+  cursor: default;
+}
+.node.complete img{
+  content: url("/static/img/check_1721539.png");
+}
+.node.complete h3{
+  color: #60DAA8;
+}
+.node.complete:hover{
+  border: 1.5px solid #caefe0;
+  background-color: #f3fdfa;
+}
+.node:hover .tooltip{
+  /* display: block; */
+  visibility: visible;
+  opacity: 1;
+}
+.description p{
+  font-size: 13px;
+  color: #bec9d5;
+  margin: 0;
+}
+.description h3{
+  margin: 0;
+}
+.tooltip{
+  /* display: none; */
+  visibility: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 250px;
+  margin-left: 20px;
+  background: white;
+  border: 1.5px solid #ececec;
+  padding: 15px;
+  border-radius: 15px;
+  white-space: nowrap;
+  z-index: 10;
+  transition: ease-in-out 0.2s;
+}
+.tooltip li{
+  color: #666666;
+  font-weight: 400;
+}
+.tooltip ol{
+  margin: 0;
+  padding-inline-start: 0;
+  list-style-position: inside;
+}
+/* button{
+  width: 150px;
+  height: 40px;
+  border-radius: 15px;
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+  border: 1.5px solid #ececec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+} */
