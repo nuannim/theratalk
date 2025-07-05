@@ -1,7 +1,14 @@
+# install requirements.txt
+```bash
+pip install -r requirements.txt
+```
+
 # how to run uvicorn
 ```bash
 uvicorn main:app --reload
 ```
+
+---
 
 # how to install node & express
 
