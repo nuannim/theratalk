@@ -7,7 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="les_short_story.css">
+    <link rel="stylesheet" href="/static/css/les_thinkpic.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Lesson</title>
 </head>
@@ -18,41 +18,35 @@
             <h4>TheraTalk</h4>
         </div>
         <div class="mid">
-            <a href="home_patient.html" id="home">หน้าหลัก</a>
-            <a href="mission.html" id="mission">ภารกิจ</a>
+            <a href="/user/" id="home">หน้าหลัก</a>
+            <a href="/user/mission/" id="mission">ภารกิจ</a>
         </div>
         <div class="las">
-            <a href="profile_patient.html">
+            <a href="/user/profile/">
                 <div class="txt">
                     <h4>name</h4>
                     <p>username</p>
                 </div>
-                <img src="img/audio-book_10089822.png" alt="">
+                <img src="/static/img/audio-book_10089822.png" alt="">
             </a>
         </div>
     </div>
     <div class="main">
         <div class="bar">
-            <h2>ฟังเรื่องสั้นและตอบคำถาม</h2>
+            <h2>นึกคำจากภาพ</h2>
             <div class="exercise-bar">
                 <div class="exercise-fill"></div>
             </div>
             <p>ข้อ 1 จาก 10</p>
         </div>
         <div class="exercise-box">
-            <p id="question">แมวของเขาสีอะไร</p>
-            <div class="listen-box">
-                <i class="fa-solid fa-volume-high"></i>
+            <div class="picture-box">
+                <div class="pic1">
+                    <img src="/static/img/football_3750002.png" alt="">
+                </div>
             </div>
-            <div class="choice">
-                <input type="radio" name="ans" id="choice1">
-                <label for="choice1">ม่วง</label>
-                <input type="radio" name="ans"  id="choice2">
-                <label for="choice2">ฟ้า</label>
-                <input type="radio" name="ans"  id="choice3">
-                <label for="choice3">ส้ม</label>
-                <input type="radio" name="ans"  id="choice4">
-                <label for="choice4">ดำ</label>
+            <div class="speak">
+                <p>กดเพื่อพูด</p>
             </div>
         </div>
         <button type="button" disabled>ตรวจสอบ</button>
