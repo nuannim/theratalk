@@ -22,3 +22,9 @@ async def showProfile(request: Request):
     return templates.TemplateResponse("profile_patient.html", {
         "request": request
     })
+
+@router.get("/lession")
+async def showLession(request: Request):
+    return templates.TemplateResponse("les_listen_speak.html", {
+        "request": request
+    })
