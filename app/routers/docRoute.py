@@ -93,6 +93,7 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
         data = slp_home.data
         # print(f"📊📊 data: {data}")
 
+        #! ถ้าข้อมูลเยอะ ๆ ไม่ค่อยเหมาะเท่าไหร่
         unique_patients = {}
         for item in data:
             patient_id = item["patientid"]

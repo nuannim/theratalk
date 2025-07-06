@@ -24,8 +24,8 @@
         <div class="las">
             <a href="/patient/profile/">
                 <div class="txt">
-                    <h4>name</h4>
-                    <p>username</p>
+                    <h4>{{ data[0].pfirstname }} {{ data[0].plastname }}</h4>
+                    <p>{{ data[0].pusername }}</p>
                 </div>
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </a>
@@ -35,8 +35,8 @@
         <div class="pro">
             <img src="/static/img/audio-book_10089822.png" alt="">
             <div class="namenuser">
-                <h3>ชื่อผู้ป่วย</h3>
-                <p>username ผู้ป่วย</p>
+                <h3>{{ data[0].pfirstname }} {{ data[0].plastname }}</h3>
+                <p>{{ data[0].pusername }}</p>
             </div>
         </div>
         <div class="content">

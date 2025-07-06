@@ -92,8 +92,18 @@ async def showMission(request: Request, resp=Depends(check_patient_role)):
 async def showProfile(request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
+
+    user_id = request.cookies.get("user_id")
+    if user_id:
+        response3 = supabase.table("assignmentforanotherpage").select("*").eq("patientid", user_id).execute()
+        asganotherpage = response3.data
+
+        print("🤓🤓🤓lenasganotherpage:", len(asganotherpage))
+        print(f"😳😳😳😳 userid: {user_id} \nasganotherpage: {asganotherpage} 😳😳😳😳")  # Debugging line
+
     return templates.TemplateResponse("profile_patient.html", {
-        "request": request
+        "request": request,
+        "data": asganotherpage
     })
 
 @router.get("/lesson")
