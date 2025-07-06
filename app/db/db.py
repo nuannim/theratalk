@@ -2,12 +2,27 @@ from supabase import create_client, Client
 import os
 from dotenv import load_dotenv
 
+# SQLAlchemy imports
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+
 load_dotenv()
 
 SUPABASE_URL = os.environ.get("DATABASE_URL")
 SUPABASE_KEY = os.environ.get("API_DATABASE")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+
+# # SQLAlchemy connection string (แก้ไข user, password, host, port, dbname ให้ตรงกับของคุณ)
+# POSTGRES_URL = os.environ.get("POSTGRES_URL")  # ตัวอย่าง: "postgresql+asyncpg://user:password@host:5432/dbname"
+
+# engine = create_async_engine(POSTGRES_URL, echo=True)
+# AsyncSessionLocal = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+
+# async def get_async_db():
+#     async with AsyncSessionLocal() as session:
+#         yield session
 
 # def get_user(username: str, password: str, role: str):
 #     table = "patients" if role == "patient" else "slp"

@@ -57,6 +57,17 @@ async def showHome(request: Request, resp=Depends(check_patient_role)):
         response2 = supabase.table("home_assignmentdescription").select("*").execute()
         assignments_description = response2.data
 
+        # response2 = await db.execute(
+        #     text("SELECT * FROM home_assignmentdescription"))
+        # assignments_description = [dict(row) for row in response.mappings().all()]
+
+        response3 = supabase.table("assignmentforanotherpage").select("*").eq("patientid", user_id).execute()
+        asganotherpage = response3.data
+        print("🤓🤓🤓lenasganotherpage:", len(asganotherpage))
+        print("🤓🤓🤓lenassignment:", len(assignments))
+
+
+        print(f"😳😳😳😳 userid: {user_id} \nasganotherpage: {asganotherpage} 😳😳😳😳")  # Debugging line
         print(f"🪲🪲🪲 Assignments for user_id {user_id}: {assignments} 🪲🪲🪲")  # Debugging line
 
         print(f"🙏🙏🙏 Assignments description: {assignments_description} 🙏🙏🙏")
@@ -65,7 +76,8 @@ async def showHome(request: Request, resp=Depends(check_patient_role)):
     return templates.TemplateResponse("home_patient.html", {
         "request": request,
         "assignments": assignments,
-        "assignments_description": assignments_description
+        "assignments_description": assignments_description,
+        'asganotherpage': asganotherpage
     })
 
 @router.get("/mission")
@@ -89,6 +101,23 @@ async def showLession(request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
     return templates.TemplateResponse("les_listen_speak.html", {
+        "request": request
+    })
+
+@router.get("/lesson/{lesson_id}")
+async def showLession(lesson_id: int, request: Request, resp=Depends(check_patient_role)):
+    file_list = {
+        1: "les_listen_speak2.html",
+        2: "les_listen_speak.html",
+        3: "les_speak_similar.html",
+        4: "les_short_story.html",
+        5: "les_thinkpic.html",
+        6: "les_listen_speak3.html",
+        8: "les_seq"
+    }
+    if isinstance(resp, RedirectResponse):
+        return resp
+    return templates.TemplateResponse(file_list[lesson_id], {
         "request": request
     })
 
