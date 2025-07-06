@@ -24,8 +24,8 @@
         <div class="las">
             <a href="/slp/profile">
                 <div class="txt">
-                    <h4>{{ data[0].slpfirstname}} {{ data[0].slplastname }}</h4>
-                    <p>{{ data[0].slpusername }}</p>
+                    <h4>name</h4>
+                    <p>username</p>
                 </div>
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </a>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div id="overlay" onclick="bac()"></div> -->
-        <h2>ผู้รับการบำบัด {{ data|length }} คน</h2>
+        <h2>ผู้รับการบำบัด 55 คน</h2>
         <table>
             <thead>
                 <tr>
@@ -82,13 +82,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for patient in data %}
                 <tr>
-                    <td>{{ patient.pfirstname }} {{ patient.plastname }}</td>
-                    <td><a href="/slp/mypatient/{{ patient.patientid }}">มอบหมายแบบฝึกหัด</a></td>
-                    <td><a href="/slp/checkmypatient/{{ patient.patientid }}">ตรวจแบบฝึกหัด</a></td>
+                    <td>แจ๋ม สโมสรชิมิ</td>
+                    <td><a href="/templates/assign_p.html">มอบหมายแบบฝึกหัด</a></td>
+                    <td><a href="/templates/check_p.html">ตรวจแบบฝึกหัด</a></td>
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
     </div>

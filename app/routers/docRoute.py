@@ -41,17 +41,42 @@ async def showHome(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
         return resp
     
-    response = supabase.table("activities").select("*").execute()
-    lessons = response.data
+    # response = supabase.table("activities").select("*").execute()
+    # lessons = response.data
+    # print (f"😭😭 lesson: {lessons}")
+    user_id = request.cookies.get("user_id")
+    if user_id:
+        slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
+        data = slp_home.data
+        # print(f"📊📊 data: {data}")
+
+        unique_patients = {}
+        for item in data:
+            patient_id = item["patientid"]
+            if patient_id not in unique_patients:
+                unique_patients[patient_id] = {
+                    "patientid": patient_id,
+                    "pfirstname": item["pfirstname"],
+                    "plastname": item["plastname"],
+                    "slpfirstname": item["slpfirstname"],
+                    "slplastname": item["slplastname"],
+                    "slpusername": item["slpusername"]
+                }
+
+        patients_list = list(unique_patients.values())
+        print(f"📊📊 patient_list: {patients_list}")
+
     return templates.TemplateResponse("home_p.html", {
         "request": request,
-        "lessons": lessons
+        # "lessons": lessons,
+        "data": patients_list
     })
 
 @router.get("/progress")
 async def showProgress(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
         return resp
+    
 
     return templates.TemplateResponse("progress_p.html", {
         "request": request
@@ -61,9 +86,33 @@ async def showProgress(request: Request, resp=Depends(check_slp_role)):
 async def showProfile(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
         return resp
+    
+    user_id = request.cookies.get("user_id")
+    if user_id:
+        slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
+        data = slp_home.data
+        # print(f"📊📊 data: {data}")
+
+        unique_patients = {}
+        for item in data:
+            patient_id = item["patientid"]
+            if patient_id not in unique_patients:
+                unique_patients[patient_id] = {
+                    "patientid": patient_id,
+                    "pfirstname": item["pfirstname"],
+                    "plastname": item["plastname"],
+                    "slpfirstname": item["slpfirstname"],
+                    "slplastname": item["slplastname"],
+                    "slpusername": item["slpusername"]
+                }
+
+        patients_list = list(unique_patients.values())
+        print(f"📊📊 patient_list: {patients_list}")
+
 
     return templates.TemplateResponse("profile_p.html", {
-        "request": request
+        "request": request,
+        "data": patients_list
     })
 
 # เดี๋ยวเปลี่ยนเป็นเติม id เข้าไป ลิ้งมา
@@ -73,5 +122,33 @@ async def showLession(request: Request, resp=Depends(check_slp_role)):
         return resp
 
     return templates.TemplateResponse("lession_p.html", {
+        "request": request
+    })
+
+@router.get("/mypatient/{patientid}")
+async def showMyPatient(request: Request, resp=Depends(check_slp_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+
+    patientid = request.path_params.get("patientid")
+    # response = supabase.table("patients").select("*").execute()
+    # data = response.data
+
+    # print(f"📊📊 data: {data}")
+
+    return templates.TemplateResponse("assign_p.html", {
+        "request": request
+        # ,
+        # "data": data
+    })
+
+@router.get("/checkmypatient/{patientid}")
+async def showCheck(request: Request, resp=Depends(check_slp_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+
+    patientid = request.path_params.get("patientid")
+
+    return templates.TemplateResponse("check_p.html", {
         "request": request
     })
