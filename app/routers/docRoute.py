@@ -66,6 +66,7 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
         "request": request
     })
 
+# เดี๋ยวเปลี่ยนเป็นเติม id เข้าไป ลิ้งมา
 @router.get("/lesson")
 async def showLession(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):

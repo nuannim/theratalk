@@ -43,8 +43,29 @@ def check_patient_role(request: Request):
 async def showHome(request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
+    
+        # ดึง user_id จาก cookie
+    user_id = request.cookies.get("user_id")
+    assignments = []
+    if user_id:
+        # response = supabase.table("assignment_full").select("*").eq("patient_id", user_id).execute()
+        # assignments = response.data
+
+        response = supabase.table("home").select("*").eq("patientid", user_id).execute()
+        assignments = response.data
+
+        response2 = supabase.table("home_assignmentdescription").select("*").execute()
+        assignments_description = response2.data
+
+        print(f"🪲🪲🪲 Assignments for user_id {user_id}: {assignments} 🪲🪲🪲")  # Debugging line
+
+        print(f"🙏🙏🙏 Assignments description: {assignments_description} 🙏🙏🙏")
+
+
     return templates.TemplateResponse("home_patient.html", {
-        "request": request
+        "request": request,
+        "assignments": assignments,
+        "assignments_description": assignments_description
     })
 
 @router.get("/mission")

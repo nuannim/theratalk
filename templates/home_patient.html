@@ -24,105 +24,42 @@
         <div class="las">
             <a href="/patient/profile">
                 <div class="txt">
-                    <h4>name</h4>
-                    <p>username</p>
+                    <h4>{{assignments[0].firstname}} {{assignments[0].lastname}}</h4>
+                    <p>{{assignments[0].pusername}}</p>
                 </div>
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </a>
         </div>
     </div>
+
     <div class="main">
-        <div class="node complete" id="n1">
-            <img src="/static/img/audio-book_10089822.png" alt="">
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
+        <div class="main">
+            {% for assignment in assignments %}
+                <div class="node active" id="n{{ loop.index }}">
+                    <img src="/static/img/audio-book_10089822.png" alt="">
+                    <div class="description">
+                        <h3>{{ assignment.assignmentdate or 'แบบฝึกหัด' }}</h3>
+                        <p>{{ assignment.aStartDate or '' }}</p>
+                        <div class="tooltip">
+                            <ol>
+                                {% for i in assignments_description %}
+                                    {% if i.assignmentid == assignment.assignmentid %}
+                                        <li>{{ i.templatename or '-' }}</li>
+                                        <!-- เพิ่ม field อื่น ๆ ตาม assignment ที่ต้องการ -->
+                                    {% endif %}
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-        <div class="node active" id="n2">
-            <img src="/static/img/audio-book_10089822.png" alt="" >
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="node lock" id="n3">
-            <img src="/static/img/audio-book_10089822.png" alt="">
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="node lock" id="n4">
-            <img src="/static/img/audio-book_10089822.png" alt="">
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="node lock" id="n5">
-            <img src="/static/img/audio-book_10089822.png" alt="">
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="node lock" id="n6">
-            <img src="/static/img/audio-book_10089822.png" alt="">
-            <div class="description">
-                <h3>แบบฝึกหัดที่ 1</h3>
-                <p>5 กรกฎาคม 2568</p>
-                <div class="tooltip">
-                    <ol>
-                        <li>การฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</li>
-                        <li>การฟังเพื่อออกเสียงคำศัพท์ทีละคำ</li>
-                        <li>การฟังเพื่อพูดคำที่เสียงคล้ายกัน</li>
-                        <li>ฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<!-- <p>{{assignments_description}}</p> -->
+
+
+
+
 </body>
 
 </html>
