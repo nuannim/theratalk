@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/check_lesson_p.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>Check</title>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo">
+            <h4>TheraTalk</h4>
+        </div>
+        <div class="mid">
+            <a href="/slp/" id="home">หน้าหลัก</a>
+        </div>
+        <div class="las">
+            <a href="/slp/profile">
+                <div class="txt">
+                    <h4>name</h4>
+                    <p>username</p>
+                </div>
+                <img src="/static/img/audio-book_10089822.png" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="top">
+            <a href="/templates/check_p.html"><i class="fa-solid fa-chevron-left"></i></a>
+            <h2>ชื่อแบบฝึกหัด</h2>
+        </div>
+        <div class="content">
+            <div class="pat">
+                <div class="image">รูป</div>
+                <div class="answer">This time I want you you you you</div>
+            </div>
+            <div class="bot">
+                <div class="score">
+                    <p>คะแนน</p>
+                    <div class="select-score">
+                        <input type="radio" name="score" id="s1">
+                        <label for="s1">5</label>
+                        <input type="radio" name="score" id="s2">
+                        <label for="s2">4</label>
+                        <input type="radio" name="score" id="s3">
+                        <label for="s3">3</label>
+                        <input type="radio" name="score" id="s4">
+                        <label for="s4">2</label>
+                        <input type="radio" name="score" id="s5">
+                        <label for="s5">1</label>
+                    </div>
+                </div>
+                <textarea name="feedback" id="feedback" placeholder="คำแนะนำ"></textarea>
+            </div>
+        </div>
+        <button>เสร็จสิ้น</button>
+    </div>
+</body>
+</html>

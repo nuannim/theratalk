@@ -18,9 +18,60 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
+  align-items: center;
+  margin-top: 90px;
 }
-.label {
+/* .top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.top i {
+  display: flex;
+  align-self: center;
+} */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1em;
+  overflow: hidden;
+  width: 70%;
+  border: 1.5px solid #ececec;
+}
+th {
+  padding: 5px;
+  text-align: start;
+  color: white;
+}
+td {
+  font-size: 15px;
+  padding: 5px;
+  border-top: 1.5px solid #ececec;
+  font-weight: 400;
+}
+thead {
+  background-color: #7293df;
+  height: 40px;
+}
+i {
+  color: #bec9d5;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+i:hover {
+  color: #7293df;
+}
+table a{
+  text-decoration: none;
+  font-weight: 400;
+  transition: ease-in-out 0.2s;
+  width: 100%;
+}
+table a:hover{
+  color: #405fa7;
+}
+
+/* .label {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -64,9 +115,8 @@ i {
   width: 100%;
   display: flex;
   gap: 10px;
-  /* justify-content: space-between; */
   flex-wrap: wrap;
-}
+} */
 #popup {
   position: fixed;
   top: 50%;

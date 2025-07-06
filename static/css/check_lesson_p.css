@@ -1,0 +1,143 @@
+* {
+  font-family: "Prompt";
+  text-decoration: none;
+  scroll-behavior: smooth;
+  color: #7293df;
+  font-weight: 550;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+.main {
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  gap: 10px;
+}
+.nav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 5px #0000001a;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  gap: 20px;
+}
+
+.mid a,
+.txt p {
+  color: #bec9d5;
+}
+
+.mid a {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.mid a:hover {
+  color: #7293df;
+}
+
+.las {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  padding-right: 12px;
+}
+
+.las img {
+  height: 40px;
+  width: 40px;
+}
+
+.las p,
+h4 {
+  margin: 0;
+}
+
+.las div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.las a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: end;
+  gap: 10px;
+}
+
+.logo {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.txt p {
+  font-weight: 400;
+  font-size: 13px;
+}
+i {
+  transition: ease-in-out 0.2s;
+  color: #bec9d5;
+  cursor: pointer;
+}
+i:hover {
+  color: #7293df;
+}
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+h3, h2 {
+  margin: 0;
+}
+.image{
+    width: 130px;
+  height: 130px;
+  border: 1.5px solid #ececec;
+  border-radius: 15px;
+}
+.pat{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer{
+    border: 1.5px solid #ececec;
+  border-radius: 15px;
+  width: 70%;
+}
+#feedback{
+    border: 1.5px solid #ececec;
+  border-radius: 15px;
+  resize: none;
+}
+.content{
+    margin-top: 10px;
+}
