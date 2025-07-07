@@ -116,15 +116,15 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
         "data": patients_list
     })
 
-# เดี๋ยวเปลี่ยนเป็นเติม id เข้าไป ลิ้งมา
-@router.get("/lesson")
-async def showLession(request: Request, resp=Depends(check_slp_role)):
-    if isinstance(resp, RedirectResponse):
-        return resp
+# ไม่ใช้แล้ว
+# @router.get("/lesson")
+# async def showLession(request: Request, resp=Depends(check_slp_role)):
+#     if isinstance(resp, RedirectResponse):
+#         return resp
 
-    return templates.TemplateResponse("lession_p.html", {
-        "request": request
-    })
+#     return templates.TemplateResponse("lession_p.html", {
+#         "request": request
+#     })
 
 @router.get("/mypatient/{patientid}")
 async def showMyPatient(request: Request, resp=Depends(check_slp_role)):
