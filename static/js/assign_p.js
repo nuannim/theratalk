@@ -10,8 +10,8 @@ const today = new Date();
 today.setHours(0, 0, 0, 0); // Clean time
 
 const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
 const selections = {};
@@ -60,18 +60,20 @@ function renderCalendar(date) {
       day.classList.add('disabled');
     } else {
       day.addEventListener('click', () => {
-        // Toggle selection
-        if (selectedDays.includes(d)) {
-          // Remove from selection
-          selections[monthKey] = selectedDays.filter(dayNum => dayNum !== d);
+        const index = selectedDays.indexOf(d);
+
+        if (index !== -1) {
+          selectedDays.splice(index, 1); // Remove selected day
           day.classList.remove('selected');
         } else {
-          // Add to selection
-          selectedDays.push(d);
-          selections[monthKey] = selectedDays;
+          selectedDays.push(d); // Add selected day
           day.classList.add('selected');
         }
+
+        // Update the selections object
+        selections[monthKey] = [...selectedDays];
       });
+
     }
 
     calendar.appendChild(day);
@@ -83,25 +85,25 @@ function renderCalendar(date) {
 let selectedDayOfMonth = current.getDate(); // track selected day
 
 prevBtn.addEventListener('click', () => {
-    const prevMonth = new Date(current);
-    prevMonth.setMonth(prevMonth.getMonth() - 1);
+  const prevMonth = new Date(current);
+  prevMonth.setMonth(prevMonth.getMonth() - 1);
 
-    const maxDay = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
-    prevMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
+  const maxDay = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
+  prevMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
 
-    current = prevMonth;
-    renderCalendar(current);
+  current = prevMonth;
+  renderCalendar(current);
 });
 
 nextBtn.addEventListener('click', () => {
-    const nextMonth = new Date(current);
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
+  const nextMonth = new Date(current);
+  nextMonth.setMonth(nextMonth.getMonth() + 1);
 
-    const maxDay = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0).getDate();
-    nextMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
+  const maxDay = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0).getDate();
+  nextMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
 
-    current = nextMonth;
-    renderCalendar(current);
+  current = nextMonth;
+  renderCalendar(current);
 });
 
 // Initial render
