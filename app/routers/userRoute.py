@@ -84,10 +84,7 @@ async def showHome(request: Request, resp=Depends(check_patient_role)):
 async def showMission(request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
-    from datetime import date
-    import json
 
-    today_str = date.today().isoformat() 
     userId = request.cookies.get("user_id")
 
     patient_response = supabase.table("patients").select("*").eq("patientid", userId).single().execute()
@@ -120,16 +117,66 @@ async def showProfile(request: Request, resp=Depends(check_patient_role)):
         "data": asganotherpage
     })
 
-@router.get("/lesson")
-async def showLession(request: Request, resp=Depends(check_patient_role)):
+@router.get("/lesson/{assignment_id}")
+async def showLession(assignment_id: int, request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
-    return templates.TemplateResponse("les_listen_speak.html", {
-        "request": request
+    
+    userId = request.cookies.get("user_id")
+    
+    # Get patient
+    patient_res = supabase.table("patients").select("*").eq("patientid", userId).execute()
+    if not patient_res.data:
+        raise HTTPException(status_code=404, detail="Patient not found")
+    patient = patient_res.data[0]
+
+     # Get all assignments under this assignmentid
+    assignment_res = supabase.table("home_assignmentdescription").select("*").eq("assignmentid", assignment_id).execute()
+    if not assignment_res.data:
+        raise HTTPException(status_code=404, detail="No assignment descriptions found")
+    assignments = assignment_res.data
+
+    lessons = []
+
+    for a in assignments:
+        # Get template
+        template_res = supabase.table("templates").select("*").eq("templateid", a["templateid"]).execute()
+        if not template_res.data:
+            continue
+        template = template_res.data[0]
+
+        # Get activity
+        activity_res = supabase.table("activities").select("*").eq("activityid", template["activityid"]).execute()
+        if not activity_res.data:
+            continue
+        activity = activity_res.data[0]
+
+        # Combine into one lesson item
+        lessons.append({
+            "assignment": a,
+            "template": template,
+            "activity": activity
+        })
+
+    # Render template with all lessons
+    return templates.TemplateResponse("each_lesson.html", {
+        "request": request,
+        "patient": patient,
+        "lessons": lessons  # 👈 send list instead of one
     })
 
-@router.get("/lesson/{lesson_id}")
-async def showLession(lesson_id: int, request: Request, resp=Depends(check_patient_role)):
+@router.get("/activity/{activity_id}")
+async def showActivity(activity_id: int, request: Request, resp=Depends(check_patient_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+
+    userId = request.cookies.get("user_id")
+
+    patient_res = supabase.table("patients").select("*").eq("patientid", userId).execute()
+    if not patient_res.data:
+        raise HTTPException(status_code=404, detail="Patient not found")
+    patient = patient_res.data[0]
+
     file_list = {
         1: "les_listen_speak2.html",
         2: "les_listen_speak.html",
@@ -139,28 +186,8 @@ async def showLession(lesson_id: int, request: Request, resp=Depends(check_patie
         6: "les_listen_speak3.html",
         8: "les_seq"
     }
-    if isinstance(resp, RedirectResponse):
-        return resp
-    return templates.TemplateResponse(file_list[lesson_id], {
-        "request": request
+
+    return templates.TemplateResponse(file_list[activity_id], {
+        "request": request,
+        "patient": patient
     })
-
-# ! เดี๋ยวนะ อันนี้คือไรนะ
-# @router.get("/lesson")
-# async def showLession(request: Request, resp=Depends(check_patient_role)):
-#     if isinstance(resp, RedirectResponse):
-#         return resp
-
-#     # ดึง user_id จาก cookie
-#     user_id = request.cookies.get("user_id")
-#     # ตัวอย่าง: ดึงข้อมูล lesson ของ patient จาก database
-#     lessons_response = None
-#     lessons = []
-#     if user_id:
-#         lessons_response = supabase.table("lessons").select("*").eq("patient_id", user_id).execute()
-#         lessons = lessons_response.data if lessons_response and lessons_response.data else []
-
-#     return templates.TemplateResponse("les_listen_speak.html", {
-#         "request": request,
-#         "lessons": lessons
-#     })
