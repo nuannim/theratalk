@@ -48,49 +48,42 @@
             <div class="type-lesson">
                 <h3>แบบฝึกหัดที่จะให้ทำในแต่ละวัน</h3>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l1">
-                    <label for="l1">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="1">
+                    <label for="l1">แบบฝึกหัดการฟังเพื่อออกเสียงพยัญชนะและสระทีละเสียง</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l2">
-                    <label for="l2">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="2">
+                    <label for="l2">แบบฝึกหัดการฟังเพื่อออกเสียงคำศัพท์ทีละคำ</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l3">
-                    <label for="l3">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="3">
+                    <label for="l3">แบบฝึกหัดการฟังเพื่อพูดคำที่เสียงคล้ายกัน</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l4">
-                    <label for="l4">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="4">
+                    <label for="l4">แบบฝึกหัดฟังหรืออ่านเรื่องสั้นเพื่อตอบคำถาม</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l5">
-                    <label for="l5">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="5">
+                    <label for="l5">แบบฝึกหัดการนึกคำจากภาพหรือสถานการณ์</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l6">
-                    <label for="l6">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="6">
+                    <label for="l6">แบบฝึกหัดฟังเพื่อพูดตามเป็นประโยค</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l7">
-                    <label for="l7">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="7">
+                    <label for="l7">ตัวนับเวลาสำหรับฝึกการหายใจ</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l8">
-                    <label for="l8">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="8">
+                    <label for="l8">แบบฝึกหัดการเรียงคำให้เป็นประโยค</label>
                 </div>
                 <div class="each">
-                    <input type="checkbox" name="lesson" id="l9">
-                    <label for="l9">แบบฝึกหัดพูด</label>
-                </div>
-                <div class="each">
-                    <input type="checkbox" name="lesson" id="l10">
-                    <label for="l10">แบบฝึกหัดพูด</label>
+                    <input type="checkbox" name="lesson" id="9">
+                    <label for="l9">แบบฝึกหัดอิสระ</label>
                 </div>
             </div>
-        </div>
-        <div class="forbut">
-            <button type="button" class="but">ถัดไป</button>
         </div>
         <div class="con2">
             <h3>เลือกแม่แบบของแบบฝึกหัด</h3>
@@ -119,5 +112,51 @@
     </div>
 </body>
 <script src="/static/js/assign_p.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const finishBtn = document.querySelector('.forbut .but');
 
+    finishBtn.addEventListener('click', async () => {
+      const selectedDates = getSelectedDates();
+
+      const lessonCheckboxes = document.querySelectorAll('input[name="lesson"]:checked');
+      const selectedLessons = Array.from(lessonCheckboxes).map(cb => cb.id);
+
+      const path = window.location.pathname;
+      const parts = path.split('/');
+      const patientId = parts[parts.length - 1];
+
+      console.log('patientId patientId:', patientId);
+
+      const data = {
+        assigned_dates: selectedDates,
+        activity: selectedLessons,
+        patientId: patientId,
+      };
+
+      console.log('Data to send:', data);
+
+      try {
+        const response = await fetch('/slp/assign/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Server response:', result);
+      } catch (error) {
+        console.error('Error sending data:', error);
+        alert('Error sending data. Please try again.');
+      }
+    });
+  });
+</script>
 </html>

@@ -7,19 +7,22 @@ let current = new Date();
 current.setDate(1); // Always start on first of the month
 
 const today = new Date();
-today.setHours(0, 0, 0, 0); // Clean time
+today.setHours(0, 0, 0, 0); // Clear time for comparison
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-const selections = {};
+// Store selections as ISO date strings for clarity
+const selections = new Set();
 
-function getMonthKey(date) {
+// Utility to format Date object as YYYY-MM-DD string
+function formatDate(date) {
   const y = date.getFullYear();
   const m = (date.getMonth() + 1).toString().padStart(2, '0');
-  return `${y}-${m}`;
+  const d = date.getDate().toString().padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 
 function renderCalendar(date) {
@@ -31,18 +34,14 @@ function renderCalendar(date) {
   const firstDay = new Date(year, month, 1).getDay();
   const totalDays = new Date(year, month + 1, 0).getDate();
 
-  // Get selected days for this month
-  const monthKey = getMonthKey(date);
-  const selectedDays = selections[monthKey] || [];
-
-  // Add empty cells before the 1st day
+  // Add empty cells before first day of month
   for (let i = 0; i < firstDay; i++) {
     const empty = document.createElement('div');
     empty.classList.add('day', 'empty');
     calendar.appendChild(empty);
   }
 
-  // Add each day
+  // Add each day cell
   for (let d = 1; d <= totalDays; d++) {
     const day = document.createElement('div');
     day.classList.add('day');
@@ -50,62 +49,54 @@ function renderCalendar(date) {
 
     const thisDate = new Date(year, month, d);
     thisDate.setHours(0, 0, 0, 0);
+    const dateStr = formatDate(thisDate);
 
-    // Mark as selected if stored in selections for this month
-    if (selectedDays.includes(d)) {
+    // Mark day as selected if in selections set
+    if (selections.has(dateStr)) {
       day.classList.add('selected');
     }
 
+    // Disable past dates
     if (thisDate < today) {
       day.classList.add('disabled');
     } else {
       day.addEventListener('click', () => {
-        const index = selectedDays.indexOf(d);
-
-        if (index !== -1) {
-          selectedDays.splice(index, 1); // Remove selected day
+        if (selections.has(dateStr)) {
+          selections.delete(dateStr);
           day.classList.remove('selected');
         } else {
-          selectedDays.push(d); // Add selected day
+          selections.add(dateStr);
           day.classList.add('selected');
         }
-
-        // Update the selections object
-        selections[monthKey] = [...selectedDays];
       });
-
     }
 
     calendar.appendChild(day);
   }
 }
 
-
-// Button listeners
-let selectedDayOfMonth = current.getDate(); // track selected day
-
+// Navigation buttons
 prevBtn.addEventListener('click', () => {
-  const prevMonth = new Date(current);
-  prevMonth.setMonth(prevMonth.getMonth() - 1);
-
-  const maxDay = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0).getDate();
-  prevMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
-
-  current = prevMonth;
+  current.setMonth(current.getMonth() - 1);
+  current.setDate(1);
   renderCalendar(current);
 });
 
 nextBtn.addEventListener('click', () => {
-  const nextMonth = new Date(current);
-  nextMonth.setMonth(nextMonth.getMonth() + 1);
-
-  const maxDay = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0).getDate();
-  nextMonth.setDate(Math.min(selectedDayOfMonth, maxDay));
-
-  current = nextMonth;
+  current.setMonth(current.getMonth() + 1);
+  current.setDate(1);
   renderCalendar(current);
 });
+
+// Function to get all selected dates as array of strings
+function getSelectedDates() {
+  return Array.from(selections).sort();
+}
 
 // Initial render
 renderCalendar(current);
 
+// For debugging: print selected dates on button click
+document.querySelector('.forbut .but').addEventListener('click', () => {
+  console.log('Selected dates:', getSelectedDates());
+});

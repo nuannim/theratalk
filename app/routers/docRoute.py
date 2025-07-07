@@ -153,3 +153,32 @@ async def showCheck(request: Request, resp=Depends(check_slp_role)):
     return templates.TemplateResponse("check_p.html", {
         "request": request
     })
+
+@router.post("/assign/")
+async def assignLesson(
+    request: Request,
+):
+    data = await request.json()
+
+    patientId = data.get("patientId")
+    assigned_dates = data.get("assigned_dates")
+    activity = data.get("activity")
+
+    slp_id = request.cookies.get("user_id")
+
+    records_to_insert = []
+
+    for date_str in assigned_dates:
+        records_to_insert.append({
+            "patientid": patientId,
+            "slpid": slp_id,
+            "assignmentdate": date_str,
+            "isdone": False,
+            "assignmentgroupid": None
+        })
+    
+    #! ยังไม่ครบทุกตาราง
+    #response = supabase.table("assignments").insert(records_to_insert).execute()
+
+    print(f"📊📊 patientId: {patientId}, assigned_dates: {assigned_dates}, activity: {activity}, slp_id: {slp_id}")
+    return {"message": "Assignments saved successfully"}
