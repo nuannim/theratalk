@@ -196,7 +196,7 @@ h2 {
   justify-content: end;
 }
 .content-calendar {
-  width: 400px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -208,8 +208,10 @@ h2 {
 .type-lesson {
   display: flex;
   flex-direction: column;
+  border-left: 1.5px solid #ececec;
+  padding-left: 30px;
 }
 .con{
   display: flex;
-  
+  margin-top: 10px;
 }

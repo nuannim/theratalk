@@ -108,3 +108,4 @@ nextBtn.addEventListener('click', () => {
 
 // Initial render
 renderCalendar(current);
+
