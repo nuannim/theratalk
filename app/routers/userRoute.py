@@ -84,8 +84,22 @@ async def showHome(request: Request, resp=Depends(check_patient_role)):
 async def showMission(request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
+    from datetime import date
+    import json
+
+    today_str = date.today().isoformat() 
+    userId = request.cookies.get("user_id")
+
+    patient_response = supabase.table("patients").select("*").eq("patientid", userId).single().execute()
+    patient = patient_response.data if patient_response.data else {}
+
+    response = supabase.table("mission").select("*").eq("patientId", userId).execute()
+    missions = response.data[0]["data"]
+
     return templates.TemplateResponse("mission.html", {
-        "request": request
+        "request": request,
+        "patient": patient,
+        "missions": missions
     })
 
 @router.get("/profile")

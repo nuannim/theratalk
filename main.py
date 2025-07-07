@@ -4,7 +4,7 @@ from app.routers import docRoute
 from fastapi.middleware import Middleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from app.db.db import supabase, get_user, get_db
+from app.db.db import supabase #, get_user, get_db
 import jwt
 # from db import get_user
 from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse, JSONResponse
@@ -18,18 +18,18 @@ app.include_router(docRoute.router, prefix="/slp")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-from app.db import models, schemas, crud
-from app.db.db import engine, get_db
-from sqlalchemy.orm import Session
+# from app.db import models, schemas, crud
+# from app.db.db import engine, get_db
+# from sqlalchemy.orm import Session
 
-@app.get("/kuy", response_model=list[schemas.Patient])
-def read_patients(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    patients = crud.get_patients(db, skip=skip, limit=limit)
-    return patients
+# @app.get("/kuy", response_model=list[schemas.Patient])
+# def read_patients(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+#     patients = crud.get_patients(db, skip=skip, limit=limit)
+#     return patients
 
 @app.get("/")
 async def root(request: Request):
-    get_db()
+    # get_db()
     return templates.TemplateResponse("test.html", {
         "request": request
     })

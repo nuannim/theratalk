@@ -17,22 +17,22 @@ SUPABASE_KEY = os.environ.get("API_DATABASE")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-DATABASE_URL = os.environ.get("POSTGRES_URL")
+# DATABASE_URL = os.environ.get("POSTGRES_URL")
 
-engine = create_engine(DATABASE_URL)
-# SessionLocal = sessionmaker(bind=engine)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# engine = create_engine(DATABASE_URL)
+# # SessionLocal = sessionmaker(bind=engine)
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
+# Base = declarative_base()
 
-def get_db():
-    db = SessionLocal()
-    print('📍📍📍📍📍📍 lllllllllllllll')
-    try:
-        yield db
-        print('📍📍📍📍📍📍 fjewafewafewijfewjiofoaeiw')
-    finally:
-        db.close()
+# def get_db():
+#     db = SessionLocal()
+#     print('📍📍📍📍📍📍 lllllllllllllll')
+#     try:
+#         yield db
+#         print('📍📍📍📍📍📍 fjewafewafewijfewjiofoaeiw')
+#     finally:
+#         db.close()
 
 # # SQLAlchemy connection string (แก้ไข user, password, host, port, dbname ให้ตรงกับของคุณ)
 # POSTGRES_URL = os.environ.get("POSTGRES_URL")  # ตัวอย่าง: "postgresql+asyncpg://user:password@host:5432/dbname"

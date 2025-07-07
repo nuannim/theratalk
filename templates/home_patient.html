@@ -24,8 +24,13 @@
         <div class="las">
             <a href="/patient/profile">
                 <div class="txt">
-                    <h4>{{assignments[0].firstname}} {{assignments[0].lastname}}</h4>
-                    <p>{{assignments[0].pusername}}</p>
+                    {% if assignments %}
+                        <h4>{{ assignments[0].firstname }} {{ assignments[0].lastname }}</h4>
+                        <p>{{ assignments[0].pusername }}</p>
+                    {% else %}
+                        <h4>ไม่พบข้อมูลผู้ใช้</h4>
+                        <p>กรุณาเข้าสู่ระบบใหม่</p>
+                    {% endif %}
                 </div>
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </a>

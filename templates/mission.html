@@ -19,13 +19,13 @@
         </div>
         <div class="mid">
             <a href="/patient/" id="home">หน้าหลัก</a>
-            <a href="/patient/mission-box" id="mission">ภารกิจ</a>
+            <a href="/patient/mission" id="mission">ภารกิจ</a>
         </div>
         <div class="las">
             <a href="/patient/profile">
                 <div class="txt">
-                    <h4>name</h4>
-                    <p>username</p>
+                    <h4>{{ patient.firstname }} {{ patient.lastname }}</h4>
+                    <p>{{ patient.pusername }}</p>
                 </div>
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </a>
@@ -33,20 +33,18 @@
     </div>
     <div class="main">
         <h2>ภารกิจประจำวัน</h2>
-        <div class="mission-box">
-            <div class="box" id="m1">
-                <p>สะสมให้ได้ 30 คะแนน</p>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
+            <div class="mission-box">
+                {% for mission in missions %}
+                    <div class="box">
+                    <p>{{ mission.task }}: {{ mission.value }} / {{ mission.max }} {{ ((mission.value / mission.max) * 100) | round(0) }}%</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ (mission.value / mission.max) * 100 }}%;"></div>
+                    </div>
+                    </div>
+                {% else %}
+                    <p>ไม่มีภารกิจในขณะนี้</p>
+                {% endfor %}
             </div>
-            <div class="box" id="m1">
-                <p>สะสมให้ได้ 30 คะแนน</p>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 
