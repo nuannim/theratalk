@@ -49,6 +49,7 @@ td {
   border-top: 1.5px solid #ececec;
   font-weight: 400;
   height: 40px;
+  color: #666666;
 }
 thead {
   background-color: #7293df;
@@ -71,10 +72,12 @@ table a{
   border: 1.5px solid #ececec;
   padding: 5px;
   border-radius: 10px;
+  color: #666666;
 }
 table a:hover{
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
+  color: #7293df;
 }
 
 h2{

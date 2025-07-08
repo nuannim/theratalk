@@ -145,5 +145,5 @@ nextButtons[nextButtons.length - 1].addEventListener('click', () => {
   alert('ส่งข้อมูลสำเร็จ!');
 
   // Redirect to another page (change URL to what you want)
-  window.location.href = 'home_p.html'; // Replace with your desired page
+  window.location.href = '/slp/'; // Replace with your desired page
 });

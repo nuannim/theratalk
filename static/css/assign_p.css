@@ -150,8 +150,14 @@ h2 {
   cursor: pointer;
   user-select: none;
   color: #666666;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
 }
-
+.day:hover {
+  color: #7293df;
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+}
 .day.selected {
   color: #7293df;
   border: 1.5px solid #dae5ff;
@@ -209,18 +215,16 @@ h2 {
   display: flex;
   flex-direction: column;
 }
-.type-lesson h2{
+.type-lesson h2 {
   display: flex;
   align-self: center;
   margin-bottom: 10px;
 }
-.each input{
+.each input {
   display: none;
 }
 
-.each label{
-  /* width: 400px; */
-  height: 40px;
+.each label {
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -229,18 +233,17 @@ h2 {
   border: 1.5px solid #ececec;
   transition: ease-in-out 0.2s;
   color: #666666;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 10px;
 }
 
-.each input:checked + label{
+.each input:checked + label {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
   color: #7293df;
   /* color: white; */
 }
 
-.select-score label:hover{
+.each label:hover {
   border: 1.5px solid #dae5ff;
   color: #7293df;
   background-color: #f7f9fe;
@@ -267,66 +270,67 @@ h2 {
   gap: 20px;
   margin-bottom: 20px;
 } */
-.forles{
+.forles {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.temleft{
+.temleft {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.select-template h3, select{
+.select-template h3,
+select {
   color: #666666;
 }
 
-.select-template{
+.select-template {
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
 }
 
-.big{
+.big {
   display: flex;
   gap: 10px;
 }
 
-.each-tem{
+.each-tem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 1.5px solid #ececec;
   border-radius: 15px;
-  width: 700px;
+  width: 70%;
   padding: 10px;
   gap: 10px;
 }
 
-.each-tem p{
+.each-tem p {
   margin: 0;
 }
 
-.left-tem{
+.left-tem {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.left-tem select{
+.left-tem select {
   border: 1.5px solid #ececec;
   border-radius: 10px;
   height: 30px;
   width: 100px;
 }
 
-.left-tem option{
+.left-tem option {
   color: #666666;
 }
 
-.right-tem{
+.right-tem {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
   border-radius: 10px;
@@ -334,6 +338,6 @@ h2 {
   min-height: 20px;
   /* height: 100px; */
 }
-.right-tem img{
-  width: 400px;
+.right-tem img {
+  width: 50%;
 }
