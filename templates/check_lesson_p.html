@@ -17,14 +17,16 @@
         </div>
         <div class="mid">
             <a href="/slp/" id="home">หน้าหลัก</a>
+            <a href="/slp/progress" id="progress">พัฒนาการของผู้ป่วย</a>
         </div>
         <div class="las">
             <a href="/slp/profile">
-                <div class="txt">
+                <!-- <div class="txt">
                     <h4>name</h4>
                     <p>username</p>
                 </div>
-                <img src="/static/img/audio-book_10089822.png" alt="">
+                <img src="/static/img/audio-book_10089822.png" alt=""> -->
+                <i class="fa-solid fa-user"></i>
             </a>
         </div>
     </div>
@@ -36,11 +38,14 @@
         <div class="content">
             <div class="pat">
                 <div class="image">รูป</div>
-                <div class="answer">This time I want you you you you</div>
+                <div class="answer">
+                    <p>This time I want you you you you  This time I want you you you you This time I want you you you you
+                    </p>
+                </div>
             </div>
             <div class="bot">
                 <div class="score">
-                    <p>คะแนน</p>
+                    <h3>คะแนน</h3>
                     <div class="select-score">
                         <input type="radio" name="score" id="s1">
                         <label for="s1">5</label>
@@ -54,7 +59,10 @@
                         <label for="s5">1</label>
                     </div>
                 </div>
-                <textarea name="feedback" id="feedback" placeholder="คำแนะนำ"></textarea>
+                <div class="recom">
+                    <h3>คำแนะนำ</h3>
+                    <textarea name="feedback" id="feedback"></textarea>
+                </div>
             </div>
         </div>
         <button>เสร็จสิ้น</button>

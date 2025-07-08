@@ -113,7 +113,7 @@ i:hover {
   align-items: center;
   gap: 30px;
   padding-bottom: 10px;
-  border-bottom: 1.5px solid #ececec;
+  /* border-bottom: 1.5px solid #ececec; */
 }
 
 h3,
@@ -193,13 +193,16 @@ h2 {
 .forbut {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  gap: 10px;
 }
 .content-calendar {
   width: 50%;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  align-items: center;
+  /* height: 350px; */
+  gap: 10px;
   /* margin-right: 50px; */
 }
 #month-title {
@@ -208,10 +211,72 @@ h2 {
 .type-lesson {
   display: flex;
   flex-direction: column;
-  border-left: 1.5px solid #ececec;
-  padding-left: 30px;
+  /* height: 350px; */
 }
-.con{
+.type-lesson h2{
   display: flex;
-  margin-top: 10px;
+  align-self: center;
+  margin-bottom: 10px;
+}
+.each input{
+  display: none;
+}
+
+.each label{
+  /* width: 400px; */
+  height: 40px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  color: #666666;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.each input:checked + label{
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+  /* color: white; */
+}
+
+.select-score label:hover{
+  border: 1.5px solid #dae5ff;
+  color: #7293df;
+  background-color: #f7f9fe;
+}
+
+.con {
+  display: none;
+}
+
+.con.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 400px;
+}
+.forles{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.left, .right, .temleft{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select-template h3, select{
+  color: #666666;
+}
+
+.big{
+  display: flex;
+  gap: 10px;
 }

@@ -94,9 +94,6 @@ i:hover {
 .mid a:hover {
   color: #7293df;
 }
-#home{
-  color: #7293df;
-}
 
 .las {
   width: 20%;
@@ -108,7 +105,7 @@ i:hover {
   padding-right: 12px;
 }
 
-.las img {
+/* .las img {
   height: 40px;
   width: 40px;
 }
@@ -123,6 +120,15 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: end;
+} */
+
+.las i {
+  color: #bec9d5;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+.las i:hover {
+  color: #7293df;
 }
 
 .las a {

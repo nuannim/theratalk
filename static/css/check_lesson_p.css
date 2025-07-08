@@ -113,31 +113,102 @@ i:hover {
   align-items: center;
   gap: 30px;
 }
-h3, h2 {
+h3,
+h2 {
   margin: 0;
 }
-.image{
-    width: 130px;
-  height: 130px;
+.image {
+  width: 100px;
+  height: 100px;
   border: 1.5px solid #ececec;
   border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.pat{
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
+.pat {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.answer{
-    border: 1.5px solid #ececec;
+.answer {
+  border: 1.5px solid #ececec;
   border-radius: 15px;
-  width: 70%;
+  width: 75%;
+  padding: 10px;
 }
-#feedback{
-    border: 1.5px solid #ececec;
+
+.answer p{
+  margin: 0;
+  color: #666666;
+}
+#feedback {
+  border: 1.5px solid #ececec;
   border-radius: 15px;
   resize: none;
+  padding: 10px;
+  color: #666666;
+  /* height: 100px; */
 }
-.content{
-    margin-top: 10px;
+.content {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.select-score{
+  display: flex;
+  gap: 10px;
+  /* justify-content: space-between; */
+}
+.select-score input{
+  display: none;
+}
+.select-score label{
+  width: 50px;
+  height: 40px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  color: #666666;
+}
+
+.select-score input:checked + label{
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+  /* color: white; */
+}
+
+.select-score label:hover{
+  border: 1.5px solid #dae5ff;
+  color: #7293df;
+  background-color: #f7f9fe;
+}
+
+.bot, .score, .recom{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+button{
+  border: 1.5px solid #ececec;
+  color: #7293df;
+  background-color: white;
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  margin-top: 10px;
+}
+button:hover{
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
 }

@@ -100,3 +100,50 @@ renderCalendar(current);
 document.querySelector('.forbut .but').addEventListener('click', () => {
   console.log('Selected dates:', getSelectedDates());
 });
+
+const steps = document.querySelectorAll('.con');
+let currentStep = 0;
+
+function goToStep(index) {
+  steps.forEach((step, i) => {
+    step.classList.toggle('active', i === index);
+  });
+  currentStep = index;
+}
+
+const backButtons = document.querySelectorAll('.forbut .back');
+
+backButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    goToStep(currentStep - 1); // Go one step back
+  });
+});
+const nextButtons = document.querySelectorAll('.forbut .next');
+
+nextButtons.forEach((button, i) => {
+  button.addEventListener('click', () => {
+    if (i === 0) {
+      // Step 0 → Step 1: check selected dates
+      if (selections.size === 0) {
+        alert('กรุณาเลือกวันที่อย่างน้อย 1 วัน');
+        return;
+      }
+    } else if (i === 1) {
+      // Step 1 → Step 2: check lessons
+      const checked = document.querySelectorAll('.con.active input[type="checkbox"]:checked');
+      if (checked.length === 0) {
+        alert('กรุณาเลือกแบบฝึกหัดอย่างน้อย 1 รายการ');
+        return;
+      }
+    }
+
+    goToStep(currentStep + 1); // Go to next step
+  });
+});
+
+nextButtons[nextButtons.length - 1].addEventListener('click', () => {
+  alert('ส่งข้อมูลสำเร็จ!');
+
+  // Redirect to another page (change URL to what you want)
+  window.location.href = 'home_p.html'; // Replace with your desired page
+});

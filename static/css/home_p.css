@@ -35,7 +35,7 @@ table {
   border-spacing: 0;
   border-radius: 1em;
   overflow: hidden;
-  width: 70%;
+  /* width: 100%; */
   border: 1.5px solid #ececec;
 }
 th {
@@ -48,6 +48,7 @@ td {
   padding: 5px;
   border-top: 1.5px solid #ececec;
   font-weight: 400;
+  height: 40px;
 }
 thead {
   background-color: #7293df;
@@ -66,9 +67,14 @@ table a{
   font-weight: 400;
   transition: ease-in-out 0.2s;
   width: 100%;
+  background-color: white;
+  border: 1.5px solid #ececec;
+  padding: 5px;
+  border-radius: 10px;
 }
 table a:hover{
-  color: #405fa7;
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
 }
 
 /* .label {
