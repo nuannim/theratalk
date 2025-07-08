@@ -22,40 +22,44 @@
             <a href="/patient/mission" id="mission">ภารกิจ</a>
         </div>
         <div class="las">
-            <a href="/patient/profile/">
-                <div class="txt">
-                    <h4>{{ patient.pfirstname }} {{ patient.plastname }}</h4>
-                    <p>{{ patient.pusername }}</p>
-                </div>
-                <img src="/static/img/audio-book_10089822.png" alt="">
+            <a href="/patient/profile">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </a>
         </div>
     </div>
-    <div class="main">
-        <div class="bar">
-            <h2>พูดคำที่ออกเสียงคล้ายกัน</h2>
-            <div class="exercise-bar">
-                <div class="exercise-fill"></div>
-            </div>
-            <p>ข้อ 1 จาก 10</p>
+    <div class="container">
+        <div class="fori">
+            <a href="/patient/"><i class="fa-solid fa-chevron-left"></i></a>
         </div>
-        <div class="exercise-box">
-            <div class="picture-box">
-                <div class="pic1">
-                    <img src="/static/img/view_12462006.png" alt="">
+        <div class="main">
+            <div class="bar">
+                <h2>พูดคำที่ออกเสียงคล้ายกัน</h2>
+                <div class="exercise-bar">
+                    <div class="exercise-fill"></div>
                 </div>
-                <div class="pic2">
-                    <img src="/static/img/fish_3025761.png" alt="">
+                <p>ข้อ 1 จาก 10</p>
+            </div>
+            <div class="exercise-box">
+                <div class="picture-box">
+                    <div class="pic1">
+                        <img src="/static/img/view_12462006.png" alt="">
+                    </div>
+                    <div class="pic2">
+                        <img src="/static/img/fish_3025761.png" alt="">
+                    </div>
+                    <div class="pic3">
+                        <img src="/static/img/raven_6541837.png" alt="">
+                    </div>
                 </div>
-                <div class="pic3">
-                    <img src="/static/img/raven_6541837.png" alt="">
+                <div class="speak">
+                    <p>กดเพื่อพูด</p>
                 </div>
             </div>
-            <div class="speak">
-                <p>กดเพื่อพูด</p>
-            </div>
+            <button type="button" disabled>ตรวจสอบ</button>
         </div>
-        <button type="button" disabled>ตรวจสอบ</button>
     </div>
 </body>
 

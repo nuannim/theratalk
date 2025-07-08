@@ -23,16 +23,16 @@
         </div>
         <div class="las">
             <a href="/patient/profile">
-                <div class="txt">
-                    <h4>{{ patient.pfirstname }} {{ patient.plastname }}</h4>
-                    <p>{{ patient.pusername }}</p>
-                </div>
-                <img src="/static/img/audio-book_10089822.png" alt="">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </a>
         </div>
     </div>
     <div class="main">
         <h2>ภารกิจประจำวัน</h2>
+        <div class="mis">
             <div class="mission-box">
                 {% for mission in missions %}
                     <div class="box">
@@ -45,6 +45,7 @@
                     <p>ไม่มีภารกิจในขณะนี้</p>
                 {% endfor %}
             </div>
+        </div>
     </div>
 </body>
 

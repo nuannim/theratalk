@@ -1,0 +1,55 @@
+* {
+  font-family: "Prompt";
+  text-decoration: none;
+  scroll-behavior: smooth;
+  color: #666666;
+  font-weight: 550;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.main {
+  margin-top: 50px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.03);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 5px;
+  border: 1.5px solid #ececec;
+  border-radius: 10px;
+}
+button {
+  /* width: 150px; */
+  height: 40px;
+  border-radius: 15px;
+  background-color: white;
+  color: #666666;
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+button:hover {
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+  transition: ease-in-out 0.2s;
+}

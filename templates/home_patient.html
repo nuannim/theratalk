@@ -23,16 +23,17 @@
         </div>
         <div class="las">
             <a href="/patient/profile">
-                <div class="txt">
-                    {% if assignments %}
-                        <h4>{{ assignments[0].firstname }} {{ assignments[0].lastname }}</h4>
-                        <p>{{ assignments[0].pusername }}</p>
-                    {% else %}
-                        <h4>ไม่พบข้อมูลผู้ใช้</h4>
-                        <p>กรุณาเข้าสู่ระบบใหม่</p>
-                    {% endif %}
-                </div>
-                <img src="/static/img/audio-book_10089822.png" alt="">
+                {% if assignments %}
+                <!-- <h4>{{ assignments[0].firstname }} {{ assignments[0].lastname }}</h4>
+                        <p>{{ assignments[0].pusername }}</p> -->
+                <i class="fa-solid fa-user"></i>
+                {% else %}
+                <h4>ไม่พบข้อมูลผู้ใช้</h4>
+                <p>กรุณาเข้าสู่ระบบใหม่</p>
+                {% endif %}
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket" id="out"></i>
             </a>
         </div>
     </div>
@@ -49,10 +50,10 @@
                         <div class="tooltip">
                             <ol>
                                 {% for i in assignments_description %}
-                                    {% if i.assignmentid == assignment.assignmentid %}
-                                        <li>{{ i.templatename or '-' }}</li>
-                                        <!-- เพิ่ม field อื่น ๆ ตาม assignment ที่ต้องการ -->
-                                    {% endif %}
+                                {% if i.assignmentid == assignment.assignmentid %}
+                                <li>{{ i.templatename or '-' }}</li>
+                                <!-- เพิ่ม field อื่น ๆ ตาม assignment ที่ต้องการ -->
+                                {% endif %}
                                 {% endfor %}
                             </ol>
                         </div>
@@ -62,7 +63,7 @@
             {% endfor %}
         </div>
 
-<!-- <p>{{assignments_description}}</p> -->
+        <!-- <p>{{assignments_description}}</p> -->
 
 
 

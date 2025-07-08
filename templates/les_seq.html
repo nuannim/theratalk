@@ -7,7 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="les_seq.css">
+    <link rel="stylesheet" href="/static/css/les_seq.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Lesson</title>
 </head>
@@ -22,41 +22,46 @@
             <a href="mission.html" id="mission">ภารกิจ</a>
         </div>
         <div class="las">
-            <a href="profile_patient.html">
-                <div class="txt">
-                    <h4>{{ patient.pfirstname }} {{ patient.plastname }}</h4>
-                    <p>{{ patient.pusername }}</p>
-                </div>
-                <img src="img/audio-book_10089822.png" alt="">
+            <a href="/patient/profile">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </a>
         </div>
     </div>
-    <div class="main">
-        <div class="bar">
-            <h2>เรียงคำให้เป็นประโยค</h2>
-            <div class="exercise-bar">
-                <div class="exercise-fill"></div>
-            </div>
-            <p>ข้อ 1 จาก 10</p>
+    <div class="container">
+        <div class="fori">
+            <a href="/patient/"><i class="fa-solid fa-chevron-left"></i></a>
         </div>
-        <div class="exercise-box">
-            <div class="answer-box" id="answer">
-                <div class="ans"></div>
-                <div class="ans"></div>
-                <div class="ans"></div>
-                <div class="ans"></div>
-                <div class="ans"></div>
+        <div class="main">
+            <div class="bar">
+                <h2>เรียงคำให้เป็นประโยค</h2>
+                <div class="exercise-bar">
+                    <div class="exercise-fill"></div>
+                </div>
+                <p>ข้อ 1 จาก 10</p>
             </div>
-            <div class="choice" id="choice">
-                <div class="list" id="word1" draggable="true">เด็ก</div>
-                <div class="list" id="word2" draggable="true">นักเรียน</div>
-                <div class="list" id="word3" draggable="true">ตัดผม</div>
-                <div class="list" id="word4" draggable="true">ผม</div>
-                <div class="list" id="word5" draggable="true">เกรียน</div>
+            <div class="exercise-box">
+                <div class="answer-box" id="answer">
+                    <div class="ans"></div>
+                    <div class="ans"></div>
+                    <div class="ans"></div>
+                    <div class="ans"></div>
+                    <div class="ans"></div>
+                </div>
+                <div class="choice" id="choice">
+                    <div class="list" id="word1" draggable="true">เด็ก</div>
+                    <div class="list" id="word2" draggable="true">นักเรียน</div>
+                    <div class="list" id="word3" draggable="true">ตัดผม</div>
+                    <div class="list" id="word4" draggable="true">ผม</div>
+                    <div class="list" id="word5" draggable="true">เกรียน</div>
+                </div>
             </div>
+            <button type="button" disabled>ตรวจสอบ</button>
         </div>
-        <button type="button" disabled>ตรวจสอบ</button>
     </div>
 </body>
-<script src="les_seq.js"></script>
+<script src="/static/js/les_seq.js"></script>
+
 </html>
