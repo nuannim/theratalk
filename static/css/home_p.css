@@ -77,6 +77,10 @@ table a:hover{
   background-color: #f7f9fe;
 }
 
+h2{
+  margin-top: 0;
+}
+
 /* .label {
   width: 100%;
   display: flex;

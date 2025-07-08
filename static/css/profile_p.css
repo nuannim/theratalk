@@ -49,8 +49,19 @@ thead {
   width: 100%;
 }
 .pro img {
-  width: 70px;
-  height: 70px;
+  width: 120px;
+  height: 120px;
+}
+.image{
+  width: 100px;
+  height: 100px;
+  border-radius: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid #ececec;
+  background-color: white;
+  overflow: hidden;
 }
 .pro h3,
 p {
@@ -140,4 +151,8 @@ h4 {
 .txt p {
   font-weight: 400;
   font-size: 13px;
+}
+
+.namenuser p{
+  color: #bec9d5;
 }

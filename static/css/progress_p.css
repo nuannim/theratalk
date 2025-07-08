@@ -12,6 +12,7 @@ body {
 #progress {
   color: #7293df;
 }
+
 .main {
   padding-left: 50px;
   padding-right: 50px;
@@ -24,11 +25,17 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 .top i {
   display: flex;
   align-self: center;
 }
+
+h2{
+  margin: 0;
+}
+
 table {
   border-collapse: separate;
   border-spacing: 0;
@@ -47,7 +54,6 @@ td {
   padding: 5px;
   border-top: 1.5px solid #ececec;
   font-weight: 400;
-  font-size: 13px;
 }
 thead {
   background-color: #7293df;
