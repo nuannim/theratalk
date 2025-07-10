@@ -1,6 +1,13 @@
-from fastapi import APIRouter, Request, Depends, HTTPException
+import os
+import subprocess
+import tempfile
+from fastapi import APIRouter, File, Request, Depends, HTTPException, UploadFile
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
+import torch
+from transformers import pipeline
+
+
 # from supabase import *
 from app.db.db import supabase, get_user
 
@@ -191,3 +198,32 @@ async def showActivity(activity_id: int, request: Request, resp=Depends(check_pa
         "request": request,
         "patient": patient
     })
+
+
+# if 0 = GPU, if can't use GPU, use CPU
+device = 0 if torch.cuda.is_available() else "cpu" 
+asr = pipeline(
+    task="automatic-speech-recognition",
+    model="biodatlab/whisper-th-medium-combined",
+    chunk_length_s=30,
+    device=device
+)
+
+@router.post("/transcribe/")
+async def transcribe(file: UploadFile = File(...)):
+    # Save uploaded file temporarily
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".webm") as temp_webm:
+        temp_webm.write(await file.read())
+        webm_path = temp_webm.name
+
+    wav_path = webm_path.replace(".webm", ".wav")
+    subprocess.run(["ffmpeg", "-i", webm_path, "-ar", "16000", "-ac", "1", wav_path], check=True)
+
+    result = asr(wav_path, generate_kwargs={"language": "<|th|>", "task": "transcribe"})
+
+    os.remove(webm_path)
+    os.remove(wav_path)
+
+    print(f"Transcription result: {result['text']}")
+
+    return {"text": result["text"]}

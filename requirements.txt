@@ -3,3 +3,7 @@ python-dotenv
 supabase
 sqlalchemy
 psycopg2
+ffmpeg-python
+librosa
+torch
+transformers
