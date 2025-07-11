@@ -147,3 +147,25 @@ nextButtons[nextButtons.length - 1].addEventListener('click', () => {
   // Redirect to another page (change URL to what you want)
   window.location.href = '/slp/'; // Replace with your desired page
 });
+
+
+// const data = {
+//   // table assignments
+//   assignments: {
+//     patientid: patientid,
+//     slpid: slpid,
+//     assignmentdate: assignmentdate,
+//     created_at: new Date().toISOString(),
+//     isdone: false,
+//     assignmentgroupid: assignmentgroupid,
+//   },
+  
+//   // table assignmenteachdays
+//   assignmenteachdays: {
+//     assignmentid: assignmentid, // fk from assignments table
+//     tamplateid: templateid, // fk from templates table. its what template slp choose for you to do. it can be more than 1 
+//     isdone: false,
+//     comment: comment
+//   }
+//   // table histories --> for collect times you retries (no need to write here, i just want to tell you)
+// }
