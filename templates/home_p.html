@@ -86,6 +86,7 @@
                         <td>{{ patient.pfirstname }} {{ patient.plastname }}</td>
                         <td><a href="/slp/mypatient/{{ patient.patientid }}">มอบหมายแบบฝึกหัด</a></td>
                         <td><a href="/slp/checkmypatient/{{ patient.patientid }}">ตรวจแบบฝึกหัด</a></td>
+                        <td><a href="/slp/resetpassword/{{ patient.patientid }}">รีเซ็ตรหัสผ่านบัญชีผู้ป่วย</a></td>
                     </tr>
                     {% endfor %}
                 {% else %}

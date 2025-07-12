@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, HTTPException, Depends
+from fastapi import APIRouter, Request, HTTPException, Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.db.db import supabase
@@ -149,6 +149,7 @@ async def showMyPatient(request: Request, resp=Depends(check_slp_role)):
         # "data": data
     })
 
+#! ยังไม่เสร็จ
 @router.get("/checkmypatient/{patientid}")
 async def showCheck(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
@@ -159,6 +160,38 @@ async def showCheck(request: Request, resp=Depends(check_slp_role)):
     return templates.TemplateResponse("check_p.html", {
         "request": request
     })
+
+
+@router.get("/resetpassword/{patientid}")
+async def showResetPassword(request: Request, resp=Depends(check_slp_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+    
+    return templates.TemplateResponse("resetpassword_p.html", {
+        "request": request
+    })
+
+@router.post("/resetpassword/{patientid}")
+async def resetPassword(
+    request: Request, 
+    patientid: int,
+    new_password: str = Form(...)
+    ):
+
+    print(f'😭😭😭 @router.post("/resetpassword/{patientid}")')
+    print('😭 patientid:', patientid)
+    print('😭 new_password:', new_password)
+
+
+    res = supabase.table("patients") \
+        .update({"ppassword": new_password}) \
+        .eq("patientid", patientid) \
+        .execute()
+
+    print("🔧 update result:", res)
+
+    return RedirectResponse(url="/slp/", status_code=302)
+
 
 @router.post("/assign/")
 async def assignLesson(

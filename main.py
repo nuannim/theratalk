@@ -81,7 +81,12 @@ async def login(
         res.set_cookie(key="role", value="patient")
         return res
 
-    return PlainTextResponse("noooo try again", status_code=401)
+    # return PlainTextResponse("noooo try again", status_code=401)
+
+    return templates.TemplateResponse("testlogin.html", {
+        "request": request,
+        "error": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"
+    })
 
 
 @app.get("/logout")
