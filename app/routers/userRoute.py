@@ -2,9 +2,12 @@ import os
 import subprocess
 import tempfile
 from fastapi import APIRouter, File, Request, Depends, HTTPException, UploadFile
+from fastapi import params
+from fastapi.params import Form
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 import torch
+from fastapi import Response
 from transformers import pipeline
 
 
@@ -124,53 +127,55 @@ async def showProfile(request: Request, resp=Depends(check_patient_role)):
         "data": asganotherpage
     })
 
+
 @router.get("/lesson/{assignment_id}")
 async def showLession(assignment_id: int, request: Request, resp=Depends(check_patient_role)):
     if isinstance(resp, RedirectResponse):
         return resp
-    
+
     userId = request.cookies.get("user_id")
-    
+
     # Get patient
     patient_res = supabase.table("patients").select("*").eq("patientid", userId).execute()
     if not patient_res.data:
         raise HTTPException(status_code=404, detail="Patient not found")
     patient = patient_res.data[0]
 
-     # Get all assignments under this assignmentid
+    # Get assignments
     assignment_res = supabase.table("home_assignmentdescription").select("*").eq("assignmentid", assignment_id).execute()
     if not assignment_res.data:
         raise HTTPException(status_code=404, detail="No assignment descriptions found")
     assignments = assignment_res.data
 
+    # Create lesson list
     lessons = []
 
     for a in assignments:
-        # Get template
         template_res = supabase.table("templates").select("*").eq("templateid", a["templateid"]).execute()
         if not template_res.data:
             continue
         template = template_res.data[0]
 
-        # Get activity
+
         activity_res = supabase.table("activities").select("*").eq("activityid", template["activityid"]).execute()
         if not activity_res.data:
             continue
         activity = activity_res.data[0]
 
-        # Combine into one lesson item
+
         lessons.append({
             "assignment": a,
             "template": template,
             "activity": activity
         })
 
-    # Render template with all lessons
-    return templates.TemplateResponse("each_lesson.html", {
+    # ✅ Create response from TemplateResponse
+    response = templates.TemplateResponse("each_lesson.html", {
         "request": request,
         "patient": patient,
-        "lessons": lessons  # 👈 send list instead of one
+        "lessons": lessons
     })
+    return response
 
 @router.get("/activity/{activity_id}")
 async def showActivity(activity_id: int, request: Request, resp=Depends(check_patient_role)):
@@ -184,6 +189,11 @@ async def showActivity(activity_id: int, request: Request, resp=Depends(check_pa
         raise HTTPException(status_code=404, detail="Patient not found")
     patient = patient_res.data[0]
 
+    tc_contents = []
+    if activity_id:
+        tc_view_res = supabase.table("tc_view").select("*").eq("assignmentid", activity_id).execute()
+        tc_contents = tc_view_res.data if tc_view_res.data else []
+
     file_list = {
         1: "les_listen_speak2.html",
         2: "les_listen_speak.html",
@@ -194,9 +204,13 @@ async def showActivity(activity_id: int, request: Request, resp=Depends(check_pa
         8: "les_seq"
     }
 
+    print("tc_contents : ", tc_contents)
+    print("activassignment_id : ", activity_id)
+
     return templates.TemplateResponse(file_list[activity_id], {
         "request": request,
-        "patient": patient
+        "patient": patient,
+        "tc_contents": tc_contents
     })
 
 
@@ -227,3 +241,19 @@ async def transcribe(file: UploadFile = File(...)):
     print(f"Transcription result: {result['text']}")
 
     return {"text": result["text"]}
+
+
+@router.post("/check_answer/")
+async def check_answer(request: Request):
+    data = await request.json()
+    answer = data.get("answer", "").strip().lower()
+    word = data.get("word", "").strip().lower()
+    print(f"🔍 Checking: '{answer}' vs '{word}'")
+    isCorrect = answer == word
+    
+
+    if isCorrect:
+        return JSONResponse(status_code=200, content={"message": "Correct"})
+    else:
+        raise HTTPException(status_code=400, detail="Incorrect")
+

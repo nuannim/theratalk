@@ -1,11 +1,14 @@
-from fastapi import FastAPI, Request, Form, Depends
+from fastapi import FastAPI, Request, Form, Depends, Query
 from app.routers import userRoute
 from app.routers import docRoute
 from fastapi.middleware import Middleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.db.db import supabase #, get_user, get_db
-import jwt
+import jwt, os
+from io import BytesIO
+from fastapi.responses import StreamingResponse
+import requests
 # from db import get_user
 from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse, JSONResponse
 
@@ -17,6 +20,10 @@ app.include_router(userRoute.router, prefix="/patient")
 app.include_router(docRoute.router, prefix="/slp")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# SET FOR VAJA API
+API_KEY = os.getenv("API_VAJA")
+SPEAKER = "farah"
 
 # from app.db import models, schemas, crud
 # from app.db.db import engine, get_db
@@ -83,22 +90,30 @@ async def logout(request: Request):
     res.delete_cookie("role", path="/")
     return res
 
+@app.post("/api/tts/")
+async def get_tts(request: Request):
+    data = await request.json()
+    text = data.get("text", "")
+    
+    vaja_url = "https://api.aiforthai.in.th/vaja"
+    headers = {
+        "Apikey": os.getenv("API_VAJA"),
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "text": text,
+        "speaker": SPEAKER
+    }
+
+    response = requests.post(vaja_url, json=payload, headers=headers)
+    result = response.json()
+
+    audio_url = result.get("audio_url")
+    return JSONResponse(content={"audio_url": audio_url})
+
+
 # @app.get("/create-user")
 # def create_user():
 #     result = supabase.table("user").insert({"username": "sora", "age": 20}).execute()
 #     return result.data
-
-# @app.post("/stt", response_class=HTMLResponse)
-# async def stt(request: Request, file: UploadFile = File(...)):
-#     file_location = os.path.join(UPLOAD_FOLDER, file.filename)
-#     with open(file_location, "wb") as buffer:
-#         shutil.copyfileobj(file.file, buffer)
-
-#     result = model.transcribe(file_location, language="th")
-#     text = result["text"]
-
-#     os.remove(file_location)
-
-#     return templates.TemplateResponse("index.html", {"request": request, "transcript": text})
-
 
