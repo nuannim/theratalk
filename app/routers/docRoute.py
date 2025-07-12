@@ -168,17 +168,84 @@ async def assignLesson(
 
     records_to_insert = []
 
-    for date_str in assigned_dates:
-        records_to_insert.append({
-            "patientid": patientId,
-            "slpid": slp_id,
-            "assignmentdate": date_str,
-            "isdone": False,
-            "assignmentgroupid": None
-        })
+    # for date_str in assigned_dates:
+    #     records_to_insert.append({
+    #         "patientid": patientId,
+    #         "slpid": slp_id,
+    #         "assignmentdate": date_str,
+    #         "isdone": False,
+    #         "assignmentgroupid": None
+    #     })
     
-    #! ยังไม่ครบทุกตาราง
-    #response = supabase.table("assignments").insert(records_to_insert).execute()
+    # #! ยังไม่ครบทุกตาราง
+    # #response = supabase.table("assignments").insert(records_to_insert).execute()
+    
+    # print("===== router.post(\"/assign/\") =====")
+    # print(f"📊📊 patientId: {patientId}, assigned_dates: {assigned_dates}, activity: {activity}, slp_id: {slp_id}")
+    # return {"message": "Assignments saved successfully"}
 
-    print(f"📊📊 patientId: {patientId}, assigned_dates: {assigned_dates}, activity: {activity}, slp_id: {slp_id}")
-    return {"message": "Assignments saved successfully"}
+    from datetime import datetime
+    import uuid
+
+    assignment_group_id = str(uuid.uuid4())
+    current_time = datetime.now().isoformat()
+
+    try:
+        # Insert into assignments table
+        assignment_records = []
+        for date_str in assigned_dates:
+            assignment_records.append({
+                "patientid": patientId,
+                "slpid": slp_id,
+                "assignmentdate": date_str,
+                "isdone": False,
+                "assignmentgroupid": assignment_group_id,
+                "created_at": current_time
+            })
+
+        print('assignment_record:', assignment_records)  # * ถูก
+
+        response_assignments = supabase.table("assignments").insert(assignment_records).execute()
+        assignments_data = response_assignments.data
+        # print('response_assignments:', response_assignments)
+        # print('response_assignments.data:', response_assignments.data)
+        print('assignments_data:', assignments_data)
+
+        # Insert into assignmenteachdays table
+        assignmenteachdays_records = []
+        for assignment in assignments_data:
+            assignment_id = assignment["assignmentid"]
+            # assignmenteachdays_records.append({
+            #     "assignmentid": assignment_id,
+            #     "templateid": activity, # Assuming 'activity' is the templateid
+            #     "isdone": False,
+            #     "retries": 0,
+            #     "comment": None
+            # })
+            for template_item in activity:
+                assignmenteachdays_records.append({
+                    "assignmentid": assignment_id,
+                    "templateid": template_item["templateid"],
+                    "isdone": False,
+                    "retries": 0,
+                    "comment": None
+                })
+
+
+
+
+        print('assignmenteachdays_records:', assignmenteachdays_records)
+        
+        for i in assignmenteachdays_records:
+            response_assignmenteachdays = supabase.table("assignmenteachdays").insert(i).execute()
+            print('response_assignmenteachdays:', response_assignmenteachdays)
+
+        
+        print("===== router.post(\"/assign/\") =====")
+        print(f"📊📊 patientId: {patientId}, assigned_dates: {assigned_dates}, activity: {activity}, slp_id: {slp_id}")
+        return {"message": "Assignments saved successfully"}
+
+    except Exception as e:
+        print(f"Error saving assignments: {e}")
+        return {"message": f"Error saving assignments: {e}"}, 500
+
