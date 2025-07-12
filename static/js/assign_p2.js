@@ -1,6 +1,9 @@
+    console.log("===== assign_p2.js is working =====")
+
 
 // ##### จับ activityid ใส่ list
     document.getElementById("but-next2").addEventListener("click", () => {
+    console.log("===== assign_p2.js - getElementById(\"but-next2\") is working =====")
         const checkboxes = document.querySelectorAll('input[name="lesson"]');
         const selectedIds = [];
 
@@ -114,3 +117,34 @@
             updateTemplateInfo(select); // 👈 แสดงผลทันทีตามค่าเริ่มต้น
         });
     });
+
+    // ##### Function to save selected template values
+    function saveSelectedTemplates() {
+        console.log("===== assign_p2.js - saveSelectedTemplates() is working =====");
+        const selectedTemplates = [];
+        document.querySelectorAll(".each-tem").forEach(eachTem => {
+            // Check if the parent container (.each-tem) is visible
+            if (eachTem.style.display !== "none") {
+                const select = eachTem.querySelector("select[id^='s1-']");
+                if (select) {
+                    const activityIdMatch = select.id.match(/s1-(\d+)/);
+                    const templateIdMatch = select.value.match(/t(\d+)/);
+
+                    if (activityIdMatch && templateIdMatch) {
+                        selectedTemplates.push({
+                            activityid: parseInt(activityIdMatch[1], 10),
+                            templateid: parseInt(templateIdMatch[1], 10)
+                        });
+                    }
+                }
+            }
+        });
+        console.log("Selected Templates:", selectedTemplates);
+        return selectedTemplates;
+        // Here you can send `selectedTemplates` to the backend or store it as needed
+        // Example: fetch('/save_templates', { method: 'POST', body: JSON.stringify(selectedTemplates) });
+    }
+
+    // ##### Event listener for the "Done" button
+    document.getElementById("but-done").addEventListener("click", saveSelectedTemplates);
+

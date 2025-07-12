@@ -240,7 +240,7 @@
             </div>
             <div class="forbut">
                 <button type="button" class="but back">ย้อนกลับ</button>
-                <button type="button" class="but next">เสร็จสิ้น</button>
+                <button type="button" class="but next" id="but-done">เสร็จสิ้น</button>
             </div>
         </div>
     </div>
@@ -248,7 +248,6 @@
 <script src="/static/js/assign_p.js"></script>
 <script src="/static/js/assign_p2.js"></script>
 <script>
-
 
     // document.querySelectorAll("select[id^='s1-']").forEach(select => {
     //     console.log("Found select:", select.id, "Default value:", select.value);
@@ -316,15 +315,19 @@
 
 
     document.addEventListener('DOMContentLoaded', () => {
-        const finishBtn = document.querySelector('.forbut .but');
+        // const finishBtn = document.querySelector('.forbut .but');
+        const doneButton = document.getElementById("but-done");
 
-        finishBtn.addEventListener('click', async () => {
+        // finishBtn.addEventListener('click', async () => {
+        if (doneButton) {
+            doneButton.addEventListener('click', async () => {
             const selectedDates = getSelectedDates();
+            const selectedTemplates = saveSelectedTemplates();
 
-            const lessonCheckboxes = document.querySelectorAll('input[name="lesson"]:checked');
+            // const lessonCheckboxes = document.querySelectorAll('input[name="lesson"]:checked');
 
-            console.log('ffffff'+ lessonCheckboxes);
-            const selectedLessons = Array.from(lessonCheckboxes).map(cb => cb.id);
+            // console.log('ffffff'+ lessonCheckboxes);
+            // const selectedLessons = Array.from(lessonCheckboxes).map(cb => cb.id);
             // const selectedTemplateIds = Array.from(lessonCheckboxes).map(cb => lessonMap[cb.getAttribute('id')]);
 
             const path = window.location.pathname;
@@ -336,7 +339,7 @@
             
             const data = {
                 assigned_dates: selectedDates,
-                activity: selectedLessons,
+                activity: selectedTemplates,
                 patientId: patientId,
             };
 
@@ -363,6 +366,9 @@
                 alert('Error sending data. Please try again.');
             }
         });
+        } else {
+            console.warn("Button with ID 'but-done' not found in assign_p.html. Data sending will not be triggered.");
+        }
     });
 </script>
 
