@@ -232,14 +232,13 @@ async def assignLesson(
                 })
 
 
-
+        for record in assignmenteachdays_records:
+            if record["comment"] is None:
+                record["comment"] = ""
 
         print('assignmenteachdays_records:', assignmenteachdays_records)
         
-        for i in assignmenteachdays_records:
-            response_assignmenteachdays = supabase.table("assignmenteachdays").insert(i).execute()
-            print('response_assignmenteachdays:', response_assignmenteachdays)
-
+        response = supabase.table("assignmenteachday").insert(assignmenteachdays_records).execute()
         
         print("===== router.post(\"/assign/\") =====")
         print(f"📊📊 patientId: {patientId}, assigned_dates: {assigned_dates}, activity: {activity}, slp_id: {slp_id}")
