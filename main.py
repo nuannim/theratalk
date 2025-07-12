@@ -83,12 +83,54 @@ async def login(
 
     return PlainTextResponse("noooo try again", status_code=401)
 
+
 @app.get("/logout")
 async def logout(request: Request):
     res = RedirectResponse(url="/login", status_code=302)
     res.delete_cookie("user_id", path="/")
     res.delete_cookie("role", path="/")
     return res
+
+
+@app.get("/signup")
+async def showSignUp(request: Request):
+    return templates.TemplateResponse("signup.html", {
+        "request": request
+    })
+
+@app.post("/signup")
+async def create_user(
+    request: Request,
+    slpfirstname: str = Form(...),
+    slplastname: str = Form(...),
+    slpemail: str = Form(...),
+    slpusername: str = Form(...),
+    slppassword: str = Form(...),
+    slphospital: str = Form(...)
+):
+
+    print('😭😭😭 /signup debug')
+    print('😭 slpfirstname: ', slpfirstname)
+    print('😭 slplastname: ', slplastname)
+    print('😭 slpemail: ', slpemail)
+    print('😭 slpusername: ', slpusername)
+    print('😭 slppassword: ', slppassword)
+    print('😭 slphospital: ', slphospital)
+
+    data = {
+        "slpfirstname": slpfirstname,
+        "slplastname": slplastname,
+        "slpemail": slpemail,
+        "slpusername": slpusername,
+        "slppassword": slppassword,  # ควร hash ถ้าใช้จริง!
+        "slphospital": slphospital
+    }
+
+    res = supabase.table("slp").insert(data).execute()
+    print(res.data)
+
+
+    return RedirectResponse(url="/login", status_code=302)
 
 @app.post("/api/tts/")
 async def get_tts(request: Request):

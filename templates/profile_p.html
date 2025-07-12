@@ -23,8 +23,6 @@
         </div>
         <div class="las">
             <div class="txt">
-                <!-- <h4>{{ data[0].slpfirstname }} {{ data[0].slplastname }}</h4>
-                <p>{{ data[0].slpusername }}</p> -->
                 <a href="/slp/profile/">
                     <i class="fa-solid fa-user"></i>
                 </a>
@@ -39,8 +37,8 @@
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </div>
             <div class="namenuser">
-                <h3>{{ data[0].slpfirstname }} {{ data[0].slplastname }}</h3>
-                <p>{{ data[0].slpusername }}</p>
+                <h3>{{slp_data.slpfirstname }} {{slp_data.slplastname }}</h3>
+                <p>{{slp_data.slpusername }}</p>
             </div>
         </div>
         <h2>ผู้ป่วยที่รับการบำบัด</h2>
@@ -51,11 +49,20 @@
                 </tr>
             </thead>
             <tbody>
-                {% for patient in data %}
-                <tr>
-                    <td>{{ patient.pfirstname }} {{ patient.plastname }}</td>
-                </tr>
-                {% endfor %}
+                {% if data %}
+                    {% for patient in data %}
+                    <tr>
+                        <td>{{ patient.pfirstname }} {{ patient.plastname }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>ไม่มีผู้รับการบำบัด</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+
             </tbody>
         </table>
     </div>

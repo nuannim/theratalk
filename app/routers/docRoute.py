@@ -72,6 +72,7 @@ async def showHome(request: Request, resp=Depends(check_slp_role)):
         "data": patients_list
     })
 
+
 @router.get("/progress")
 async def showProgress(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
@@ -89,6 +90,10 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
     
     user_id = request.cookies.get("user_id")
     if user_id:
+        # ลืมไปว่า ถ้าslpไม่มีผุ้ป่วยจะไม่แสดงผล
+        slp_result = supabase.table("slp").select("*").eq("slpid", user_id).single().execute()
+        slp_data = slp_result.data if slp_result.data else {}
+
         slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
         data = slp_home.data
         # print(f"📊📊 data: {data}")
@@ -113,7 +118,8 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
 
     return templates.TemplateResponse("profile_p.html", {
         "request": request,
-        "data": patients_list
+        "data": patients_list,
+        "slp_data": slp_data
     })
 
 # ไม่ใช้แล้ว
