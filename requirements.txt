@@ -7,3 +7,4 @@ ffmpeg-python
 librosa
 torch
 transformers
+bcrypt==3.2.2

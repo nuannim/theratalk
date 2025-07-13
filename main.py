@@ -5,6 +5,7 @@ from fastapi.middleware import Middleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.db.db import supabase #, get_user, get_db
+from passlib.context import CryptContext
 import jwt, os
 from io import BytesIO
 from fastapi.responses import StreamingResponse
@@ -15,6 +16,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse,
 # middleware=[Middleware(AuthMiddleware)]
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 app.include_router(userRoute.router, prefix="/patient")
 app.include_router(docRoute.router, prefix="/slp")
@@ -57,6 +59,10 @@ async def login(
 ):
     # & just for checking
     print(f"😭😭😭 Username: {username}, Password: {password}")
+
+    #! ยังไม่ hash password เก่าเลยยังไม่ใส่เดียวพัง
+    hashed_pw = hash_password(password)
+    #! ------------------------------------
 
     slp_response = supabase.table("slp").select("*").eq("slpusername", username).eq("slppassword", password).execute()
     slp_users = slp_response.data
@@ -103,6 +109,9 @@ async def showSignUp(request: Request):
         "request": request
     })
 
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
 @app.post("/signup")
 async def create_user(
     request: Request,
@@ -122,12 +131,14 @@ async def create_user(
     print('😭 slppassword: ', slppassword)
     print('😭 slphospital: ', slphospital)
 
+    hashed_pw = hash_password(slppassword)
+
     data = {
         "slpfirstname": slpfirstname,
         "slplastname": slplastname,
         "slpemail": slpemail,
         "slpusername": slpusername,
-        "slppassword": slppassword,  # ควร hash ถ้าใช้จริง!
+        "slppassword": hash_password(hashed_pw),  # ควร hash ถ้าใช้จริง!
         "slphospital": slphospital
     }
 

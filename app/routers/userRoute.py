@@ -191,7 +191,7 @@ async def showActivity(activity_id: int, request: Request, resp=Depends(check_pa
 
     tc_contents = []
     if activity_id:
-        tc_view_res = supabase.table("tc_view").select("*").eq("assignmentid", activity_id).execute()
+        tc_view_res = supabase.table("tc_view").select("*").eq("activityid", activity_id).eq("assignmentid", activity_id).execute()
         tc_contents = tc_view_res.data if tc_view_res.data else []
 
     file_list = {
