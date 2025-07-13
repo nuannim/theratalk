@@ -23,11 +23,7 @@
         </div>
         <div class="las">
             <a href="/slp/profile">
-                <!-- <div class="txt">
-                    <h4>name</h4>
-                    <p>username</p>
-                </div>
-                <img src="/static/img/audio-book_10089822.png" alt=""> -->
+
                 <i class="fa-solid fa-user"></i>
             </a>
             <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
@@ -35,7 +31,7 @@
     </div>
     <div class="main">
         <div class="top">
-            <a href="/slp/checkmypatient/{{ data[0].patientid}}"><i class="fa-solid fa-chevron-left"></i>
+            <a href="/slp/"><i class="fa-solid fa-chevron-left"></i>
             {% if data %}
                 <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
             {% else %}
@@ -43,27 +39,19 @@
             {% endif %}
             </a>
         </div>
-        <h1>{{ date }}</h1>
+        <h1>ตรวจแบบฝึกหัด</h1>
         <div class="content">
-            <!-- <div class="need" style="display: none;">
-                <h2>แบบฝึกหัดที่ต้องตรวจ</h2>
-                <div class="lesson">
-                    <a href="check_lesson_p.html"><div>แบบฝึกหัดการนึกคำจากภาพหรือสถานการณ์</div></a>
-                </div>
-            </div> -->
-
             <div class="finish">
                 <!-- <h2>แบบฝึกหัดที่ตรวจเรียบร้อยแล้ว</h2> -->
-                <h2>แบบฝึกหัดที่มอบหมาย</h2>
+                <h2>วันที่มอบหมายแบบฝึกหัด</h2>
                 <div class="lesson">
-                    {% if data_assignmenteachday %}
-                        {% for i in data_assignmenteachday %}
-                            <a href="/slp/checkmypatient/{{data[0].patientid}}/{{date}}/{{i.ahid}}"><div>{{ i.activityname }} ({{i.templatename}})</div></a>
-                        {% endfor %}
-                    {% else %}
-                        <a href="#"><div>marmink so cute</div></a>
-                    {% endif %}
-
+            {% if data_assignments %}
+                {% for i in data_assignments %}
+                    <a href="/slp/checkmypatient/{{ data[0].patientid }}/{{ i.assignmentdate }}"><div>{{ i.assignmentdate }}</div></a>
+                {% endfor %}
+            {% else %}
+                    <a href="#"><div>xx-xx-xxxx</div></a>
+            {% endif %}
                 </div>
             </div>
         </div>

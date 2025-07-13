@@ -46,30 +46,33 @@ async def showHome(request: Request, resp=Depends(check_slp_role)):
     # print (f"😭😭 lesson: {lessons}")
     user_id = request.cookies.get("user_id")
     if user_id:
-        slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
-        data = slp_home.data
-        # print(f"📊📊 data: {data}")
+        # slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
+        # data = slp_home.data
+        # # print(f"📊📊 data: {data}")
 
-        unique_patients = {}
-        for item in data:
-            patient_id = item["patientid"]
-            if patient_id not in unique_patients:
-                unique_patients[patient_id] = {
-                    "patientid": patient_id,
-                    "pfirstname": item["pfirstname"],
-                    "plastname": item["plastname"],
-                    "slpfirstname": item["slpfirstname"],
-                    "slplastname": item["slplastname"],
-                    "slpusername": item["slpusername"]
-                }
+        # unique_patients = {}
+        # for item in data:
+        #     patient_id = item["patientid"]
+        #     if patient_id not in unique_patients:
+        #         unique_patients[patient_id] = {
+        #             "patientid": patient_id,
+        #             "pfirstname": item["pfirstname"],
+        #             "plastname": item["plastname"],
+        #             "slpfirstname": item["slpfirstname"],
+        #             "slplastname": item["slplastname"],
+        #             "slpusername": item["slpusername"]
+        #         }
 
-        patients_list = list(unique_patients.values())
-        print(f"📊📊 patient_list: {patients_list}")
+        # patients_list = list(unique_patients.values())
+        # print(f"📊📊 patient_list: {patients_list}")
+
+        new_slp_home = supabase.table("patients").select("*").eq("slpid", user_id).execute()
+        # print("feafeawfeawfewafewfefewfewfewfew:", new_slp_home)
 
     return templates.TemplateResponse("home_p.html", {
         "request": request,
         # "lessons": lessons,
-        "data": patients_list
+        "data": new_slp_home.data
     })
 
 
@@ -94,31 +97,14 @@ async def showProfile(request: Request, resp=Depends(check_slp_role)):
         slp_result = supabase.table("slp").select("*").eq("slpid", user_id).single().execute()
         slp_data = slp_result.data if slp_result.data else {}
 
-        slp_home = supabase.table("slp_home").select("*").eq('slpid', user_id).execute()
-        data = slp_home.data
-        # print(f"📊📊 data: {data}")
-
-        #! ถ้าข้อมูลเยอะ ๆ ไม่ค่อยเหมาะเท่าไหร่
-        unique_patients = {}
-        for item in data:
-            patient_id = item["patientid"]
-            if patient_id not in unique_patients:
-                unique_patients[patient_id] = {
-                    "patientid": patient_id,
-                    "pfirstname": item["pfirstname"],
-                    "plastname": item["plastname"],
-                    "slpfirstname": item["slpfirstname"],
-                    "slplastname": item["slplastname"],
-                    "slpusername": item["slpusername"]
-                }
-
-        patients_list = list(unique_patients.values())
-        print(f"📊📊 patient_list: {patients_list}")
-
+        user_id = request.cookies.get("user_id")
+        if user_id:
+            new_slp_home = supabase.table("patients").select("*").eq("slpid", user_id).execute()
+            # print("feafeawfeawfewafewfefewfewfewfew:", new_slp_home)
 
     return templates.TemplateResponse("profile_p.html", {
         "request": request,
-        "data": patients_list,
+        "data": new_slp_home.data,
         "slp_data": slp_data
     })
 
@@ -138,15 +124,14 @@ async def showMyPatient(request: Request, resp=Depends(check_slp_role)):
         return resp
 
     patientid = request.path_params.get("patientid")
-    # response = supabase.table("patients").select("*").execute()
-    # data = response.data
+    response = supabase.table("patients").select("*").eq("patientid", patientid).execute()
+    data = response.data
 
-    # print(f"📊📊 data: {data}")
+    # print(f"afefpekfewkofekopawfkeoawfe data: {data}")
 
     return templates.TemplateResponse("assign_p.html", {
-        "request": request
-        # ,
-        # "data": data
+        "request": request,
+        "data": data
     })
 
 #! ยังไม่เสร็จ
@@ -156,11 +141,67 @@ async def showCheck(request: Request, resp=Depends(check_slp_role)):
         return resp
 
     patientid = request.path_params.get("patientid")
+    response = supabase.table("patients").select("*").eq("patientid", patientid).execute()
+    data = response.data
 
-    return templates.TemplateResponse("check_p.html", {
-        "request": request
+    response_assignments = supabase.table("assignments").select("assignmentid, patientid, assignmentdate").eq("patientid", patientid).execute()
+    data_assignments = response_assignments.data
+    # print('iofeoijaifoeajf DATA_ASSIGNMENTS:', data_assignments)
+
+    return templates.TemplateResponse("checkday_p.html", {
+        "request": request,
+        "data": data,
+        'data_assignments': data_assignments
     })
 
+@router.get("/checkmypatient/{patientid}/{date}")
+async def showCheckMyPatient(request: Request, resp=Depends(check_slp_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+    
+    patientid = request.path_params.get("patientid")
+    response = supabase.table("patients").select("*").eq("patientid", patientid).execute()
+    data = response.data
+
+
+    date = request.path_params.get("date")
+    response_assignmenteachday = supabase.table("assignments_with_eachdays2").select("*").eq("patientid", patientid).eq("assignmentdate", date).execute()
+    data_assignmenteachday = response_assignmenteachday.data
+    # print('oijfewaiojfejiefa data assignments_with_eachdays2:', data_assignmenteachday)
+    # print('fjeaiofeaji data:', data)
+
+    return templates.TemplateResponse("check_p.html", {
+        "request": request,
+        "data": data,
+        "date": date,
+        'data_assignmenteachday': data_assignmenteachday
+        })
+
+@router.get("/checkmypatient/{patientid}/{date}/{ahid}")
+async def showCheckMyPatient_ahid(request: Request, resp=Depends(check_slp_role)):
+    if isinstance(resp, RedirectResponse):
+        return resp
+    
+    patientid = request.path_params.get("patientid")
+    date = request.path_params.get("date")
+    ahid = request.path_params.get("ahid")
+
+    response = supabase.table("history_assignmenteachday_patient_templatecontents").select("*").eq("patientid", patientid).eq("ahid", ahid).execute()
+    data = response.data
+    print('date jfejaiofejiojiofeajiofejiofewaji:', data)
+
+    response_assignmenteachday = supabase.table("assignments_with_eachdays2").select("*").eq("ahid", ahid).execute()
+    data_assignmenteachday = response_assignmenteachday.data
+    print('oioioioioioioioioi data assignments_with_eachdays2:', data_assignmenteachday)
+    # print('jijijijijijiji data:', data)
+
+    return templates.TemplateResponse("checkdescription_p.html", {
+        "request": request,
+        "data": data,
+        "data_assignmenteachday": data_assignmenteachday,
+        "date": date,
+        "patientid": patientid
+    })
 
 @router.get("/resetpassword/{patientid}")
 async def showResetPassword(request: Request, resp=Depends(check_slp_role)):
@@ -189,6 +230,56 @@ async def resetPassword(
         .execute()
 
     print("🔧 update result:", res)
+
+    return RedirectResponse(url="/slp/", status_code=302)
+
+
+@router.get("/addnewpatient")
+async def showAddNewPatient(
+    request: Request, 
+    resp=Depends(check_slp_role)
+):
+    if isinstance(resp, RedirectResponse):
+        return resp
+    
+    return templates.TemplateResponse("addnewpatient_p.html", {
+        "request": request
+    })
+
+@router.post("/addnewpatient")
+async def addNewPatient(
+    request: Request,
+    pfirstname: str = Form(...),
+    plastname: str = Form(...),
+    pbirthday: str = Form(...),
+    pusername: str = Form(...),
+    ppassword: str = Form(...)
+):
+
+    print(f'😭😭😭 @router.post("/addnewpatient")')
+    print('😭 pfirstname:', pfirstname)
+    print('😭 plastname:', plastname)
+    print('😭 pbirthday:', pbirthday)
+    print('😭 pusername:', pusername)
+    print('😭 ppassword:', ppassword)
+
+    user_id = request.cookies.get("user_id")
+
+    data = {
+        "pfirstname": pfirstname,
+        "plastname": plastname,
+        "pbirthday": pbirthday,
+        "pusername": pusername,
+        "ppassword": ppassword,
+        "slpid": user_id
+    }
+
+
+    try:
+        response = supabase.table("patients").insert(data).execute()
+        print("✅ Insert success:", response)
+    except Exception as e:
+        print("❌ Insert error:", e)
 
     return RedirectResponse(url="/slp/", status_code=302)
 

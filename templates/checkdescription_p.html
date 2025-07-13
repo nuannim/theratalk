@@ -35,7 +35,7 @@
     </div>
     <div class="main">
         <div class="top">
-            <a href="/slp/checkmypatient/{{ data[0].patientid}}"><i class="fa-solid fa-chevron-left"></i>
+            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}"><i class="fa-solid fa-chevron-left"></i>
             {% if data %}
                 <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
             {% else %}
@@ -43,26 +43,25 @@
             {% endif %}
             </a>
         </div>
-        <h1>{{ date }}</h1>
+        <h1>fefefefe</h1>
         <div class="content">
-            <!-- <div class="need" style="display: none;">
-                <h2>แบบฝึกหัดที่ต้องตรวจ</h2>
-                <div class="lesson">
-                    <a href="check_lesson_p.html"><div>แบบฝึกหัดการนึกคำจากภาพหรือสถานการณ์</div></a>
-                </div>
-            </div> -->
-
             <div class="finish">
-                <!-- <h2>แบบฝึกหัดที่ตรวจเรียบร้อยแล้ว</h2> -->
-                <h2>แบบฝึกหัดที่มอบหมาย</h2>
+                {% if data_assignmenteachday %}
+                    {% for i in data_assignmenteachday %}
+                        <h2>{{i.activityname}} ({{i.templatename}})</h2>
+                    {% endfor %}
+                {% else %}
+                    <h2>แบบฝึกหัดที่มอบหมาย</h2>
+                {% endif %}
+
                 <div class="lesson">
-                    {% if data_assignmenteachday %}
-                        {% for i in data_assignmenteachday %}
-                            <a href="/slp/checkmypatient/{{data[0].patientid}}/{{date}}/{{i.ahid}}"><div>{{ i.activityname }} ({{i.templatename}})</div></a>
-                        {% endfor %}
-                    {% else %}
-                        <a href="#"><div>marmink so cute</div></a>
-                    {% endif %}
+                {% if data %}
+                    {% for i in data %}
+                        <div>{{i.sentence}} ทำซ้ำ {{i.retries}} ครั้ง</div>
+                    {% endfor %}
+                {% else %}
+                    <div>marmink so cute</div>
+                {% endif %}
 
                 </div>
             </div>
