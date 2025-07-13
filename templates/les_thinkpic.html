@@ -38,23 +38,66 @@
             <div class="bar">
                 <h2>นึกคำจากภาพ</h2>
                 <div class="exercise-bar">
-                    <div class="exercise-fill"></div>
+                    <div class="exercise-fill" id="progress-fill"></div>
                 </div>
-                <p>ข้อ 1 จาก 10</p>
+                <p id="progress-text">ข้อ 1 จาก {{ tc_contents|length }}</p>
             </div>
             <div class="exercise-box">
                 <div class="picture-box">
                     <div class="pic1">
-                        <img src="/static/img/football_3750002.png" alt="">
+                        <img id="current-image" src="" alt="ภาพ" width="200" />
                     </div>
+                </div>
+                <div class="word" hidden>
+                    <p id="current-sentence" hidden></p>
                 </div>
                 <div class="speak">
                     <p>กดเพื่อพูด</p>
                 </div>
             </div>
-            <button type="button" disabled>ตรวจสอบ</button>
+            <div class="navigation-buttons">
+                <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
+                <button onclick="next()" id="next-btn">ถัดไป</button>
+            </div>
         </div>
     </div>
-</body>
+    <script>
+        const tcContents = {{ tc_contents | tojson }};
+        let currentIndex = 0;
+    
+        const sentenceEl = document.getElementById("current-sentence");
+        const imageEl = document.getElementById("current-image");
+        const progressText = document.getElementById("progress-text");
+        const progressFill = document.getElementById("progress-fill");
 
+        function update() {
+            const item = tcContents[currentIndex];
+            imageEl.src = `/static/img/activities/${item.imageurl}`;
+            sentenceEl.textContent = item.sentence;
+            sentenceEl.hidden = true;
+            progressText.textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
+            progressFill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
+
+            document.getElementById("prev-btn").disabled = currentIndex === 0;
+            document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
+        }
+
+        function next() {
+            if (currentIndex < tcContents.length - 1) {
+                currentIndex++;
+                update();
+            }
+        }
+
+        function prev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                update();
+            }
+        }
+
+        window.onload = update;
+    </script>
+</body>
+<script src="/static/js/recordVoice.js"></script>
 </html>

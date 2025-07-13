@@ -247,7 +247,7 @@ async def transcribe(file: UploadFile = File(...)):
 @router.post("/check_answer/")
 async def check_answer(request: Request):
     data = await request.json()
-    answer = data.get("answer", "").strip().lower()
+    answer = data.get("answer", "").strip().lower().replace(" ", "")
     word = data.get("word", "").strip().lower()
     print(f"🔍 Checking: '{answer}' vs '{word}'")
     isCorrect = answer == word

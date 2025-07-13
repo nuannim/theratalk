@@ -43,18 +43,17 @@
             </div>
             <div class="exercise-box">
                 {% for q_index in range(story_data.questions | length) %}
-    {% set q = story_data.questions[q_index] %}
-    <div class="question-block">
-        <p>{{ q.q }}</p>
-        <div class="choice">
-            {% for c_index in range(q.choice | length) %}
-                <input type="radio" name="ans_{{ q_index }}" id="choice{{ q_index }}_{{ c_index }}">
-                <label for="choice{{ q_index }}_{{ c_index }}">{{ q.choice[c_index] }}</label>
-            {% endfor %}
-        </div>
-    </div>
-{% endfor %}
-
+                    {% set q = story_data.questions[q_index] %}
+                    <div class="question-block">
+                        <p>{{ q.q }}</p>
+                        <div class="choice">
+                            {% for c_index in range(q.choice | length) %}
+                                <input type="radio" name="ans_{{ q_index }}" id="choice{{ q_index }}_{{ c_index }}">
+                                <label for="choice{{ q_index }}_{{ c_index }}">{{ q.choice[c_index] }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
             <button type="button" disabled>ตรวจสอบ</button>
         </div>
