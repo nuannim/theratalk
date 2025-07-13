@@ -1,9 +1,10 @@
+import json
 import os
 import subprocess
 import tempfile
 from fastapi import APIRouter, File, Request, Depends, HTTPException, UploadFile
 from fastapi import params
-from fastapi.params import Form
+from fastapi.params import Form, Query
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 import torch
@@ -133,14 +134,6 @@ async def showLession(assignment_id: int, request: Request, resp=Depends(check_p
     if isinstance(resp, RedirectResponse):
         return resp
 
-    userId = request.cookies.get("user_id")
-
-    # Get patient
-    patient_res = supabase.table("patients").select("*").eq("patientid", userId).execute()
-    if not patient_res.data:
-        raise HTTPException(status_code=404, detail="Patient not found")
-    patient = patient_res.data[0]
-
     # Get assignments
     assignment_res = supabase.table("home_assignmentdescription").select("*").eq("assignmentid", assignment_id).execute()
     if not assignment_res.data:
@@ -172,27 +165,34 @@ async def showLession(assignment_id: int, request: Request, resp=Depends(check_p
     # ✅ Create response from TemplateResponse
     response = templates.TemplateResponse("each_lesson.html", {
         "request": request,
-        "patient": patient,
         "lessons": lessons
     })
     return response
 
 @router.get("/activity/{activity_id}")
-async def showActivity(activity_id: int, request: Request, resp=Depends(check_patient_role)):
+async def showActivity(
+    activity_id: int,
+    request: Request,
+    assignment_id: int = Query(...),
+    resp=Depends(check_patient_role)
+):
     if isinstance(resp, RedirectResponse):
         return resp
 
     userId = request.cookies.get("user_id")
 
-    patient_res = supabase.table("patients").select("*").eq("patientid", userId).execute()
-    if not patient_res.data:
-        raise HTTPException(status_code=404, detail="Patient not found")
-    patient = patient_res.data[0]
-
     tc_contents = []
+    story_data = {}
     if activity_id:
-        tc_view_res = supabase.table("tc_view").select("*").eq("activityid", activity_id).eq("assignmentid", activity_id).execute()
+        tc_view_res = supabase.table("tc_view").select("*").eq("activityid", activity_id).eq("assignmentid", assignment_id).execute()
         tc_contents = tc_view_res.data if tc_view_res.data else []
+
+        if tc_contents:
+            raw_sentence = tc_contents[0]["sentence"]
+            try:
+                story_data = json.loads(raw_sentence)
+            except Exception as e:
+                print("❌ Error parsing sentence JSON:", e)
 
     file_list = {
         1: "les_listen_speak2.html",
@@ -201,16 +201,17 @@ async def showActivity(activity_id: int, request: Request, resp=Depends(check_pa
         4: "les_short_story.html",
         5: "les_thinkpic.html",
         6: "les_listen_speak3.html",
-        8: "les_seq"
+        8: "les_seq.html"
     }
 
     print("tc_contents : ", tc_contents)
-    print("activassignment_id : ", activity_id)
+    print("story_data : ", story_data)
 
     return templates.TemplateResponse(file_list[activity_id], {
         "request": request,
-        "patient": patient,
-        "tc_contents": tc_contents
+        "story_data": story_data,
+        "tc_contents": tc_contents,
+        "assignment_id": assignment_id
     })
 
 

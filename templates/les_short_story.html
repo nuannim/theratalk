@@ -32,35 +32,73 @@
     </div>
     <div class="container">
         <div class="fori">
-            <a href="/patient/"><i class="fa-solid fa-chevron-left"></i></a>
+            <a href="javascript:window.history.back()"><i class="fa-solid fa-chevron-left"></i></a>
         </div>
         <div class="main">
             <div class="bar">
-                <h2>ฟังเรื่องสั้นและตอบคำถาม</h2>
-                <div class="exercise-bar">
-                    <div class="exercise-fill"></div>
+                <h2>{{ story_data.title }}</h2>
+                <div class="listen-box">
+                    <i class="fa-solid fa-volume-high" id="play-sound-btn"></i>
                 </div>
-                <p>ข้อ 1 จาก 10</p>
             </div>
             <div class="exercise-box">
-                <p id="question">แมวของเขาสีอะไร</p>
-                <div class="listen-box">
-                    <i class="fa-solid fa-volume-high"></i>
-                </div>
-                <div class="choice">
-                    <input type="radio" name="ans" id="choice1">
-                    <label for="choice1">ม่วง</label>
-                    <input type="radio" name="ans" id="choice2">
-                    <label for="choice2">ฟ้า</label>
-                    <input type="radio" name="ans" id="choice3">
-                    <label for="choice3">ส้ม</label>
-                    <input type="radio" name="ans" id="choice4">
-                    <label for="choice4">ดำ</label>
-                </div>
+                {% for q_index in range(story_data.questions | length) %}
+    {% set q = story_data.questions[q_index] %}
+    <div class="question-block">
+        <p>{{ q.q }}</p>
+        <div class="choice">
+            {% for c_index in range(q.choice | length) %}
+                <input type="radio" name="ans_{{ q_index }}" id="choice{{ q_index }}_{{ c_index }}">
+                <label for="choice{{ q_index }}_{{ c_index }}">{{ q.choice[c_index] }}</label>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+
             </div>
             <button type="button" disabled>ตรวจสอบ</button>
         </div>
     </div>
 </body>
-<script src="/static/js/playAudio.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const playButton = document.getElementById("play-sound-btn");
+
+        // story_data is passed from backend as JSON
+        const storyData = {{ story_data | tojson }};
+        const storyText = storyData.story;
+
+        let cachedAudio = null;
+
+        // 🔁 Fetch audio on page load
+        try {
+            const response = await fetch("/api/tts/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text: storyText }),
+            });
+
+            if (!response.ok) throw new Error("Failed to fetch audio");
+
+            const data = await response.json();
+            const audioUrl = data.audio_url;
+
+            cachedAudio = new Audio(audioUrl);
+        } catch (error) {
+            console.error("Error fetching audio on load:", error);
+            alert("เกิดข้อผิดพลาดในการโหลดเสียง");
+        }
+
+        playButton.addEventListener("click", () => {
+            if (cachedAudio) {
+                cachedAudio.currentTime = 0;
+                cachedAudio.play();
+            } else {
+                alert("ยังไม่สามารถเล่นเสียงได้");
+            }
+        });
+    });
+</script>
 </html>
