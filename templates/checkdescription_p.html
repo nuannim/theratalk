@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/static/css/check_p.css">
+    <link rel="stylesheet" href="/static/css/home_p.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Check</title>
 </head>
@@ -49,27 +50,56 @@
             {% endif %}
         </div>
         {% if data_assignmenteachday %}
-            {% for i in data_assignmenteachday %}
-                <h1>{{i.activityname}} ({{i.templatename}})</h1>
-            {% endfor %}
+        {% for i in data_assignmenteachday %}
+        <h1>{{i.activityname}} ({{i.templatename}})</h1>
+        {% endfor %}
         {% else %}
-            <h1>xxxxxxx</h1>
+        <h1>xxxxxxx</h1>
         {% endif %}
-
+<!-- 
         <div class="content">
             <div class="finish">
                 <div class="lesson">
                     {% if data %}
-                        {% for i in data %}
-                            <div>{{i.sentence}} ทำซ้ำ {{i.retries}} ครั้ง</div>
-                        {% endfor %}
+                    {% for i in data %}
+                    <div>{{i.sentence}} ทำซ้ำ {{i.retries}} ครั้ง</div>
+                    {% endfor %}
                     {% else %}
-                        <div>marmink so cute</div>
+                    <div>marmink so cute</div>
                     {% endif %}
-
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th id="name">คำที่ฝึก</th>
+                    <th>ทำซ้ำ (ครั้ง)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                    {% for i in data %}
+                        <tr>
+                            <td></td>
+                            <td>{{i.sentence}}</td>
+                            <td>{{i.retries}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td></td>
+                        <td>คำ2</td>
+                        <td>999</td>
+                    </tr>
+                {% endif %}
+
+
+
+            </tbody>
+        </table>
     </div>
 </body>
 

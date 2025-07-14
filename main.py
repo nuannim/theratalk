@@ -58,10 +58,13 @@ async def login(
     password: str = Form(...)
 ):
     # & just for checking
-    print(f"😭😭😭 Username: {username}, Password: {password}")
+
 
     #! ยังไม่ hash password เก่าเลยยังไม่ใส่เดียวพัง
-    hashed_pw = hash_password(password)
+    # hashed_pw = hash_password(password)
+    # slp_response = supabase.table("slp").select("*").eq("slpusername", username).eq("slppassword", hashed_pw).execute()
+
+    # print(f"😭😭😭 Username: {username}, Password: {password}, hashed password: {hashed_pw}")
     #! ------------------------------------
 
     slp_response = supabase.table("slp").select("*").eq("slpusername", username).eq("slppassword", password).execute()
