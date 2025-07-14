@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Check</title>
 </head>
+
 <body>
     <div class="nav">
         <div class="logo">
@@ -35,37 +37,40 @@
     </div>
     <div class="main">
         <div class="top">
-            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}"><i class="fa-solid fa-chevron-left"></i>
+            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}"><i class="fa-solid fa-chevron-left"></i></a>
             {% if data %}
+            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}">
                 <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
-            {% else %}
-                <h2>แจ๋ม บุญประกอบ</h2>
-            {% endif %}
             </a>
+            {% else %}
+            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}">
+                <h2>แจ๋ม บุญประกอบ</h2>
+            </a>
+            {% endif %}
         </div>
-        <h1>fefefefe</h1>
+        {% if data_assignmenteachday %}
+            {% for i in data_assignmenteachday %}
+                <h1>{{i.activityname}} ({{i.templatename}})</h1>
+            {% endfor %}
+        {% else %}
+            <h1>xxxxxxx</h1>
+        {% endif %}
+
         <div class="content">
             <div class="finish">
-                {% if data_assignmenteachday %}
-                    {% for i in data_assignmenteachday %}
-                        <h2>{{i.activityname}} ({{i.templatename}})</h2>
-                    {% endfor %}
-                {% else %}
-                    <h2>แบบฝึกหัดที่มอบหมาย</h2>
-                {% endif %}
-
                 <div class="lesson">
-                {% if data %}
-                    {% for i in data %}
-                        <div>{{i.sentence}} ทำซ้ำ {{i.retries}} ครั้ง</div>
-                    {% endfor %}
-                {% else %}
-                    <div>marmink so cute</div>
-                {% endif %}
+                    {% if data %}
+                        {% for i in data %}
+                            <div>{{i.sentence}} ทำซ้ำ {{i.retries}} ครั้ง</div>
+                        {% endfor %}
+                    {% else %}
+                        <div>marmink so cute</div>
+                    {% endif %}
 
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

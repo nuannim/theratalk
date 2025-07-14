@@ -35,13 +35,13 @@
     </div>
     <div class="main">
         <div class="top">
-            <a href="/slp/"><i class="fa-solid fa-chevron-left"></i>
+            <a href="/slp/"><i class="fa-solid fa-chevron-left"></i></a>
             {% if data %}
-                <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
+                <a href="/slp/"><h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2></a>
             {% else %}
                 <h2>แจ๋ม บุญประกอบ</h2>
             {% endif %}
-            </a>
+            
         </div>
         <div class="con active" id="daydiv">
             <div class="content-calendar">

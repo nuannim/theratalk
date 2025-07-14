@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,40 @@
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/check_p.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <title>Add New Patient - TheraTalk</title>
 
 </head>
+
 <body>
+    <div class="nav">
+        <div class="logo">
+            <h4>TheraTalk</h4>
+        </div>
+        <div class="mid">
+            <a href="/slp/" id="home">หน้าหลัก</a>
+            <a href="/slp/progress" id="progress">พัฒนาการของผู้ป่วย</a>
+        </div>
+        <div class="las">
+            <a href="/slp/profile">
+                <!-- <div class="txt">
+                    <h4>name</h4>
+                    <p>username</p>
+                </div>
+                <img src="/static/img/audio-book_10089822.png" alt=""> -->
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+    </div>
+
     <div class="main">
+    <div class="top">
+        <a href="/slp/"><i class="fa-solid fa-chevron-left"></i></a>
+        <a href="/slp/">กลับไปหน้าหลัก</a>
+    </div>
         <h2>เพิ่มผู้ป่วยใหม่</h2>
         <form action="/slp/addnewpatient/" method="POST">
             <label>First Name</label>
@@ -37,4 +65,5 @@
         <!-- <p class="form-footer">Already have an account? <a href="/login/">Login here</a></p> -->
     </div>
 </body>
+
 </html>

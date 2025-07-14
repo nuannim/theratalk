@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Check</title>
 </head>
+
 <body>
     <div class="nav">
         <div class="logo">
@@ -36,11 +38,15 @@
     <div class="main">
         <div class="top">
             <a href="/slp/checkmypatient/{{ data[0].patientid}}"><i class="fa-solid fa-chevron-left"></i>
-            {% if data %}
-                <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
-            {% else %}
-                <h2>แจ๋ม บุญประกอบ</h2>
-            {% endif %}
+                {% if data %}
+                <a href="/slp/checkmypatient/{{ data[0].patientid}}">
+                    <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
+                </a>
+                {% else %}
+                <a href="/slp/checkmypatient/{{ data[0].patientid}}">
+                    <h2>แจ๋ม บุญประกอบ</h2>
+                </a>
+                {% endif %}
             </a>
         </div>
         <h1>{{ date }}</h1>
@@ -57,11 +63,15 @@
                 <h2>แบบฝึกหัดที่มอบหมาย</h2>
                 <div class="lesson">
                     {% if data_assignmenteachday %}
-                        {% for i in data_assignmenteachday %}
-                            <a href="/slp/checkmypatient/{{data[0].patientid}}/{{date}}/{{i.ahid}}"><div>{{ i.activityname }} ({{i.templatename}})</div></a>
-                        {% endfor %}
+                    {% for i in data_assignmenteachday %}
+                    <a href="/slp/checkmypatient/{{data[0].patientid}}/{{date}}/{{i.ahid}}">
+                        <div>{{ i.activityname }} ({{i.templatename}})</div>
+                    </a>
+                    {% endfor %}
                     {% else %}
-                        <a href="#"><div>marmink so cute</div></a>
+                    <a href="#">
+                        <div>marmink so cute</div>
+                    </a>
                     {% endif %}
 
                 </div>
@@ -69,4 +79,5 @@
         </div>
     </div>
 </body>
+
 </html>
