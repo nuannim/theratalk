@@ -63,24 +63,26 @@ i {
 i:hover {
   color: #7293df;
 }
-table a{
+table a {
+  display: flex;
   text-decoration: none;
   font-weight: 400;
   transition: ease-in-out 0.2s;
-  width: 100%;
+  /* width: 100%; */
   background-color: white;
   border: 1.5px solid #ececec;
   padding: 5px;
   border-radius: 10px;
   color: #666666;
+  text-align: center;
 }
-table a:hover{
+table a:hover {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
   color: #7293df;
 }
 
-h2{
+h2 {
   margin-top: 0;
 }
 
@@ -265,7 +267,7 @@ i {
 .mid a:hover {
   color: #7293df;
 }
-#home{
+#home {
   color: #7293df;
 }
 
@@ -314,4 +316,23 @@ h4 {
 .txt p {
   font-weight: 400;
   font-size: 13px;
+}
+#name {
+  width: 65%;
+}
+
+@media screen and (max-width: 630px) {
+  #name {
+    width: 60%;
+    font-size: 13px;
+  }
+  td {
+    font-size: 13px;
+  }
+  h2{
+    font-size: 18px;
+  }
+  a, h4{
+    font-size: 13px;
+  }
 }

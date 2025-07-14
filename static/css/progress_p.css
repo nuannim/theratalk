@@ -157,3 +157,15 @@ h4 {
   font-weight: 400;
   font-size: 13px;
 }
+
+@media screen and (max-width: 630px) {
+  td, th {
+    font-size: 13px;
+  }
+  h2{
+    font-size: 18px;
+  }
+  a, h4{
+    font-size: 13px;
+  }
+}
