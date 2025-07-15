@@ -67,28 +67,37 @@ async def login(
     # print(f"😭😭😭 Username: {username}, Password: {password}, hashed password: {hashed_pw}")
     #! ------------------------------------
 
-    slp_response = supabase.table("slp").select("*").eq("slpusername", username).eq("slppassword", password).execute()
+    slp_response = supabase.table("slp").select("*").eq("slpusername", username).execute()
     slp_users = slp_response.data
 
     if slp_users:
         user = slp_users[0]
-        user_id = user["slpid"]
-        res = RedirectResponse(url="/slp/", status_code=302)
-        res.set_cookie(key="user_id", value=str(user_id))
-        res.set_cookie(key="role", value="slp")
-        return res
+        hashed_pw = user["slppassword"]
+        print(hashed_pw)
+        print(pwd_context.verify(password, hashed_pw))
+
+        # 👉 Use verify to compare input password with stored hash
+        if pwd_context.verify(password, hashed_pw):
+            user_id = user["slpid"]
+            res = RedirectResponse(url="/slp/", status_code=302)
+            res.set_cookie(key="user_id", value=str(user_id))
+            res.set_cookie(key="role", value="slp")
+            return res
 
     # If not an SLP, check as patient
-    patient_response = supabase.table("patients").select("*").eq("pusername", username).eq("ppassword", password).execute()
+    patient_response = supabase.table("patients").select("*").eq("pusername", username).execute()
     patient_users = patient_response.data
 
     if patient_users:
         user = patient_users[0]
-        user_id = user["patientid"]
-        res = RedirectResponse(url="/patient/", status_code=302)
-        res.set_cookie(key="user_id", value=str(user_id))
-        res.set_cookie(key="role", value="patient")
-        return res
+        hashed_pw = user["ppassword"]
+
+        if pwd_context.verify(password, hashed_pw):
+            user_id = user["patientid"]
+            res = RedirectResponse(url="/patient/", status_code=302)
+            res.set_cookie(key="user_id", value=str(user_id))
+            res.set_cookie(key="role", value="patient")
+            return res
 
     # return PlainTextResponse("noooo try again", status_code=401)
 
@@ -112,9 +121,6 @@ async def showSignUp(request: Request):
         "request": request
     })
 
-def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
-
 @app.post("/signup")
 async def create_user(
     request: Request,
@@ -134,14 +140,12 @@ async def create_user(
     print('😭 slppassword: ', slppassword)
     print('😭 slphospital: ', slphospital)
 
-    hashed_pw = hash_password(slppassword)
-
     data = {
         "slpfirstname": slpfirstname,
         "slplastname": slplastname,
         "slpemail": slpemail,
         "slpusername": slpusername,
-        "slppassword": hash_password(hashed_pw),  # ควร hash ถ้าใช้จริง!
+        "slppassword": pwd_context.hash(slppassword),  # ควร hash ถ้าใช้จริง!
         "slphospital": slphospital
     }
 
