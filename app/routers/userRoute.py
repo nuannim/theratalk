@@ -101,7 +101,7 @@ async def showMission(request: Request, resp=Depends(check_patient_role)):
     patient_response = supabase.table("patients").select("*").eq("patientid", userId).single().execute()
     patient = patient_response.data if patient_response.data else {}
 
-    response = supabase.table("mission").select("*").eq("patientId", userId).execute()
+    response = supabase.table("mission").select("*").eq("patientid", userId).execute()
     missions = response.data[0]["data"]
 
     return templates.TemplateResponse("mission.html", {

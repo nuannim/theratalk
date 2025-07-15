@@ -73,8 +73,6 @@ async def login(
     if slp_users:
         user = slp_users[0]
         hashed_pw = user["slppassword"]
-        print(hashed_pw)
-        print(pwd_context.verify(password, hashed_pw))
 
         # 👉 Use verify to compare input password with stored hash
         if pwd_context.verify(password, hashed_pw):
