@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import tempfile
+from typing import Dict
 from fastapi import APIRouter, File, Request, Depends, HTTPException, UploadFile
 from fastapi import params
 from fastapi.params import Form, Query
@@ -10,6 +11,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 import torch
 from fastapi import Response
 from transformers import pipeline
+from pydantic import BaseModel
 
 
 # from supabase import *
@@ -258,3 +260,13 @@ async def check_answer(request: Request):
     else:
         raise HTTPException(status_code=400, detail="Incorrect")
 
+class FinishRequest(BaseModel):
+    completed: bool
+    wrong_summary: Dict[str, int]
+
+@router.post("/finish/")
+async def finish_task(data: FinishRequest):
+    # Process summary here (store in DB, mark as done, etc.)
+    print("Patient finished:", data.completed)
+    print("Wrong attempts:", data.wrong_summary)
+    return {"status": "success"}

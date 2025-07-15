@@ -63,11 +63,15 @@
                 <button type="button" onclick="prevLesson()">ย้อนกลับ</button>
                 <button type="button" onclick="nextLesson()">ถัดไป</button>
             </div>
+            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
+                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+            </div>
         </div>
     </div>
 
     <script>
     const tcContents = {{ tc_contents | tojson }};
+    const wrongAttempts = {}; 
     let currentIndex = 0;
 
     const sentenceElement = document.getElementById("current-sentence");
@@ -122,9 +126,27 @@
         if (correctIndexes.has(currentIndex)) {
             speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
             speakButton.querySelector("p").style.color = "green";
+            speakButton.style.pointerEvents = "none"; // disable interaction
+            speakButton.style.opacity = "0.5";
         } else {
-            speakButton.querySelector("p").textContent = "กดเพื่อพูด";
             speakButton.querySelector("p").style.color = "#7293df";
+            speakButton.querySelector("p").textContent = "กดเพื่อพูด";
+            speakButton.style.pointerEvents = "auto";
+            speakButton.style.opacity = "1";
+        }
+
+        const submitSection = document.querySelector(".submit-section");
+        const submitButton = document.getElementById("submit-button");
+        if (currentIndex === tcContents.length - 1) {
+            submitSection.style.display = "block";
+
+            if (correctIndexes.size === tcContents.length) {
+            submitButton.disabled = false; // Enable submit
+            } else {
+                submitButton.disabled = true; // Disable submit
+            }
+        } else {
+            submitSection.style.display = "none";
         }
     }
 
@@ -166,6 +188,58 @@
             playCachedAudio(text);
         }
     }
+
+    function onSpeechEvaluated(isCorrect) {
+        const currentItem = tcContents[currentIndex];
+        const sentence = currentItem.sentence;
+
+        if (isCorrect) {
+            correctIndexes.add(currentIndex);
+        } else {
+            if (!wrongAttempts[sentence]) {
+                wrongAttempts[sentence] = 1;
+            } else {
+                wrongAttempts[sentence]++;
+            }
+        }
+    }
+
+
+    async function submitAnswers() {
+        const button = document.getElementById("submit-button");
+        if (correctIndexes.size !== tcContents.length) {
+            alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "กำลังส่ง...";
+
+        try {
+            const res = await fetch("/patient/finish/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    completed: true,
+                    wrong_summary: wrongAttempts,
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error("ส่งข้อมูลไม่สำเร็จ");
+            }
+
+            window.location.href = "/patient/";
+        } catch (err) {
+            console.error("Error sending:", err);
+            alert("การเชื่อมต่อผิดพลาด กรุณาลองใหม่");
+            button.disabled = false;
+            button.textContent = "ส่งคำตอบ";
+        }
+    }
+
 
     // โหลดเสียงทั้งหมดตอนโหลดหน้าเว็บ
     window.onload = () => {

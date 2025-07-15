@@ -53,11 +53,18 @@ const speakButton = document.querySelector(".speak");
                 speakButton.querySelector("p").style.color = "green";
                 speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
                 correctIndexes.add(currentIndex);
+                if (correctIndexes.size === tcContents.length) {
+                    submitButton.disabled = false; // Enable submit
+                } else {
+                    submitButton.disabled = true; // Disable submit
+                }
                 playCorrectSound();
+                onSpeechEvaluated(true);
             } else {
                 // Wrong or error
                 speakButton.querySelector("p").style.color = "red";
                 correctIndexes.delete(currentIndex);
+                onSpeechEvaluated(false);
             }
         };
 

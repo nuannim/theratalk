@@ -173,10 +173,3 @@ async def get_tts(request: Request):
 
     audio_url = result.get("audio_url")
     return JSONResponse(content={"audio_url": audio_url})
-
-
-# @app.get("/create-user")
-# def create_user():
-#     result = supabase.table("user").insert({"username": "sora", "age": 20}).execute()
-#     return result.data
-
