@@ -321,6 +321,7 @@ h4 {
   width: 65%;
 }
 
+/* Existing media query */
 @media screen and (max-width: 630px) {
   #name {
     width: 60%;
@@ -334,5 +335,123 @@ h4 {
   }
   a, h4{
     font-size: 13px;
+  }
+}
+
+/* Tablet/iPad Media Query */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 70px;
+  }
+  
+  .mid {
+    width: 70%;
+    gap: 15px;
+  }
+  
+  .las, .logo {
+    width: 15%;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  td {
+    font-size: 14px;
+  }
+}
+
+/* Mobile Media Query - Enhanced */
+@media screen and (max-width: 630px) {
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 60px;
+  }
+  
+  .nav {
+    height: 60px;
+  }
+  
+  .mid {
+    width: 50%;
+    gap: 10px;
+  }
+  
+  .las, .logo {
+    width: 25%;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  table a {
+    padding: 3px;
+    font-size: 12px;
+  }
+  
+  th {
+    padding: 3px;
+    font-size: 13px;
+  }
+  
+  #popup {
+    width: 90%;
+    max-width: 350px;
+  }
+  
+  #lesname, #lescat {
+    width: 100%;
+  }
+  
+  .forbut {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btnsolid, .btntrans {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  .mid {
+    width: 60%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+  
+  tr {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1.5px solid #ececec;
+    padding: 10px 0;
+  }
+  
+  td {
+    border-top: none;
+    padding: 3px;
+    height: auto;
+  }
+  
+  th {
+    display: none;
+  }
+  
+  table a {
+    margin: 3px 0;
+  }
+  
+  thead {
+    display: none;
   }
 }

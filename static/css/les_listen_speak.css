@@ -228,3 +228,27 @@ i {
 i:hover {
   color: #7293df;
 }
+
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 630px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .main {
+    width: 100%;
+    padding-right: 0;
+    gap: 30px;
+  }
+  
+  .fori {
+    width: 100%;
+    justify-content: start;
+    padding-left: 15px;
+  }
+  
+  .exercise-box {
+    align-items: center;
+  }
+}

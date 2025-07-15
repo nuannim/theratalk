@@ -188,10 +188,118 @@ h2 {
 
 .select-score label:hover{
   border: 1.5px solid #dae5ff;
-  color: #7293df;
   background-color: #f7f9fe;
 }
 
+/* Responsive Styles */
+
+/* Tablet/iPad (631px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .pat {
+    width: 100%;
+    max-width: 650px;
+  }
+  
+  .image {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .answer {
+    width: 70%;
+  }
+  
+  .select-score {
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .pat {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .answer {
+    width: 100%;
+  }
+  
+  .select-score {
+    flex-wrap: wrap;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 150px;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .top {
+    gap: 15px;
+  }
+  
+  .pat {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .image {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .answer {
+    width: 100%;
+  }
+  
+  .select-score {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .select-score label {
+    width: 45px;
+    height: 35px;
+  }
+  
+  #feedback {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 120px;
+    height: 35px;
+  }
+}
 .bot, .score, .recom{
   display: flex;
   flex-direction: column;

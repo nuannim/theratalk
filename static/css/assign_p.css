@@ -341,3 +341,171 @@ select {
 .right-tem img {
   width: 50%;
 }
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 630px) {
+  .top {
+    gap: 15px;
+  }
+  
+  .each label {
+    font-size: 13px;
+    padding: 8px;
+  }
+  
+  .big {
+    flex-direction: column;
+  }
+}
+
+/* Enhanced Responsive Styles */
+
+/* Tablet/iPad (631px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .content-calendar {
+    width: 80%;
+  }
+  
+  #calendar-nav, #calendar {
+    width: 100%;
+  }
+  
+  .each-tem {
+    width: 90%;
+  }
+  
+  .type-lesson {
+    width: 90%;
+  }
+  
+  .forles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (max-width: 630px) {
+  /* Calendar Section */
+  .content-calendar {
+    width: 100%;
+  }
+  
+  #calendar-nav {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  #calendar {
+    width: 100%;
+    max-width: 350px;
+    gap: 2px;
+  }
+  
+  .day {
+    padding: 4px;
+    font-size: 13px;
+  }
+  
+  /* Lesson Type Section */
+  .type-lesson {
+    width: 100%;
+  }
+  
+  .forles {
+    width: 100%;
+  }
+  
+  /* Template Selection Section */
+  .select-template {
+    width: 100%;
+  }
+  
+  .each-tem {
+    width: 95%;
+    padding: 8px;
+  }
+  
+  .left-tem h3 {
+    font-size: 15px;
+  }
+  
+  .left-tem select {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  /* Button Container */
+  .forbut {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .but {
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  /* Calendar Section */
+  #calendar-nav {
+    max-width: 300px;
+    font-size: 15px;
+  }
+  
+  #calendar {
+    max-width: 300px;
+    gap: 1px;
+  }
+  
+  .day {
+    padding: 3px;
+    font-size: 12px;
+  }
+  
+  /* Lesson Type Section */
+  .each label {
+    font-size: 12px;
+    padding: 6px;
+  }
+  
+  /* Template Selection Section */
+  .each-tem {
+    width: 100%;
+    padding: 6px;
+  }
+  
+  .left-tem h3 {
+    font-size: 14px;
+  }
+  
+  .left-tem select {
+    font-size: 12px;
+    height: 28px;
+  }
+  
+  .right-tem {
+    padding: 4px;
+    font-size: 12px;
+  }
+  
+  .right-tem img {
+    width: 70%;
+  }
+  
+  /* Button Container */
+  .forbut {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .but {
+    width: 100%;
+    max-width: 150px;
+  }
+}

@@ -1,0 +1,324 @@
+/* Global Responsive Styles for TheraTalk */
+
+/* Tablet/iPad (768px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  /* Global Layout */
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 60px;
+  }
+  
+  /* Navigation */
+  .nav {
+    height: 50px;
+  }
+  
+  .mid {
+    width: 65%;
+    gap: 15px;
+  }
+  
+  .las, .logo {
+    width: 17.5%;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+  }
+  
+  td {
+    font-size: 14px;
+    padding: 5px;
+  }
+  
+  /* Form Elements */
+  input, select {
+    width: 100%;
+  }
+  
+  /* Calendar */
+  #calendar-nav, #calendar {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Exercise Elements */
+  .exercise-bar {
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  /* Content Containers */
+  .content-calendar, .type-lesson, .select-template {
+    width: 100%;
+  }
+  
+  .each-tem {
+    width: 90%;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  /* Global Layout */
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 60px;
+    gap: 15px;
+  }
+  
+  /* Typography */
+  h2 {
+    font-size: 18px;
+  }
+  
+  h3 {
+    font-size: 16px;
+  }
+  
+  h4, a {
+    font-size: 14px;
+  }
+  
+  p, td, th {
+    font-size: 13px;
+  }
+  
+  /* Navigation */
+  .nav {
+    height: 50px;
+  }
+  
+  .mid {
+    width: 60%;
+    gap: 10px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+  }
+  
+  /* Form Elements */
+  input, select, button {
+    width: 100%;
+  }
+  
+  .but {
+    width: 100%;
+    max-width: 150px;
+  }
+  
+  /* Calendar */
+  #calendar-nav, #calendar {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  /* Exercise Elements */
+  .exercise-bar {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .listen-box, .speak {
+    width: 130px;
+  }
+  
+  /* Content Containers */
+  .content-calendar, .type-lesson, .select-template {
+    width: 100%;
+  }
+  
+  .each-tem {
+    width: 95%;
+  }
+  
+  /* Profile Elements */
+  .pro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  /* Content Layout */
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .need, .finish {
+    width: 100%;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  /* Global Layout */
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 60px;
+    gap: 10px;
+  }
+  
+  /* Typography */
+  h2 {
+    font-size: 16px;
+  }
+  
+  h3 {
+    font-size: 15px;
+  }
+  
+  h4, a {
+    font-size: 13px;
+  }
+  
+  p, td, th {
+    font-size: 12px;
+  }
+  
+  /* Navigation */
+  .nav {
+    height: 50px;
+  }
+  
+  .mid {
+    width: 50%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 25%;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+  }
+  
+  tr {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1.5px solid #ececec;
+    padding: 5px 0;
+  }
+  
+  td {
+    border-top: none;
+    padding: 3px;
+    height: auto;
+  }
+  
+  th {
+    display: none;
+  }
+  
+  thead {
+    display: none;
+  }
+  
+  table a {
+    margin: 3px 0;
+    padding: 3px;
+  }
+  
+  /* Form Elements */
+  input, select, button {
+    width: 100%;
+  }
+  
+  .but {
+    width: 100%;
+    max-width: 120px;
+    height: 35px;
+  }
+  
+  /* Calendar */
+  #calendar-nav, #calendar {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .day {
+    font-size: 12px;
+    padding: 3px;
+  }
+  
+  /* Exercise Elements */
+  .exercise-bar {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .listen-box, .speak {
+    width: 100px;
+    height: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  /* Content Containers */
+  .content-calendar, .type-lesson, .select-template {
+    width: 100%;
+  }
+  
+  .each-tem {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .left-tem, .right-tem {
+    width: 100%;
+  }
+  
+  /* Profile Elements */
+  .pro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .image {
+    width: 70px;
+    height: 70px;
+  }
+  
+  /* Content Layout */
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .need, .finish {
+    width: 100%;
+  }
+  
+  /* Button Containers */
+  .forbut {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Login Form */
+  .main.login {
+    width: 90%;
+    max-width: 280px;
+  }
+}

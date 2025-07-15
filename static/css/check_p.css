@@ -162,3 +162,98 @@ h3, h2 {
   width: 200px;
   /* height: 100px; */
 }
+
+/* Responsive Styles */
+
+/* Tablet/iPad (631px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .top {
+    gap: 20px;
+  }
+  
+  .content {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .need, .finish {
+    min-width: 280px;
+    width: 45%;
+  }
+  
+  .need a {
+    width: 100%;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .top {
+    gap: 15px;
+  }
+  
+  .content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .need, .finish {
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  .need a {
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .top {
+    gap: 10px;
+  }
+  
+  .content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .need, .finish {
+    width: 100%;
+  }
+  
+  .need a {
+    width: 100%;
+  }
+  
+  .lesson div {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 20px;
+  }
+}
