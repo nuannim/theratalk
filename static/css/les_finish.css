@@ -164,3 +164,105 @@ i {
 i:hover {
   color: #7293df;
 }
+
+/* Responsive Design */
+
+/* Tablet/iPad (631px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 70px;
+    gap: 30px;
+  }
+  
+  .mid {
+    width: 65%;
+    gap: 15px;
+  }
+  
+  .las, .logo {
+    width: 17.5%;
+  }
+  
+  .box {
+    width: 220px;
+  }
+  
+  button {
+    width: 140px;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 60px;
+    gap: 20px;
+  }
+  
+  .mid {
+    width: 60%;
+    gap: 10px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+  
+  .box {
+    width: 200px;
+  }
+  
+  .box h1 {
+    font-size: 24px;
+  }
+  
+  .box h3 {
+    font-size: 16px;
+  }
+  
+  button {
+    width: 130px;
+    height: 35px;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 60px;
+    gap: 15px;
+  }
+  
+  .mid {
+    width: 50%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 25%;
+  }
+  
+  .box {
+    width: 180px;
+  }
+  
+  .box h1 {
+    font-size: 22px;
+  }
+  
+  .box h3 {
+    font-size: 15px;
+  }
+  
+  button {
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
