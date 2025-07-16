@@ -2,6 +2,7 @@ from fastapi import APIRouter, Request, HTTPException, Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.db.db import supabase
+from passlib.context import CryptContext
 
 #^ slp 
 
@@ -246,6 +247,8 @@ async def showAddNewPatient(
         "request": request
     })
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 @router.post("/addnewpatient")
 async def addNewPatient(
     request: Request,
@@ -270,7 +273,7 @@ async def addNewPatient(
         "plastname": plastname,
         "pbirthday": pbirthday,
         "pusername": pusername,
-        "ppassword": ppassword,
+        "ppassword": pwd_context.hash(ppassword),
         "slpid": user_id
     }
 
