@@ -164,6 +164,8 @@ async def showLession(assignment_id: int, request: Request, resp=Depends(check_p
             "activity": activity
         })
 
+    print(lessons)
+
     # ✅ Create response from TemplateResponse
     response = templates.TemplateResponse("each_lesson.html", {
         "request": request,
@@ -176,12 +178,11 @@ async def showActivity(
     activity_id: int,
     request: Request,
     assignment_id: int = Query(...),
+    templateid: int = Query(...),
     resp=Depends(check_patient_role)
 ):
     if isinstance(resp, RedirectResponse):
         return resp
-
-    userId = request.cookies.get("user_id")
 
     tc_contents = []
     story_data = {}
@@ -263,10 +264,33 @@ async def check_answer(request: Request):
 class FinishRequest(BaseModel):
     completed: bool
     wrong_summary: Dict[str, int]
+    activityid: int
+    templateid: int
+    assignmentid: int
 
 @router.post("/finish/")
-async def finish_task(data: FinishRequest):
+async def finish_task(data: FinishRequest, request: Request):
     # Process summary here (store in DB, mark as done, etc.)
     print("Patient finished:", data.completed)
     print("Wrong attempts:", data.wrong_summary)
+    print("Activity ID:", data.activityid)
+    print("templateid ID:", data.templateid)
+    print("Assignment ID:", data.assignmentid)
+
+    userId = request.cookies.get("user_id")
+
+    ahid_result = supabase.table("assignmenteachday").select("ahid").eq("templateid", data.templateid).eq("assignmentid", data.assignmentid).execute()
+    print("ahid:", ahid_result.data[0]["ahid"])
+    ahid_value = ahid_result.data[0]["ahid"]
+    if ahid_result:
+        insert_result = supabase.table("histories").insert({
+            "ahid": ahid_value,
+            "retries": data.wrong_summary,
+            "patientid": userId,
+        }).execute()
+
+    update_result = supabase.table("assignmenteachday").update({
+        "isdone": True
+    }).eq("ahid", ahid_value).execute()
+
     return {"status": "success"}

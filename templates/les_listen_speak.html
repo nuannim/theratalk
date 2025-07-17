@@ -215,6 +215,13 @@
         button.disabled = true;
         button.textContent = "กำลังส่ง...";
 
+        const pathParts = window.location.pathname.split('/');
+        const activityid = parseInt(pathParts[pathParts.length - 1]);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const assignmentid = parseInt(urlParams.get("assignment_id"));
+        const templateid = parseInt(urlParams.get("templateid"));
+
         try {
             const res = await fetch("/patient/finish/", {
                 method: "POST",
@@ -224,6 +231,9 @@
                 body: JSON.stringify({
                     completed: true,
                     wrong_summary: wrongAttempts,
+                    activityid: activityid,
+                    templateid: templateid,
+                    assignmentid: assignmentid
                 }),
             });
 

@@ -35,13 +35,20 @@
         <h2>แบบฝึกหัดของคุณ</h2>
     </div>
         {% for item in lessons %}
-            <a href="/patient/activity/{{ item.activity.activityid }}?assignment_id={{ item.assignment.assignmentid }}">
-                <div class="node">
-                    <img src="/static/img/audio-book_10089822.png" alt="">
+            {% if item.assignment.isdone %}
+                <div class="node locked">
+                    <img src="/static/img/check_1721539.png" alt="locked" />
                     <h3>{{ item.activity.activityname }}</h3>
                 </div>
-            </a>
+            {% else %}
+                <a href="/patient/activity/{{ item.activity.activityid }}?assignment_id={{ item.assignment.assignmentid }}&templateid={{ item.assignment.templateid }}">
+                    <div class="node">
+                        <img src="/static/img/audio-book_10089822.png" alt="active" />
+                        <h3>{{ item.activity.activityname }}</h3>
+                    </div>
+                </a>
+            {% endif %}
         {% endfor %}
-</div>
+    </div>
 </body>
 </html>
