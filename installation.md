@@ -9,7 +9,7 @@ pip install -r requirements.txt
 ```
 
 # 2. install chocolatey
-install requirements.txt เสร็จ ลง choco ต่อ
+install requirements.txt เสร็จ ลง choco ต่อ (https://docs.chocolatey.org/en-us/choco/setup/)
 
 ## install with cmd
 ```bash
@@ -21,7 +21,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 
 # 3. install torch cuda
-torch cuda ทำให้รันเอไอบน gpu ได้
+torch cuda ทำให้รันเอไอบน gpu ได้ (https://pytorch.org/get-started/locally/)
 ```bash
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
