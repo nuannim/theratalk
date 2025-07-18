@@ -3,13 +3,18 @@
 uvicorn main:app --reload
 ```
 
+<br>
+
 # 1. install requirements.txt
 ```bash
 pip install -r requirements.txt
 ```
+<br>
 
 # 2. install chocolatey
 install requirements.txt เสร็จ ลง choco ต่อ (https://docs.chocolatey.org/en-us/choco/setup/)
+
+<br>
 
 ## install with cmd
 ```bash
@@ -20,8 +25,10 @@ install requirements.txt เสร็จ ลง choco ต่อ (https://docs.ch
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
+<br>
+
 # 3. install torch cuda
-install torch cuda แทน torch ตัวเก่า
+install torch cuda แทน torch ตัวเก่า  
 torch cuda ทำให้รันเอไอบน gpu ได้ (https://pytorch.org/get-started/locally/)
 ```bash
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
