@@ -14,8 +14,6 @@ pip install -r requirements.txt
 # 2. install chocolatey
 install requirements.txt เสร็จ ลง choco ต่อ (https://docs.chocolatey.org/en-us/choco/setup/)
 
-<br>
-
 ## install with cmd
 ```bash
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
@@ -35,8 +33,13 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 ```
 
 
+<br>
+
 
 ---
+
+
+<br>
 
 # how to install node & express
 
