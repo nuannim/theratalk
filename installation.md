@@ -1,12 +1,25 @@
-# install requirements.txt
-```bash
-pip install -r requirements.txt
-```
-
 # how to run uvicorn
 ```bash
 uvicorn main:app --reload
 ```
+
+# 1. install requirements.txt
+```bash
+pip install -r requirements.txt
+```
+
+# 2. install chocolatey
+install requirements.txt เสร็จ ลง choco ต่อ
+```bash
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+```
+
+# 3. install torch cuda
+```bash
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+```
+
+
 
 ---
 
