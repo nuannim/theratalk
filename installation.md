@@ -21,6 +21,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 
 # 3. install torch cuda
+install torch cuda แทน torch ตัวเก่า
 torch cuda ทำให้รันเอไอบน gpu ได้ (https://pytorch.org/get-started/locally/)
 ```bash
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
