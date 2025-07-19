@@ -64,7 +64,7 @@
                     <button id="next-button" type="button" onclick="nextLesson()">ถัดไป</button>
                 </div>
             </div>
-            <button id="check-button" type="button" onclick="checkAnswer()" disabled>ตรวจสอบ</button>
+            <button id="check-button" type="button" onclick="checkAnswer()">ตรวจสอบ</button>
             <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
                 <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
             </div>
@@ -265,8 +265,6 @@ function checkCheckButtonState() {
     for (let box of answerBoxes) {
         if (box.hasChildNodes()) filledCount++;
     }
-
-    checkButton.disabled = filledCount !== answerBoxes.length;
 }
 
 
