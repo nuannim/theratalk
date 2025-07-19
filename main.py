@@ -38,8 +38,7 @@ SPEAKER = "farah"
 
 @app.get("/")
 async def root(request: Request):
-    # get_db()
-    return templates.TemplateResponse("test.html", {
+    return templates.TemplateResponse("disclaimer.html", {
         "request": request
     })
 
