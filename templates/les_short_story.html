@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/les_short_story.css">
     <link rel="stylesheet" href="/static/css/responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Lesson</title>
 </head>
 
@@ -56,17 +57,26 @@
                     </div>
                 {% endfor %}
             </div>
-            <button type="button" disabled>ตรวจสอบ</button>
+            <button type="button" id="check-btn">ตรวจสอบ</button>
         </div>
     </div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", async () => {
         const playButton = document.getElementById("play-sound-btn");
+        const checkBtn = document.getElementById("check-btn");
 
         // story_data is passed from backend as JSON
         const storyData = {{ story_data | tojson }};
         const storyText = storyData.story;
+        const questions = storyData.questions;
+
+        const pathParts = window.location.pathname.split('/');
+        const activityid = parseInt(pathParts[pathParts.length - 1]);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const assignmentid = parseInt(urlParams.get("assignment_id"));
+        const templateid = parseInt(urlParams.get("templateid"));
 
         let cachedAudio = null;
 
@@ -99,6 +109,74 @@
                 alert("ยังไม่สามารถเล่นเสียงได้");
             }
         });
+
+        checkBtn.addEventListener("click", async () => {
+            let correct = 0;
+            let total = questions.length;
+            const wrongAttempts = {};
+            let feedback = "";
+
+            questions.forEach((q, qIndex) => {
+                const selected = document.querySelector(`input[name="ans_${qIndex}"]:checked`);
+                if (selected) {
+                    const selectedLabel = document.querySelector(`label[for="${selected.id}"]`);
+                    const selectedText = selectedLabel.textContent.trim();
+
+                    if (selectedText === q.ans) {
+                        correct++;
+                        feedback += `ข้อ ${qIndex + 1}: ✅ ถูกต้อง\n`;
+                    } else {
+                        feedback += `ข้อ ${qIndex + 1}: ❌ ผิดกรุณาลองอีกครั้ง\n`;
+                        wrongAttempts[q.q] = 1;
+                    }
+                } else {
+                    feedback += `ข้อ ${qIndex + 1}: ❗ ยังไม่ได้เลือกคำตอบ\n`;
+                    wrongAttempts[q.q] = 1;
+                }
+            });
+
+            // ✅ If all correct → send to backend
+            if (correct === total) {
+                try {
+                    const res = await fetch("/patient/finish/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            completed: true,
+                            wrong_summary: wrongAttempts,
+                            activityid: activityid,
+                            templateid: templateid,
+                            assignmentid: assignmentid,
+                        }),
+                    });
+
+                    if (!res.ok) {
+                        throw new Error("ส่งข้อมูลไม่สำเร็จ");
+                    }
+                } catch (err) {
+                    console.error("Error sending:", err);
+                    Swal.fire({
+                        icon: "error",
+                        title: "เกิดข้อผิดพลาด",
+                        text: "การเชื่อมต่อผิดพลาด กรุณาลองใหม่",
+                        confirmButtonText: "ลองอีกครั้ง",
+                    });
+                }
+                window.location.href = "/patient/";
+            } else {
+                // ❌ Show feedback in alert if any wrong
+                Swal.fire({
+                    icon: 'warning',
+                    title: `ผลลัพธ์: ได้ ${correct}/${total} คะแนน`,
+                    html: feedback.replace(/\n/g, '<br>'),
+                    confirmButtonText: 'ลองอีกครั้ง',
+                });
+            }
+        });
+
+
     });
 </script>
 </html>
