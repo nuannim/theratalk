@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/les_seq.css">
     <link rel="stylesheet" href="/static/css/responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Lesson</title>
 </head>
 
@@ -19,8 +20,8 @@
             <h4>TheraTalk</h4>
         </div>
         <div class="mid">
-            <a href="home_patient.html" id="home">หน้าหลัก</a>
-            <a href="mission.html" id="mission">ภารกิจ</a>
+            <a href="/patient/" id="home">หน้าหลัก</a>
+            <a href="/patient/mission" id="mission">ภารกิจ</a>
         </div>
         <div class="las">
             <a href="/patient/profile">
@@ -41,7 +42,7 @@
                 <div class="exercise-bar">
                     <div class="exercise-fill"></div>
                 </div>
-                <p>ข้อ 1 จาก 10</p>
+                <p id="progress-text">ข้อ 1 จาก {{ tc_contents|length }}</p>
             </div>
             <div class="exercise-box">
                 <div class="answer-box" id="answer">
@@ -58,10 +59,323 @@
                     <div class="list" id="word4" draggable="true">ผม</div>
                     <div class="list" id="word5" draggable="true">เกรียน</div>
                 </div>
+                <div class="navigation-buttons">
+                    <button id="prev-button" type="button" onclick="prevLesson()">ย้อนกลับ</button>
+                    <button id="next-button" type="button" onclick="nextLesson()">ถัดไป</button>
+                </div>
             </div>
-            <button type="button" disabled>ตรวจสอบ</button>
+            <button id="check-button" type="button" onclick="checkAnswer()" disabled>ตรวจสอบ</button>
+            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
+                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+            </div>
         </div>
     </div>
+<script>
+const tcContents = {{ tc_contents | tojson }};
+let currentIndex = 0;
+const correctIndexes = new Set();
+const wrongAttempts = {};
+let selected = null;
+
+function updateLesson() {
+    const sentence = tcContents[currentIndex].sentence;
+    const words = shuffleArray(sentence.split('/'));
+
+    const choiceBox = document.getElementById("choice");
+    choiceBox.innerHTML = "";
+
+    const answerBox = document.getElementById("answer");
+    answerBox.innerHTML = ""; // clear previous answer boxes
+    for (let i = 0; i < words.length; i++) {
+        const div = document.createElement("div");
+        div.className = "ans";
+        answerBox.appendChild(div);
+    }
+
+    let usedWords = new Set();
+
+    // If already correct, render the sentence in correct order into answer boxes
+    if (correctIndexes.has(currentIndex)) {
+        const correctWords = sentence.split('/');
+        const answerBoxes = document.getElementsByClassName("ans");
+
+        correctWords.forEach((word, i) => {
+            const div = document.createElement("div");
+            div.className = "list";
+            div.draggable = false;
+            div.textContent = word;
+            div.style.cursor = "default";
+            answerBoxes[i].appendChild(div);
+            usedWords.add(word);
+        });
+
+        document.getElementById("check-button").disabled = true;
+    }
+
+    // Then generate remaining words for choices (if not already used)
+    words.forEach((word, index) => {
+        if (!correctIndexes.has(currentIndex) || !usedWords.has(word)) {
+            const div = document.createElement("div");
+            div.className = "list";
+            div.id = `word${index + 1}`;
+            div.draggable = true;
+            div.textContent = word;
+            choiceBox.appendChild(div);
+        }
+    });
+
+
+    attachDragAndClickEvents();      // rebind for new .list
+    attachDropEventsToAnswerBoxes(); // rebind for new .ans
+
+    // If this lesson was already answered correctly, re-lock it
+    if (correctIndexes.has(currentIndex)) {
+        const answerBoxes = document.getElementsByClassName("ans");
+        for (let box of answerBoxes) {
+            const word = box.firstChild;
+            if (word) {
+                word.draggable = false;
+                word.style.cursor = "default";
+                word.removeEventListener("click", handleWordReturn);
+            }
+            box.style.pointerEvents = "none";
+        }
+        document.getElementById("check-button").disabled = true;
+    }
+
+
+    document.getElementById("progress-text").textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
+
+    const fill = document.querySelector(".exercise-fill");
+    fill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
+
+    document.getElementById("prev-button").disabled = currentIndex === 0;
+    document.getElementById("next-button").disabled = currentIndex === tcContents.length - 1;
+
+    const submitSection = document.querySelector(".submit-section");
+    const submitButton = document.getElementById("submit-button");
+    if (currentIndex === tcContents.length - 1) {
+        submitSection.style.display = "block";
+
+        if (correctIndexes.size === tcContents.length) {
+        submitButton.disabled = false; // Enable submit
+        } else {
+            submitButton.disabled = true; // Disable submit
+        }
+    } else {
+        submitSection.style.display = "none";
+    }
+}
+
+function nextLesson() {
+    if (currentIndex < tcContents.length - 1) {
+        currentIndex++;
+        updateLesson();
+    }
+}
+
+function prevLesson() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateLesson();
+    }
+}
+
+function moveToAnswerBox(wordElement) {
+    let answerBoxes = document.getElementsByClassName("ans");
+    for (let box of answerBoxes) {
+        if (!box.hasChildNodes()) {
+            box.appendChild(wordElement);
+            selected = null;
+            checkCheckButtonState();
+            return;
+        }
+    }
+}
+
+function attachDragAndClickEvents() {
+    let lists = document.getElementsByClassName("list");
+    for (let item of lists) {
+        item.addEventListener("dragstart", function (e) {
+            selected = e.target;
+        });
+
+        item.addEventListener("click", function (e) {
+            selected = e.target;
+            moveToAnswerBox(selected);
+        });
+    }
+
+    const choice = document.getElementById("choice");
+
+    choice.addEventListener("dragover", function (e) {
+        e.preventDefault();
+    });
+
+    choice.addEventListener("drop", function (e) {
+        if (selected) {
+            choice.appendChild(selected);
+            selected = null;
+        }
+    });
+}
+
+function handleWordReturn(e) {
+    const box = e.currentTarget;
+    if (box.hasChildNodes()) {
+        document.getElementById("choice").appendChild(box.firstChild);
+        checkCheckButtonState();
+    }
+}
+
+function attachDropEventsToAnswerBoxes() {
+    let answerBoxes = document.getElementsByClassName("ans");
+    for (let box of answerBoxes) {
+        box.addEventListener("dragover", function (e) {
+            e.preventDefault();
+        });
+
+        box.addEventListener("drop", function (e) {
+            if (selected) {
+                if (box.hasChildNodes()) {
+                    document.getElementById("choice").appendChild(box.firstChild);
+                }
+                box.appendChild(selected);
+                selected = null;
+            }
+        });
+
+        box.addEventListener("click", handleWordReturn);
+    }
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function checkCheckButtonState() {
+    const answerBoxes = document.getElementsByClassName("ans");
+    const checkButton = document.getElementById("check-button");
+
+    let filledCount = 0;
+    for (let box of answerBoxes) {
+        if (box.hasChildNodes()) filledCount++;
+    }
+
+    checkButton.disabled = filledCount !== answerBoxes.length;
+}
+
+
+function checkAnswer() {
+    const answerBoxes = document.getElementsByClassName("ans");
+    const correctSentence = tcContents[currentIndex].sentence.split('/');
+
+    let userAnswer = [];
+    for (let box of answerBoxes) {
+        if (box.firstChild) {
+            userAnswer.push(box.firstChild.textContent.trim());
+        } else {
+            userAnswer.push("");
+        }
+    }
+
+    const isCorrect = userAnswer.join(' ') === correctSentence.join(' ');
+
+    if (isCorrect) {
+        Swal.fire({
+            icon: "success",
+            title: "✅ ถูกต้อง!",
+            text: "คุณทำได้ถูกต้องแล้ว เก่งมาก!",
+            confirmButtonText: "ตกลง"
+        });
+        correctIndexes.add(currentIndex);
+
+        // Disable interaction if correct
+        for (let box of answerBoxes) {
+            const word = box.firstChild;
+            if (word) {
+                word.draggable = false;
+                word.style.cursor = "default";      // visually show it's locked
+                word.removeEventListener("click", handleWordReturn); // remove click event
+            }
+            box.style.pointerEvents = "none"; // disable dropping new items
+        }
+        document.getElementById("check-button").disabled = true;
+    } else {
+        Swal.fire({
+            icon: "error",
+            title: "❌ ไม่ถูกต้อง",
+            text: "กรุณาลองอีกครั้ง",
+            confirmButtonText: "ตกลง"
+        });
+        const sentence = tcContents[currentIndex].sentence;
+        if (!wrongAttempts[sentence]) {
+            wrongAttempts[sentence] = 1;
+        } else {
+            wrongAttempts[sentence]++;
+        }
+    }
+}
+
+async function submitAnswers() {
+    const button = document.getElementById("submit-button");
+    if (correctIndexes.size !== tcContents.length) {
+        alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "กำลังส่ง...";
+
+    const pathParts = window.location.pathname.split('/');
+    const activityid = parseInt(pathParts[pathParts.length - 1]);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const assignmentid = parseInt(urlParams.get("assignment_id"));
+    const templateid = parseInt(urlParams.get("templateid"));
+
+    try {
+        const res = await fetch("/patient/finish/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                completed: true,
+                wrong_summary: wrongAttempts,
+                activityid: activityid,
+                templateid: templateid,
+                assignmentid: assignmentid
+            }),
+        });
+
+        if (!res.ok) {
+            throw new Error("ส่งข้อมูลไม่สำเร็จ");
+        }
+
+        window.location.href = "/patient/";
+    } catch (err) {
+        console.error("Error sending:", err);
+        Swal.fire({
+            icon: "error",
+            title: "เกิดข้อผิดพลาด",
+            text: "การเชื่อมต่อผิดพลาด กรุณาลองใหม่",
+            confirmButtonText: "ลองอีกครั้ง"
+        });
+        button.disabled = false;
+        button.textContent = "ส่งคำตอบ";
+    }
+}
+
+window.onload = () => {
+    updateLesson();
+}
+</script>
+
 </body>
 <script src="/static/js/les_seq.js"></script>
 
