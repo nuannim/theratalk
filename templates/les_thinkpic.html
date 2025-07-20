@@ -57,13 +57,13 @@
                 </div>
             </div>
             <!-- <div class="forbutton"> -->
-                <div class="navigation-buttons">
-                    <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
-                    <button onclick="next()" id="next-btn">ถัดไป</button>
-                    <div class="submit-section" style="display: none; text-align: center;">
-                        <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
-                    </div>
+            <div class="navigation-buttons">
+                <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
+                <button onclick="next()" id="next-btn">ถัดไป</button>
+                <div class="submit-section" style="display: none; text-align: center;">
+                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
                 </div>
+            </div>
             <!-- </div> -->
         </div>
     </div>
@@ -77,7 +77,7 @@
         const tcContents = {{ tc_contents | tojson }};
         const wrongAttempts = {};
         let currentIndex = 0;
-    
+
         const sentenceEl = document.getElementById("current-sentence");
         const imageEl = document.getElementById("current-image");
         const progressText = document.getElementById("progress-text");
@@ -117,18 +117,21 @@
             }
 
             // ✅ Navigation buttons state
-            if(currentIndex === 0){
-                document.getElementById("prev-btn").style.display = "none";
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+
+            if (currentIndex === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "inline-block";
             }
-            else{
-                document.getElementById("prev-btn").style.display = "inline-block";
+
+            if (currentIndex === tcContents.length - 1) {
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "inline-block";
             }
-            if(currentIndex === tcContents.length - 1){
-                document.getElementById("next-btn").style.display = "none";
-            }
-            else{
-                document.getElementById("prev-btn").style.display = "inline-block";
-            }
+
             // document.getElementById("prev-btn").disabled = currentIndex === 0;
             // document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
         }
@@ -212,4 +215,5 @@
     </script>
 </body>
 <script src="/static/js/recordVoice.js"></script>
+
 </html>

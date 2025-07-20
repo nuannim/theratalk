@@ -128,17 +128,19 @@
             }
 
             // ✅ Navigation buttons state
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+
             if (currentIndex === 0) {
-                document.getElementById("prev-btn").style.display = "none";
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "inline-block";
             }
-            else {
-                document.getElementById("prev-btn").style.display = "inline-block";
-            }
+
             if (currentIndex === tcContents.length - 1) {
-                document.getElementById("next-btn").style.display = "none";
-            }
-            else {
-                document.getElementById("prev-btn").style.display = "inline-block";
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "inline-block";
             }
             // document.getElementById("prev-btn").disabled = currentIndex === 0;
             // document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;

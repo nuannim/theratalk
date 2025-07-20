@@ -60,8 +60,8 @@
             </div>
 
             <div class="navigation-buttons">
-                <button type="button" onclick="prevLesson()">ย้อนกลับ</button>
-                <button type="button" onclick="nextLesson()">ถัดไป</button>
+                <button id="prev-btn" type="button" onclick="prevLesson()">ย้อนกลับ</button>
+                <button id="next-btn" type="button" onclick="nextLesson()">ถัดไป</button>
             </div>
         </div>
     </div>
@@ -131,6 +131,33 @@
             speakButton.querySelector("p").textContent = "กดเพื่อพูด";
             speakButton.querySelector("p").style.color = "#7293df";
         }
+        const submitSection = document.querySelector(".submit-section");
+            if (currentIndex === tcContents.length - 1) {
+                submitSection.style.display = "block";
+
+                if (correctIndexes.size === tcContents.length) {
+                    submitButton.disabled = false; // Enable submit
+                } else {
+                    submitButton.disabled = true; // Disable submit
+                }
+            } else {
+                submitSection.style.display = "none";
+            }
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+
+            if (currentIndex === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "inline-block";
+            }
+
+            if (currentIndex === tcContents.length - 1) {
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "inline-block";
+            }
+        
     }
 
     function nextLesson() {
