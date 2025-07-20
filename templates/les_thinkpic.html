@@ -56,12 +56,14 @@
                     <p>กดเพื่อพูด</p>
                 </div>
             </div>
-            <div class="navigation-buttons">
-                <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
-                <button onclick="next()" id="next-btn">ถัดไป</button>
-            </div>
-            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
-                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+            <div class="forbutton">
+                <div class="navigation-buttons">
+                    <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
+                    <button onclick="next()" id="next-btn">ถัดไป</button>
+                </div>
+                <div class="submit-section" style="display: none; text-align: center;">
+                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled style="width: 100%;">ส่งคำตอบ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -109,8 +111,20 @@
             }
 
             // ✅ Navigation buttons state
-            document.getElementById("prev-btn").disabled = currentIndex === 0;
-            document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
+            if(currentIndex === 0){
+                document.getElementById("prev-btn").style.display = "none";
+            }
+            else{
+                document.getElementById("prev-btn").style.display = "inline-block";
+            }
+            if(currentIndex === tcContents.length - 1){
+                document.getElementById("next-btn").style.display = "none";
+            }
+            else{
+                document.getElementById("prev-btn").style.display = "inline-block";
+            }
+            // document.getElementById("prev-btn").disabled = currentIndex === 0;
+            // document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
         }
 
 
