@@ -1,0 +1,59 @@
+// {
+//     "word1": "หมู",
+//     "word2": "หู",
+//     "word3": "ปู",
+//     "word4": "งู"
+// }
+// {
+//     "image1": "t09pig.png",
+//     "image2": "t09ear.png",
+//     "image3": "t09crab.png",
+//     "image4": "t09snake.png"
+// }
+
+
+
+// {
+//     "word1": "งู",
+//     "word2": "ปู",
+//     "word3": "หมู",
+//     "word4": "หู"
+// }
+// {
+//     "image1": "t09snake.png",
+//     "image2": "t09crab.png",
+//     "image3": "t09pig.png",
+//     "image4": "t09ear.png"
+// }
+
+
+
+
+// {
+//     "word1": "ปู",
+//     "word2": "งู",
+//     "word3": "หู",
+//     "word4": "หมู"
+// }
+// {
+//     "image1": "t09crab.png",
+//     "image2": "t09snake.png",
+//     "image3": "t09ear.png",
+//     "image4": "t09pig.png"
+// }
+
+
+
+
+// {
+//     "word1": "หู",
+//     "word2": "หมู",
+//     "word3": "งู",
+//     "word4": "ปู"
+// }
+// {
+//     "image1": "t09ear.png",
+//     "image2": "t09pig.png",
+//     "image3": "t09snake.png",
+//     "image4": "t09crab.png"
+// }

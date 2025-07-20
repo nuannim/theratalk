@@ -1,0 +1,59 @@
+[
+    {
+        "word1": "ไก่",
+        "word2": "ไข่",
+        "word3": "ไม่",
+        "word4": "ใจ"
+    },
+    {
+        "image1": "t08chicken.png",
+        "image2": "t08egg.png",
+        "image3": "t08no.png",
+        "image4": "t08heart.png"
+    },
+
+
+
+    {
+        "word1": "ไข่",
+        "word2": "ไก่",
+        "word3": "ใจ",
+        "word4": "ไม่"
+    },
+    {
+        "image1": "t08egg.png",
+        "image2": "t08chicken.png",
+        "image3": "t08heart.png",
+        "image4": "t08no.png"
+    },
+
+
+
+    {
+        "word1": "ไม่",
+        "word2": "ใจ",
+        "word3": "ไก่",
+        "word4": "ไข่"
+    },
+    {
+        "image1": "t08no.png",
+        "image2": "t08heart.png",
+        "image3": "t08chicken.png",
+        "image4": "t08egg.png"
+    },
+
+
+    
+    {
+        "word1": "ใจ",
+        "word2": "ไม่",
+        "word3": "ไข่",
+        "word4": "ไก่"
+    },
+    {
+        "image1": "t08heart.png",
+        "image2": "t08no.png",
+        "image3": "t08egg.png",
+        "image4": "t08chicken.png"
+    }
+]
