@@ -38,7 +38,7 @@
     </div>
     <div class="main">
         <div class="top">
-            <a href="/slp/checkmypatient/{{ patientid }}/{{date}}"><i class="fa-solid fa-chevron-left"></i></a>
+            <a href="javascript:window.history.back()"><i class="fa-solid fa-chevron-left"></i></a>
             {% if data_name %}
             <a href="/slp/checkmypatient/{{ patientid }}/{{date}}">
                 <h2>{{ data_name[0].pfirstname }} {{ data_name[0].plastname }}</h2>
@@ -84,8 +84,28 @@
                     {% for i in data %}
                         <tr>
                             <td></td>
-                            <td>{{i.sentence}}</td>
-                            <td>{{i.retries}}</td>
+                            {% set sent = i.sentence | from_json %}
+                            {% set clean_sentence = i.sentence | replace("/", "") %}
+                            <td>
+                                {% if sent is mapping and sent.title is defined %}
+                                    {{ sent.title }}
+                                {% elif sent is mapping %}
+                                    {{ sent.values() | join(" ") }}
+                                {% else %}
+                                    {{ clean_sentence }}
+                                {% endif %}
+                            </td>
+                            {% set retry = i.retries %}
+                            {% if retry is string %}
+                                {% set retry = retry | from_json %}
+                            {% endif %}
+                            <td>
+                                {% if retry is mapping %}
+                                    {{ retry[i.sentence] | default('0') }}
+                                {% else %}
+                                    {{ retry }}
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 {% else %}

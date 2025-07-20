@@ -1,3 +1,4 @@
+import json
 from fastapi import APIRouter, Request, HTTPException, Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -8,6 +9,7 @@ from passlib.context import CryptContext
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 #^ from noeysod - อันนี้เช็ค role
 # def check_slp_role(request: Request):
@@ -208,6 +210,14 @@ async def showCheckMyPatient_ahid(request: Request, resp=Depends(check_slp_role)
         "data_name": data_name
     })
 
+def from_json_filter(s):
+    try:
+        return json.loads(s)
+    except (json.JSONDecodeError, TypeError):
+        return None
+
+templates.env.filters["from_json"] = from_json_filter
+
 @router.get("/resetpassword/{patientid}")
 async def showResetPassword(request: Request, resp=Depends(check_slp_role)):
     if isinstance(resp, RedirectResponse):
@@ -230,7 +240,7 @@ async def resetPassword(
 
 
     res = supabase.table("patients") \
-        .update({"ppassword": new_password}) \
+        .update({"ppassword": pwd_context.hash(new_password)}) \
         .eq("patientid", patientid) \
         .execute()
 
@@ -250,8 +260,6 @@ async def showAddNewPatient(
     return templates.TemplateResponse("addnewpatient_p.html", {
         "request": request
     })
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 @router.post("/addnewpatient")
 async def addNewPatient(

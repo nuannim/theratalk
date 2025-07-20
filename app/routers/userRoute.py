@@ -277,7 +277,7 @@ async def finish_task(data: FinishRequest, request: Request):
     print("templateid ID:", data.templateid)
     print("Assignment ID:", data.assignmentid)
 
-    userId = request.cookies.get("user_id")
+    userId = 2#request.cookies.get("user_id")
 
     ahid_result = supabase.table("assignmenteachday").select("ahid").eq("templateid", data.templateid).eq("assignmentid", data.assignmentid).execute()
     print("ahid:", ahid_result.data[0]["ahid"])
