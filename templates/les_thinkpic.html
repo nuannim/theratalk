@@ -56,15 +56,15 @@
                     <p>กดเพื่อพูด</p>
                 </div>
             </div>
-            <div class="forbutton">
+            <!-- <div class="forbutton"> -->
                 <div class="navigation-buttons">
                     <button onclick="prev()" id="prev-btn">ย้อนกลับ</button>
                     <button onclick="next()" id="next-btn">ถัดไป</button>
+                    <div class="submit-section" style="display: none; text-align: center;">
+                        <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                    </div>
                 </div>
-                <div class="submit-section" style="display: none; text-align: center;">
-                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled style="width: 100%;">ส่งคำตอบ</button>
-                </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
     <script>

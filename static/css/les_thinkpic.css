@@ -218,11 +218,11 @@ i {
 i:hover {
   color: #7293df;
 }
-.forbutton{
+/* .forbutton{
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
     padding-right: 30px;
