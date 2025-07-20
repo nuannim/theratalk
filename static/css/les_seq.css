@@ -92,6 +92,7 @@ h4 {
 
 .container {
   display: flex;
+  flex-direction: row;
   width: 100%;
   margin-top: 70px;
 }
@@ -102,7 +103,7 @@ h4 {
 }
 
 .main {
-  /* padding-left: 50px; */
+  padding-left: 50px;
   padding-right: 50px;
   display: flex;
   flex-direction: column;
@@ -399,7 +400,7 @@ i:hover {
     height: 35px;
     font-size: 14px;
   } */
-  h4, a {
+  h4, a{
     font-size: 13px;
   }
   .answer-box{
