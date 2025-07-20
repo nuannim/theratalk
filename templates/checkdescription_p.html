@@ -39,22 +39,22 @@
     <div class="main">
         <div class="top">
             <a href="/slp/checkmypatient/{{ patientid }}/{{date}}"><i class="fa-solid fa-chevron-left"></i></a>
-            {% if data %}
+            {% if data_name %}
             <a href="/slp/checkmypatient/{{ patientid }}/{{date}}">
-                <h2>{{ data[0].pfirstname }} {{ data[0].plastname }}</h2>
+                <h2>{{ data_name[0].pfirstname }} {{ data_name[0].plastname }}</h2>
             </a>
             {% else %}
             <a href="/slp/checkmypatient/{{ patientid }}/{{date}}">
-                <h2>แจ๋ม บุญประกอบ</h2>
+                <h2>ชื่อ นามสกุล</h2>
             </a>
             {% endif %}
         </div>
         {% if data_assignmenteachday %}
-        {% for i in data_assignmenteachday %}
-        <h1>{{i.activityname}} ({{i.templatename}})</h1>
-        {% endfor %}
+            {% for i in data_assignmenteachday %}
+                <h1>{{i.activityname}} ({{i.templatename}})</h1>
+            {% endfor %}
         {% else %}
-        <h1>xxxxxxx</h1>
+            <h1>ไม่มีแบบฝึกหัด</h1>
         {% endif %}
 <!-- 
         <div class="content">
@@ -91,15 +91,14 @@
                 {% else %}
                     <tr>
                         <td></td>
-                        <td>คำ2</td>
-                        <td>999</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
+                    <h2>ผู้ป่วยยังไม่ได้ทำแบบฝึกหัด</h2>
                 {% endif %}
-
-
-
             </tbody>
         </table>
+        
     </div>
 </body>
 
