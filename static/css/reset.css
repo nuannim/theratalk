@@ -1,0 +1,315 @@
+* {
+  font-family: "Prompt";
+  text-decoration: none;
+  scroll-behavior: smooth;
+  color: #666666;
+  font-weight: 550;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.main {
+  margin-top: 70px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.03);
+  gap: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 5px;
+  border: 1.5px solid #ececec;
+  border-radius: 10px;
+  width: 95%;
+}
+button {
+  /* width: 150px; */
+  height: 40px;
+  border-radius: 15px;
+  background-color: white;
+  color: #666666;
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+button:hover {
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+  transition: ease-in-out 0.2s;
+}
+
+
+.nav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 5px #0000001a;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  gap: 20px;
+}
+
+.mid a,
+.txt p {
+  color: #bec9d5;
+}
+
+.mid a {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.mid a:hover {
+  color: #7293df;
+}
+
+.las {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 15px;
+  padding-right: 12px;
+}
+
+.las img {
+  height: 40px;
+  width: 40px;
+}
+
+.las p,
+h4 {
+  margin: 0;
+}
+
+.las div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.logo {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.txt p {
+  font-weight: 400;
+  font-size: 13px;
+}
+i {
+  transition: ease-in-out 0.2s;
+  color: #bec9d5;
+  cursor: pointer;
+}
+i:hover {
+  color: #7293df;
+}
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+h3,
+h2 {
+  margin: 0;
+}
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+  align-items: center;
+}
+/* .need{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1.5px solid #ececec;
+  padding: 10px;
+  border-radius: 15px;
+} */
+.finish {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  width: 70%;
+}
+.need h2,
+.finish h2 {
+  display: flex;
+  justify-content: center;
+}
+.finish .lesson {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lesson div {
+  /* height: 40px; */
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  color: #666666;
+  padding: 10px;
+}
+.lesson div:hover {
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+}
+.need a {
+  width: 200px;
+  /* height: 100px; */
+}
+
+h2{
+    color: #7293df;
+}
+
+/* Responsive Styles */
+
+/* Tablet/iPad (631px - 1024px) */
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .top {
+    gap: 20px;
+  }
+
+  .content {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* .need, .finish {
+    min-width: 280px;
+    width: 45%;
+  } */
+
+  .need a {
+    width: 100%;
+  }
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .top {
+    gap: 15px;
+  }
+
+  .content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* .need, .finish {
+    width: 100%;
+    max-width: 450px;
+  } */
+
+  .need a {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .top {
+    gap: 10px;
+  }
+
+  .content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .need,
+  .finish {
+    width: 100%;
+  }
+
+  .need a {
+    width: 100%;
+  }
+
+  .lesson div {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .nav,
+  a {
+    font-size: 13px;
+  }
+  .main {
+    width: 250px;
+  }
+  .mid {
+    width: 60%;
+    gap: 8px;
+  }
+
+  .las,
+  .logo {
+    width: 20%;
+  }
+}

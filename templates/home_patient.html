@@ -40,31 +40,30 @@
     </div>
 
     <div class="main">
-        <div class="main">
-            {% for assignment in assignments %}
-            <a href="/patient/lesson/{{ assignment.assignmentid }}">
-                <div class="node active" id="n{{ loop.index }}">
-                    <img src="/static/img/audio-book_10089822.png" alt="">
-                    <div class="description">
-                        <h3>{{ assignment.assignmentdate or 'แบบฝึกหัด' }}</h3>
-                        <p>{{ assignment.aStartDate or '' }}</p>
-                        <div class="tooltip">
-                            <ol>
-                                {% for i in assignments_description %}
-                                {% if i.assignmentid == assignment.assignmentid %}
-                                <li>{{ i.templatename or '-' }}</li>
-                                <!-- เพิ่ม field อื่น ๆ ตาม assignment ที่ต้องการ -->
-                                {% endif %}
-                                {% endfor %}
-                            </ol>
-                        </div>
+        {% for assignment in assignments %}
+        <a href="/patient/lesson/{{ assignment.assignmentid }}">
+            <div class="node active" id="n{{ loop.index }}">
+                <img src="/static/img/audio-book_10089822.png" alt="">
+                <div class="description">
+                    <h3>{{ assignment.assignmentdate or 'แบบฝึกหัด' }}</h3>
+                    <p>{{ assignment.aStartDate or '' }}</p>
+                    <div class="tooltip">
+                        <ol>
+                            {% for i in assignments_description %}
+                            {% if i.assignmentid == assignment.assignmentid %}
+                            <li>{{ i.templatename or '-' }}</li>
+                            <!-- เพิ่ม field อื่น ๆ ตาม assignment ที่ต้องการ -->
+                            {% endif %}
+                            {% endfor %}
+                        </ol>
                     </div>
                 </div>
-            </a>
-            {% endfor %}
-        </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 
-        <!-- <p>{{assignments_description}}</p> -->
+    <!-- <p>{{assignments_description}}</p> -->
 
 
 
