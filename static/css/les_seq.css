@@ -247,3 +247,170 @@ i {
 i:hover {
   color: #7293df;
 }
+
+@media screen and (min-width: 631px) and (max-width: 1024px) {
+  .main {
+    padding-right: 30px;
+    gap: 30px;
+  }
+  
+  .mid {
+    width: 65%;
+    gap: 15px;
+  }
+  
+  .las, .logo {
+    width: 17.5%;
+  }
+  
+  .exercise-bar {
+    width: 400px;
+  }
+  
+  /* .listen-box, .speak {
+    width: 140px;
+  } */
+  
+  /* button {
+    width: 140px;
+  } */
+}
+
+/* Mobile (481px - 630px) */
+@media screen and (min-width: 481px) and (max-width: 630px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .main {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* margin-top: 60px; */
+    gap: 20px;
+  }
+  
+  .fori {
+    width: 100%;
+    justify-content: start;
+    padding-left: 15px;
+  }
+  
+  .mid {
+    width: 60%;
+    gap: 10px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+  
+  .exercise-bar {
+    width: 350px;
+  }
+  
+  /* .listen-box, .speak {
+    width: 130px;
+    height: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+  } */
+  
+  .exercise-box {
+    align-items: center;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    gap: 10px;
+    width: 60%;
+  }
+  
+  /* button {
+    width: 130px;
+    height: 35px;
+  } */
+}
+
+/* Small Mobile (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .main {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    /* margin-top: 60px; */
+    gap: 15px;
+  }
+  
+  .fori {
+    width: 100%;
+    justify-content: start;
+    padding-left: 15px;
+  }
+  
+  .mid {
+    width: 50%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 25%;
+  }
+  
+  .bar h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .exercise-bar {
+    width: 280px;
+  }
+  
+  /* .listen-box, .speak {
+    width: 100px;
+    height: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
+  } */
+  
+  .word p {
+    font-size: 14px;
+  }
+  
+  .speak p {
+    font-size: 14px;
+  }
+  
+  .exercise-box {
+    align-items: center;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* button {
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+  } */
+  h4, a {
+    font-size: 13px;
+  }
+  .answer-box{
+    width: 350px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+  }
+  .choice{
+    width: 350px;
+    height: 150px;
+    justify-content: center;
+  }
+}
