@@ -224,13 +224,13 @@
     height: auto;
   }
   
-  th {
+  /* th {
     display: none;
-  }
+  } */
   
-  thead {
+  /* thead {
     display: none;
-  }
+  } */
   
   table a {
     margin: 3px 0;
