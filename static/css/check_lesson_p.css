@@ -320,3 +320,17 @@ button:hover{
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
 }
+
+@media screen and (max-width: 480px) {
+    .nav, a{
+      font-size: 13px;
+    }
+  .mid {
+    width: 60%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+}
