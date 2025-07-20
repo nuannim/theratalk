@@ -210,6 +210,7 @@ h2 {
 }
 #month-title {
   color: #666666;
+  text-align: center;
 }
 .type-lesson {
   display: flex;
@@ -229,6 +230,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   cursor: pointer;
   border: 1.5px solid #ececec;
   transition: ease-in-out 0.2s;
@@ -291,6 +293,7 @@ select {
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  width: 100%;
 }
 
 .big {
@@ -323,7 +326,7 @@ select {
   border: 1.5px solid #ececec;
   border-radius: 10px;
   height: 30px;
-  width: 100px;
+  /* width: 50%; */
 }
 
 .left-tem option {
@@ -446,7 +449,7 @@ select {
   .but {
     width: 120px;
     height: 35px;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -499,13 +502,27 @@ select {
   }
   
   /* Button Container */
-  .forbut {
+  /* .forbut {
     flex-direction: column;
     align-items: center;
-  }
+  } */
   
   .but {
     width: 100%;
     max-width: 150px;
+  }
+  .nav, a{
+      font-size: 13px;
+    }
+  .main{
+    width: 250px;
+  }
+  .mid {
+    width: 60%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 20%;
   }
 }

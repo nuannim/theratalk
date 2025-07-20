@@ -282,9 +282,9 @@
     flex-direction: column;
   }
   
-  .left-tem, .right-tem {
+  /* .left-tem, .right-tem {
     width: 100%;
-  }
+  } */
   
   /* Profile Elements */
   .pro {
@@ -310,11 +310,11 @@
   }
   
   /* Button Containers */
-  .forbut {
+  /* .forbut {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-  }
+  } */
   
   /* Login Form */
   .main.login {

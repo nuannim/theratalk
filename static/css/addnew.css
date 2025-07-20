@@ -1,0 +1,179 @@
+* {
+  font-family: "Prompt";
+  text-decoration: none;
+  scroll-behavior: smooth;
+  color: #7293df;
+  font-weight: 550;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.main {
+  margin-top: 80px;
+  margin-bottom: 50px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.03);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label{
+    color: #666666;
+}
+
+input {
+  padding: 5px;
+  border: 1.5px solid #ececec;
+    color: #666666;
+  border-radius: 10px;
+}
+button {
+  /* width: 150px; */
+  height: 40px;
+  border-radius: 15px;
+  background-color: white;
+  /* color: #666666; */
+  border: 1.5px solid #ececec;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+button:hover {
+  border: 1.5px solid #dae5ff;
+  background-color: #f7f9fe;
+  color: #7293df;
+  transition: ease-in-out 0.2s;
+}
+
+.nav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 5px #0000001a;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.mid {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  gap: 20px;
+}
+
+.mid a,
+.txt p {
+  color: #bec9d5;
+}
+
+.mid a {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.mid a:hover {
+  color: #7293df;
+}
+
+.las {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 15px;
+  padding-right: 12px;
+}
+
+.las img {
+  height: 40px;
+  width: 40px;
+}
+
+.las p,
+h4 {
+  margin: 0;
+}
+
+.las div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.logo {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.txt p {
+  font-weight: 400;
+  font-size: 13px;
+}
+i {
+  transition: ease-in-out 0.2s;
+  color: #bec9d5;
+  cursor: pointer;
+}
+i:hover {
+  color: #7293df;
+}
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+h2{
+    margin-top: 0;
+}
+
+@media screen and (max-width: 630px) {
+  .top {
+    gap: 15px;
+  }
+  
+  label {
+    font-size: 13px;
+  }
+  h2{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+    .nav, a{
+      font-size: 13px;
+    }
+  .main{
+    width: 250px;
+  }
+  .mid {
+    width: 60%;
+    gap: 8px;
+  }
+  
+  .las, .logo {
+    width: 20%;
+  }
+}
