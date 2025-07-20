@@ -67,6 +67,11 @@
     </div>
 
     <script>
+        const speakButton = document.querySelector(".speak");
+        const submitButton = document.getElementById("submit-button");
+        const correctIndexes = new Set();
+    </script>
+    <script>
     const tcContents = {{ tc_contents | tojson }};
     let currentIndex = 0;
 

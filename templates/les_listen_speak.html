@@ -60,14 +60,20 @@
             </div>
 
             <div class="navigation-buttons">
-                <button type="button" onclick="prevLesson()">ย้อนกลับ</button>
-                <button type="button" onclick="nextLesson()">ถัดไป</button>
+                <button id="prev-btn" type="button" onclick="prevLesson()">ย้อนกลับ</button>
+                <button id="next-btn" type="button" onclick="nextLesson()">ถัดไป</button>
             </div>
             <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
                 <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
             </div>
         </div>
     </div>
+
+    <script>
+        const speakButton = document.querySelector(".speak");
+        const submitButton = document.getElementById("submit-button");
+        const correctIndexes = new Set();
+    </script>
 
     <script>
     const tcContents = {{ tc_contents | tojson }};
@@ -136,7 +142,6 @@
         }
 
         const submitSection = document.querySelector(".submit-section");
-        const submitButton = document.getElementById("submit-button");
         if (currentIndex === tcContents.length - 1) {
             submitSection.style.display = "block";
 
@@ -148,6 +153,8 @@
         } else {
             submitSection.style.display = "none";
         }
+        document.getElementById("prev-btn").disabled = currentIndex === 0;
+        document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
     }
 
     function nextLesson() {
@@ -257,8 +264,7 @@
         updateLesson();
     }
 </script>
-
-    <script src="/static/js/recordVoice.js"></script>
+<script src="/static/js/recordVoice.js"></script>
 </body>
 
 </html>

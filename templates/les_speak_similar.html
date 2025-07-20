@@ -67,6 +67,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const speakButton = document.querySelector(".speak");
+        const submitButton = document.getElementById("submit-button");
+        const correctIndexes = new Set();
+    </script>
+
 <script>
     const tcContents = {{ tc_contents | tojson }};
     const wrongAttempts = {};
@@ -91,8 +98,19 @@
         document.getElementById("progress-text").textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
         document.getElementById("progress-fill").style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
 
+        if (correctIndexes.has(currentIndex)) {
+            speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
+            speakButton.querySelector("p").style.color = "green";
+            speakButton.style.pointerEvents = "none"; // disable interaction
+            speakButton.style.opacity = "0.5";
+        } else {
+            speakButton.querySelector("p").style.color = "#7293df";
+            speakButton.querySelector("p").textContent = "กดเพื่อพูด";
+            speakButton.style.pointerEvents = "auto";
+            speakButton.style.opacity = "1";
+        }
+
         const submitSection = document.querySelector(".submit-section");
-        const submitButton = document.getElementById("submit-button");
 
         if (currentIndex === tcContents.length - 1) {
             submitSection.style.display = "block";

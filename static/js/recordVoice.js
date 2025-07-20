@@ -1,7 +1,6 @@
-const speakButton = document.querySelector(".speak");
-    const checkButton = document.getElementById("check-button");
+window.addEventListener("DOMContentLoaded", () => {
+    const speakButton = document.querySelector(".speak");
     const wordText = document.querySelector(".word p");
-    const correctIndexes = new Set();
     const correctSound = new Audio("/static/sounds/correct.mp3");
     speakButton.querySelector("p").style.color = "#7293df";
 
@@ -53,10 +52,10 @@ const speakButton = document.querySelector(".speak");
                 speakButton.querySelector("p").style.color = "green";
                 speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
                 correctIndexes.add(currentIndex);
+                console.log("Correct indexes:", correctIndexes.size);
+                console.log("Total correct answers:", tcContents.length);
                 if (correctIndexes.size === tcContents.length) {
-                    submitButton.disabled = false; // Enable submit
-                } else {
-                    submitButton.disabled = true; // Disable submit
+                    submitButton.disabled = false;
                 }
                 playCorrectSound();
                 onSpeechEvaluated(true);
@@ -69,8 +68,10 @@ const speakButton = document.querySelector(".speak");
         };
 
         mediaRecorder.start();
+        speakButton.querySelector("p").style.color = "#7293df";
         speakButton.querySelector("p").textContent = "🎙️ พูดได้เลย...";
         setTimeout(() => {
             mediaRecorder.stop();
         }, 3000); // Record for 3 seconds
     };
+});
