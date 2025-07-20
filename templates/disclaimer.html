@@ -7,6 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Disclaimer</title>
     <style>
         * {
@@ -23,12 +24,24 @@
         }
 
         .main {
-            padding: 50px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            /* vertical center */
             align-items: center;
-            gap: 30px;
-            width: 90%;
+            /* horizontal center */
+            gap: 20px;
+            height: 100vh;
+            /* full screen height */
+            padding: 20px;
+            /* ensure padding on small screens */
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+
+        h1{
+            font-size: 60px;
         }
 
         h1,
@@ -37,7 +50,11 @@
             margin: 0;
         }
 
-        button {
+        p {
+            text-align: start;
+        }
+
+        #goto {
             width: 200px;
             height: 50px;
             border-radius: 15px;
@@ -49,10 +66,82 @@
             font-size: 15px;
         }
 
-        button:hover {
+        #goto:hover {
             border: 1.5px solid #dae5ff;
             background-color: #f7f9fe;
+        }
+
+        #myBtn {
+            border: 0;
+            color: #666666;
             transition: ease-in-out 0.2s;
+            background-color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            color: #7293df;
+        }
+
+        /* === MODAL STYLES === */
+        #seemore {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 80%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+            color: #666666;
+        }
+
+        .close-btn:hover {
+            color: #7293df;
+        }
+
+        #login:hover {
+            border: 1.5px solid #dae5ff;
+            background-color: #f7f9fe;
+            color: #7293df;
+            transition: ease-in-out 0.2s;
+        }
+
+        #login {
+            width: 260px;
+            height: 40px;
+            border-radius: 15px;
+            background-color: white;
+            color: #7293df;
+            border: 1.5px solid #ececec;
+            transition: ease-in-out 0.2s;
+            cursor: pointer;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -60,36 +149,72 @@
 <body>
     <div class="main">
         <h1 style="color: #7293df;">TheraTalk</h1>
-        <button onclick="window.location.href='/login'">เข้าสู่เว็บไซต์</button>
-        <h1>ข้อตกลงในการใช้ซอฟต์แวร์ (Disclaimer)</h1>
-        <h2>ข้อตกลงในการใช้ซอฟต์แวร์</h2>
-        <p>ข้อตกลงในการใช้ซอฟต์แวร์ ซอฟต์แวร์นี้เป็นผลงานที่พัฒนาขึ้นโดย นางสาว อินทิรา ธนัพประภัศร์ นางสาว ปนัสยา
-            บุญประกอบ และ นาย สรวิชญ์ กาญจนสันติศักดิ์ จากสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
-            ภายใต้การดูแลของ ดร. ศิรสิทธิ์ โล่ห์ชนะจิต ภายใต้โครงการ เทอร่า ทอล์ก ซึ่งสนับสนุนโดย
-            สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
-            โดยมีวัตถุประสงค์เพื่อส่งเสริมให้นักเรียนและนักศึกษาได้เรียนรู้และฝึกทักษะในการพัฒนาซอฟต์แวร์
-            ลิขสิทธิ์ของซอฟต์แวร์นี้จึงเป็นของผู้พัฒนา
-            ซึ่งผู้พัฒนาได้อนุญาตให้สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ เผยแพร่ซอฟต์แวร์นี้ตาม “ต้นฉบับ”
-            โดยไม่มีการแก้ไขดัดแปลงใด ๆ ทั้งสิ้น
-            ให้แก่บุคคลทั่วไปได้ใช้เพื่อประโยชน์ส่วนบุคคลหรือประโยชน์ทางการศึกษาที่ไม่มีวัตถุประสงค์ในเชิงพาณิชย์
-            โดยไม่คิดค่าตอบแทนการใช้ซอฟต์แวร์ ดังนั้นสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
-            จึงไม่มีหน้าที่ในการดูแล บำรุงรักษา จัดการอบรมการใช้งาน หรือพัฒนาประสิทธิภาพซอฟต์แวร์
-            รวมทั้งไม่รับรองความถูกต้องหรือประสิทธิภาพการทำงานของซอฟต์แวร์ ตลอดจนไม่รับประกันความเสียหายต่าง ๆ
-            อันเกิดจากการใช้ซอฟต์แวร์นี้ทั้งสิ้น</p>
-        <h2>License Agreement</h2>
-        <p>License Agreement This software is a work developed by Indira Thanabpraphas, Panatsaya Boonprakob, and
-            Sorawit
-            Kanjanasantisak from King Mongkut's Institute of Technology Ladkrabang under the provision of Dr. Sirasit
-            Lochanachit under TheraTalk Project, which has been supported by the National Science and Technology
-            Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills in
-            developing software. Therefore, the intellectual property of this software shall belong to the developer and
-            the developer gives NSTDA a permission to distribute this software as an “as is” and non-modified software
-            for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or academic
-            purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user
-            for taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall
-            not be liable for any error, software efficiency and damages in connection with or arising out of the use of
-            the software.</p>
+        <button id="login" onclick="window.location.href='/login'">เข้าสู่เว็บไซต์</button>
+        <button onclick="myFunction()" id="myBtn">ข้อตกลงในการใช้ซอฟต์แวร์ (Disclaimer)</button>
+        <div id="seemore">
+            <div class="modal-content">
+                <button class="close-btn" onclick="myFunction()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>ข้อตกลงในการใช้ซอฟต์แวร์</h2>
+                <p>ข้อตกลงในการใช้ซอฟต์แวร์ ซอฟต์แวร์นี้เป็นผลงานที่พัฒนาขึ้นโดย นางสาว อินทิรา ธนัพประภัศร์ นางสาว
+                    ปนัสยา
+                    บุญประกอบ และ นาย สรวิชญ์ กาญจนสันติศักดิ์ จากสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+                    ภายใต้การดูแลของ ดร. ศิรสิทธิ์ โล่ห์ชนะจิต ภายใต้โครงการ เทอร่า ทอล์ก ซึ่งสนับสนุนโดย
+                    สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
+                    โดยมีวัตถุประสงค์เพื่อส่งเสริมให้นักเรียนและนักศึกษาได้เรียนรู้และฝึกทักษะในการพัฒนาซอฟต์แวร์
+                    ลิขสิทธิ์ของซอฟต์แวร์นี้จึงเป็นของผู้พัฒนา
+                    ซึ่งผู้พัฒนาได้อนุญาตให้สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ เผยแพร่ซอฟต์แวร์นี้ตาม
+                    “ต้นฉบับ”
+                    โดยไม่มีการแก้ไขดัดแปลงใด ๆ ทั้งสิ้น
+                    ให้แก่บุคคลทั่วไปได้ใช้เพื่อประโยชน์ส่วนบุคคลหรือประโยชน์ทางการศึกษาที่ไม่มีวัตถุประสงค์ในเชิงพาณิชย์
+                    โดยไม่คิดค่าตอบแทนการใช้ซอฟต์แวร์ ดังนั้นสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
+                    จึงไม่มีหน้าที่ในการดูแล บำรุงรักษา จัดการอบรมการใช้งาน หรือพัฒนาประสิทธิภาพซอฟต์แวร์
+                    รวมทั้งไม่รับรองความถูกต้องหรือประสิทธิภาพการทำงานของซอฟต์แวร์ ตลอดจนไม่รับประกันความเสียหายต่าง ๆ
+                    อันเกิดจากการใช้ซอฟต์แวร์นี้ทั้งสิ้น</p>
+                <br>
+                <h2>License Agreement</h2>
+                <p>License Agreement This software is a work developed by Indira Thanabpraphas, Panatsaya Boonprakob,
+                    and
+                    Sorawit
+                    Kanjanasantisak from King Mongkut's Institute of Technology Ladkrabang under the provision of Dr.
+                    Sirasit
+                    Lochanachit under TheraTalk Project, which has been supported by the National Science and Technology
+                    Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their
+                    skills in
+                    developing software. Therefore, the intellectual property of this software shall belong to the
+                    developer and
+                    the developer gives NSTDA a permission to distribute this software as an “as is” and non-modified
+                    software
+                    for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or
+                    academic
+                    purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to
+                    the user
+                    for taking care, maintaining, training, or developing the efficiency of this software. Moreover,
+                    NSTDA shall
+                    not be liable for any error, software efficiency and damages in connection with or arising out of
+                    the use of
+                    the software.</p>
+            </div>
+        </div>
     </div>
 </body>
+<script>
+    const modal = document.getElementById("seemore");
+    let status = 0;
+
+    function myFunction() {
+        if (status === 0) {
+            modal.style.display = "flex";
+            status = 1;
+        } else {
+            modal.style.display = "none";
+            status = 0;
+        }
+    }
+
+    modal.addEventListener("click", function () {
+        modal.style.display = "none";
+        status = 0;
+    });
+</script>
 
 </html>

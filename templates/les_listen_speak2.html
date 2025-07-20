@@ -7,7 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/les_listen_speak2.css"/>
+    <link rel="stylesheet" href="/static/css/les_listen_speak2.css" />
     <!-- <link rel="stylesheet" href="/static/css/responsive.css"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
     <title>Lesson</title>
@@ -62,6 +62,9 @@
             <div class="navigation-buttons">
                 <button id="prev-btn" type="button" onclick="prevLesson()">ย้อนกลับ</button>
                 <button id="next-btn" type="button" onclick="nextLesson()">ถัดไป</button>
+                <div class="submit-section" style="display: none; text-align: center;">
+                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -72,66 +75,66 @@
         const correctIndexes = new Set();
     </script>
     <script>
-    const tcContents = {{ tc_contents | tojson }};
-    let currentIndex = 0;
+        const tcContents = {{ tc_contents | tojson }};
+        let currentIndex = 0;
 
-    const sentenceElement = document.getElementById("current-sentence");
-    const progressText = document.getElementById("progress-text");
-    const progressFill = document.getElementById("progress-fill");
+        const sentenceElement = document.getElementById("current-sentence");
+        const progressText = document.getElementById("progress-text");
+        const progressFill = document.getElementById("progress-fill");
 
-    // สร้าง AudioContext ครั้งเดียว ใช้ตลอด
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const audioCache = new Map();
+        // สร้าง AudioContext ครั้งเดียว ใช้ตลอด
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const audioCache = new Map();
 
-    async function preloadAudio(texts) {
-        for (const text of texts) {
-            if (!audioCache.has(text)) {
-                const res = await fetch("/api/tts/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ text })
-                });
-                const data = await res.json();
-                const audioUrl = data.audio_url;
+        async function preloadAudio(texts) {
+            for (const text of texts) {
+                if (!audioCache.has(text)) {
+                    const res = await fetch("/api/tts/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ text })
+                    });
+                    const data = await res.json();
+                    const audioUrl = data.audio_url;
 
-                if (!audioUrl) {
-                    console.error(`ไม่พบ audio_url สำหรับ: ${text}`);
-                    continue;
+                    if (!audioUrl) {
+                        console.error(`ไม่พบ audio_url สำหรับ: ${text}`);
+                        continue;
+                    }
+
+                    const audioRes = await fetch(audioUrl);
+                    const arrayBuffer = await audioRes.arrayBuffer();
+                    const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                    audioCache.set(text, buffer);
                 }
-
-                const audioRes = await fetch(audioUrl);
-                const arrayBuffer = await audioRes.arrayBuffer();
-                const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-                audioCache.set(text, buffer);
             }
         }
-    }
 
-    function playCachedAudio(text) {
-        const buffer = audioCache.get(text);
-        if (!buffer) {
-            console.warn("เสียงยังไม่ถูกโหลด:", text);
-            return;
+        function playCachedAudio(text) {
+            const buffer = audioCache.get(text);
+            if (!buffer) {
+                console.warn("เสียงยังไม่ถูกโหลด:", text);
+                return;
+            }
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioCtx.destination);
+            source.start();
         }
-        const source = audioCtx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioCtx.destination);
-        source.start();
-    }
 
-    function updateLesson() {
-        sentenceElement.textContent = tcContents[currentIndex].sentence;
-        progressText.textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
-        progressFill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
-        // สามารถเพิ่ม logic แสดงสถานะถูกต้องได้ตรงนี้
-        if (correctIndexes.has(currentIndex)) {
-            speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
-            speakButton.querySelector("p").style.color = "green";
-        } else {
-            speakButton.querySelector("p").textContent = "กดเพื่อพูด";
-            speakButton.querySelector("p").style.color = "#7293df";
-        }
-        const submitSection = document.querySelector(".submit-section");
+        function updateLesson() {
+            sentenceElement.textContent = tcContents[currentIndex].sentence;
+            progressText.textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
+            progressFill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
+            // สามารถเพิ่ม logic แสดงสถานะถูกต้องได้ตรงนี้
+            if (correctIndexes.has(currentIndex)) {
+                speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
+                speakButton.querySelector("p").style.color = "green";
+            } else {
+                speakButton.querySelector("p").textContent = "กดเพื่อพูด";
+                speakButton.querySelector("p").style.color = "#7293df";
+            }
+            const submitSection = document.querySelector(".submit-section");
             if (currentIndex === tcContents.length - 1) {
                 submitSection.style.display = "block";
 
@@ -157,54 +160,54 @@
             } else {
                 nextBtn.style.display = "inline-block";
             }
-        
-    }
 
-    function nextLesson() {
-        if (currentIndex < tcContents.length - 1) {
-            currentIndex++;
-            updateLesson();
         }
-    }
 
-    function prevLesson() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLesson();
-        }
-    }
-
-    async function loadAndPlayTTS() {
-        const text = sentenceElement.textContent;
-        if (audioCache.has(text)) {
-            playCachedAudio(text);
-        } else {
-            // ถ้ายังไม่มีใน cache โหลดและเล่นเลย
-            const res = await fetch("/api/tts/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text })
-            });
-            const data = await res.json();
-            const audioUrl = data.audio_url;
-            if (!audioUrl) {
-                console.error("ไม่มี audio_url กลับมา");
-                return;
+        function nextLesson() {
+            if (currentIndex < tcContents.length - 1) {
+                currentIndex++;
+                updateLesson();
             }
-            const audioRes = await fetch(audioUrl);
-            const arrayBuffer = await audioRes.arrayBuffer();
-            const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-            audioCache.set(text, buffer);
-            playCachedAudio(text);
         }
-    }
 
-    // โหลดเสียงทั้งหมดตอนโหลดหน้าเว็บ
-    window.onload = () => {
-        preloadAudio(tcContents.map(c => c.sentence));
-        updateLesson();
-    }
-</script>
+        function prevLesson() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateLesson();
+            }
+        }
+
+        async function loadAndPlayTTS() {
+            const text = sentenceElement.textContent;
+            if (audioCache.has(text)) {
+                playCachedAudio(text);
+            } else {
+                // ถ้ายังไม่มีใน cache โหลดและเล่นเลย
+                const res = await fetch("/api/tts/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                const audioUrl = data.audio_url;
+                if (!audioUrl) {
+                    console.error("ไม่มี audio_url กลับมา");
+                    return;
+                }
+                const audioRes = await fetch(audioUrl);
+                const arrayBuffer = await audioRes.arrayBuffer();
+                const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                audioCache.set(text, buffer);
+                playCachedAudio(text);
+            }
+        }
+
+        // โหลดเสียงทั้งหมดตอนโหลดหน้าเว็บ
+        window.onload = () => {
+            preloadAudio(tcContents.map(c => c.sentence));
+            updateLesson();
+        }
+    </script>
 
     <script src="/static/js/recordVoice.js"></script>
 </body>

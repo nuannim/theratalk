@@ -55,11 +55,11 @@
                 </div>
             </div>
             <div class="navigation-buttons">
-                <button type="button" onclick="prevLesson()">ย้อนกลับ</button>
-                <button type="button" onclick="nextLesson()">ถัดไป</button>
-            </div>
-            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
-                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                <button id="prev-btn" type="button" onclick="prevLesson()">ย้อนกลับ</button>
+                <button id="next-btn" type="button" onclick="nextLesson()">ถัดไป</button>
+                <div class="submit-section" style="display: none; text-align: center;">
+                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -70,22 +70,122 @@
         const correctIndexes = new Set();
     </script>
 
-<script>
-    const tcContents = {{ tc_contents | tojson }};
-    const wrongAttempts = {}; 
-    let currentIndex = 0;
+    <script>
+        const tcContents = {{ tc_contents | tojson }};
+        const wrongAttempts = {};
+        let currentIndex = 0;
 
-    const sentenceElement = document.getElementById("current-sentence");
-    const progressText = document.getElementById("progress-text");
-    const progressFill = document.getElementById("progress-fill");
+        const sentenceElement = document.getElementById("current-sentence");
+        const progressText = document.getElementById("progress-text");
+        const progressFill = document.getElementById("progress-fill");
 
-    // สร้าง AudioContext ครั้งเดียว ใช้ตลอด
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const audioCache = new Map();
+        // สร้าง AudioContext ครั้งเดียว ใช้ตลอด
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const audioCache = new Map();
 
-    async function preloadAudio(texts) {
-        for (const text of texts) {
-            if (!audioCache.has(text)) {
+        async function preloadAudio(texts) {
+            for (const text of texts) {
+                if (!audioCache.has(text)) {
+                    const res = await fetch("/api/tts/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ text })
+                    });
+                    const data = await res.json();
+                    const audioUrl = data.audio_url;
+
+                    if (!audioUrl) {
+                        console.error(`ไม่พบ audio_url สำหรับ: ${text}`);
+                        continue;
+                    }
+
+                    const audioRes = await fetch(audioUrl);
+                    const arrayBuffer = await audioRes.arrayBuffer();
+                    const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                    audioCache.set(text, buffer);
+                }
+            }
+        }
+
+        function playCachedAudio(text) {
+            const buffer = audioCache.get(text);
+            if (!buffer) {
+                console.warn("เสียงยังไม่ถูกโหลด:", text);
+                return;
+            }
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioCtx.destination);
+            source.start();
+        }
+
+        function updateLesson() {
+            sentenceElement.textContent = tcContents[currentIndex].sentence;
+            progressText.textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
+            progressFill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
+            // สามารถเพิ่ม logic แสดงสถานะถูกต้องได้ตรงนี้
+            if (correctIndexes.has(currentIndex)) {
+                speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
+                speakButton.querySelector("p").style.color = "green";
+                speakButton.style.pointerEvents = "none"; // disable interaction
+                speakButton.style.opacity = "0.5";
+            } else {
+                speakButton.querySelector("p").style.color = "#7293df";
+                speakButton.querySelector("p").textContent = "กดเพื่อพูด";
+                speakButton.style.pointerEvents = "auto";
+                speakButton.style.opacity = "1";
+            }
+
+            const submitSection = document.querySelector(".submit-section");
+            const submitButton = document.getElementById("submit-button");
+            if (currentIndex === tcContents.length - 1) {
+                submitSection.style.display = "block";
+
+                if (correctIndexes.size === tcContents.length) {
+                    submitButton.disabled = false; // Enable submit
+                } else {
+                    submitButton.disabled = true; // Disable submit
+                }
+            } else {
+                submitSection.style.display = "none";
+            }
+
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+
+            if (currentIndex === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "inline-block";
+            }
+
+            if (currentIndex === tcContents.length - 1) {
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "inline-block";
+            }
+        }
+
+        function nextLesson() {
+            if (currentIndex < tcContents.length - 1) {
+                currentIndex++;
+                updateLesson();
+            }
+        }
+
+        function prevLesson() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateLesson();
+            }
+        }
+
+        async function loadAndPlayTTS() {
+            const text = sentenceElement.textContent;
+            if (audioCache.has(text)) {
+                playCachedAudio(text);
+            } else {
+                // ถ้ายังไม่มีใน cache โหลดและเล่นเลย
                 const res = await fetch("/api/tts/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -93,171 +193,86 @@
                 });
                 const data = await res.json();
                 const audioUrl = data.audio_url;
-
                 if (!audioUrl) {
-                    console.error(`ไม่พบ audio_url สำหรับ: ${text}`);
-                    continue;
+                    console.error("ไม่มี audio_url กลับมา");
+                    return;
                 }
-
                 const audioRes = await fetch(audioUrl);
                 const arrayBuffer = await audioRes.arrayBuffer();
                 const buffer = await audioCtx.decodeAudioData(arrayBuffer);
                 audioCache.set(text, buffer);
+                playCachedAudio(text);
             }
         }
-    }
 
-    function playCachedAudio(text) {
-        const buffer = audioCache.get(text);
-        if (!buffer) {
-            console.warn("เสียงยังไม่ถูกโหลด:", text);
-            return;
-        }
-        const source = audioCtx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioCtx.destination);
-        source.start();
-    }
+        function onSpeechEvaluated(isCorrect) {
+            const currentItem = tcContents[currentIndex];
+            const sentence = currentItem.sentence;
 
-    function updateLesson() {
-        sentenceElement.textContent = tcContents[currentIndex].sentence;
-        progressText.textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
-        progressFill.style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
-        // สามารถเพิ่ม logic แสดงสถานะถูกต้องได้ตรงนี้
-        if (correctIndexes.has(currentIndex)) {
-            speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
-            speakButton.querySelector("p").style.color = "green";
-            speakButton.style.pointerEvents = "none"; // disable interaction
-            speakButton.style.opacity = "0.5";
-        } else {
-            speakButton.querySelector("p").style.color = "#7293df";
-            speakButton.querySelector("p").textContent = "กดเพื่อพูด";
-            speakButton.style.pointerEvents = "auto";
-            speakButton.style.opacity = "1";
-        }
-
-        const submitSection = document.querySelector(".submit-section");
-        const submitButton = document.getElementById("submit-button");
-        if (currentIndex === tcContents.length - 1) {
-            submitSection.style.display = "block";
-
-            if (correctIndexes.size === tcContents.length) {
-            submitButton.disabled = false; // Enable submit
+            if (isCorrect) {
+                correctIndexes.add(currentIndex);
             } else {
-                submitButton.disabled = true; // Disable submit
+                if (!wrongAttempts[sentence]) {
+                    wrongAttempts[sentence] = 1;
+                } else {
+                    wrongAttempts[sentence]++;
+                }
             }
-        } else {
-            submitSection.style.display = "none";
         }
-    }
 
-    function nextLesson() {
-        if (currentIndex < tcContents.length - 1) {
-            currentIndex++;
-            updateLesson();
-        }
-    }
 
-    function prevLesson() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLesson();
-        }
-    }
-
-    async function loadAndPlayTTS() {
-        const text = sentenceElement.textContent;
-        if (audioCache.has(text)) {
-            playCachedAudio(text);
-        } else {
-            // ถ้ายังไม่มีใน cache โหลดและเล่นเลย
-            const res = await fetch("/api/tts/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text })
-            });
-            const data = await res.json();
-            const audioUrl = data.audio_url;
-            if (!audioUrl) {
-                console.error("ไม่มี audio_url กลับมา");
+        async function submitAnswers() {
+            const button = document.getElementById("submit-button");
+            if (correctIndexes.size !== tcContents.length) {
+                alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
                 return;
             }
-            const audioRes = await fetch(audioUrl);
-            const arrayBuffer = await audioRes.arrayBuffer();
-            const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-            audioCache.set(text, buffer);
-            playCachedAudio(text);
-        }
-    }
 
-    function onSpeechEvaluated(isCorrect) {
-        const currentItem = tcContents[currentIndex];
-        const sentence = currentItem.sentence;
+            button.disabled = true;
+            button.textContent = "กำลังส่ง...";
 
-        if (isCorrect) {
-            correctIndexes.add(currentIndex);
-        } else {
-            if (!wrongAttempts[sentence]) {
-                wrongAttempts[sentence] = 1;
-            } else {
-                wrongAttempts[sentence]++;
+            const pathParts = window.location.pathname.split('/');
+            const activityid = parseInt(pathParts[pathParts.length - 1]);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const assignmentid = parseInt(urlParams.get("assignment_id"));
+            const templateid = parseInt(urlParams.get("templateid"));
+
+            try {
+                const res = await fetch("/patient/finish/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        completed: true,
+                        wrong_summary: wrongAttempts,
+                        activityid: activityid,
+                        templateid: templateid,
+                        assignmentid: assignmentid
+                    }),
+                });
+
+                if (!res.ok) {
+                    throw new Error("ส่งข้อมูลไม่สำเร็จ");
+                }
+
+                window.location.href = "/patient/";
+            } catch (err) {
+                console.error("Error sending:", err);
+                alert("การเชื่อมต่อผิดพลาด กรุณาลองใหม่");
+                button.disabled = false;
+                button.textContent = "ส่งคำตอบ";
             }
         }
-    }
 
 
-    async function submitAnswers() {
-        const button = document.getElementById("submit-button");
-        if (correctIndexes.size !== tcContents.length) {
-            alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
-            return;
+        // โหลดเสียงทั้งหมดตอนโหลดหน้าเว็บ
+        window.onload = () => {
+            preloadAudio(tcContents.map(c => c.sentence));
+            updateLesson();
         }
-
-        button.disabled = true;
-        button.textContent = "กำลังส่ง...";
-
-        const pathParts = window.location.pathname.split('/');
-        const activityid = parseInt(pathParts[pathParts.length - 1]);
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const assignmentid = parseInt(urlParams.get("assignment_id"));
-        const templateid = parseInt(urlParams.get("templateid"));
-
-        try {
-            const res = await fetch("/patient/finish/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    completed: true,
-                    wrong_summary: wrongAttempts,
-                    activityid: activityid,
-                    templateid: templateid,
-                    assignmentid: assignmentid
-                }),
-            });
-
-            if (!res.ok) {
-                throw new Error("ส่งข้อมูลไม่สำเร็จ");
-            }
-
-            window.location.href = "/patient/";
-        } catch (err) {
-            console.error("Error sending:", err);
-            alert("การเชื่อมต่อผิดพลาด กรุณาลองใหม่");
-            button.disabled = false;
-            button.textContent = "ส่งคำตอบ";
-        }
-    }
-
-
-    // โหลดเสียงทั้งหมดตอนโหลดหน้าเว็บ
-    window.onload = () => {
-        preloadAudio(tcContents.map(c => c.sentence));
-        updateLesson();
-    }
-</script>
+    </script>
 
     <script src="/static/js/recordVoice.js"></script>
 </body>

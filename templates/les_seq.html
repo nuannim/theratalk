@@ -62,11 +62,11 @@
                 <div class="navigation-buttons">
                     <button id="prev-button" type="button" onclick="prevLesson()">ย้อนกลับ</button>
                     <button id="next-button" type="button" onclick="nextLesson()">ถัดไป</button>
+                    <div class="submit-section" style="display: none; text-align: center;">
+                        <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                    </div>
                 </div>
-            </div>
-            <button id="check-button" type="button" onclick="checkAnswer()">ตรวจสอบ</button>
-            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
-                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                <button id="check-button" type="button" onclick="checkAnswer()">ตรวจสอบ</button>
             </div>
         </div>
     </div>
