@@ -275,13 +275,13 @@ i:hover {
     width: 400px;
   }
   
-  .listen-box, .speak {
+  /* .listen-box, .speak {
     width: 140px;
   }
   
   button {
     width: 140px;
-  }
+  } */
 }
 
 /* Mobile (481px - 630px) - Enhancing existing mobile styles */
@@ -289,7 +289,7 @@ i:hover {
   .main {
     padding-left: 20px;
     padding-right: 20px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     gap: 20px;
   }
   
@@ -306,22 +306,23 @@ i:hover {
     width: 350px;
   }
   
-  .listen-box, .speak {
+  /* .listen-box, .speak {
     width: 130px;
     height: 50px;
     padding-left: 15px;
     padding-right: 15px;
-  }
+  } */
   
   .navigation-buttons {
     display: flex;
     gap: 10px;
+    width: 60%;
   }
   
-  button {
+  /* button {
     width: 130px;
     height: 35px;
-  }
+  } */
 }
 
 /* Small Mobile (320px - 480px) */
@@ -329,7 +330,7 @@ i:hover {
   .main {
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     gap: 15px;
   }
   
@@ -351,12 +352,12 @@ i:hover {
     width: 280px;
   }
   
-  .listen-box, .speak {
+  /* .listen-box, .speak {
     width: 100px;
     height: 45px;
     padding-left: 10px;
     padding-right: 10px;
-  }
+  } */
   
   .word p {
     font-size: 14px;
@@ -371,9 +372,12 @@ i:hover {
     gap: 8px;
   }
   
-  button {
+  /* button {
     width: 120px;
     height: 35px;
     font-size: 14px;
+  } */
+  h4, a {
+    font-size: 13px;
   }
 }
