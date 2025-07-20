@@ -194,14 +194,18 @@ async def showCheckMyPatient_ahid(request: Request, resp=Depends(check_slp_role)
     response_assignmenteachday = supabase.table("assignments_with_eachdays2").select("*").eq("ahid", ahid).execute()
     data_assignmenteachday = response_assignmenteachday.data
     print('oioioioioioioioioi data assignments_with_eachdays2:', data_assignmenteachday)
-    # print('jijijijijijiji data:', data)
+
+    response_name = supabase.table('patients').select('pfirstname', 'plastname').eq("patientid", patientid).execute()
+    data_name = response_name.data
+    print('data_name:', data_name)
 
     return templates.TemplateResponse("checkdescription_p.html", {
         "request": request,
         "data": data,
         "data_assignmenteachday": data_assignmenteachday,
         "date": date,
-        "patientid": patientid
+        "patientid": patientid,
+        "data_name": data_name
     })
 
 @router.get("/resetpassword/{patientid}")

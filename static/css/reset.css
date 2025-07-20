@@ -56,6 +56,9 @@ button:hover {
   transition: ease-in-out 0.2s;
 }
 
+h4{
+    color: #7293df;
+}
 
 .nav {
   width: 100%;

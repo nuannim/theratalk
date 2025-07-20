@@ -8,7 +8,7 @@
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/static/css/les_speak_similar.css">
-    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- <link rel="stylesheet" href="/static/css/responsive.css"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Lesson</title>
 </head>
@@ -45,10 +45,18 @@
             </div>
             <div class="exercise-box">
                 <div class="picture-box">
-                    <div class="pic1"><img src="" alt=""><p></p></div>
-                    <div class="pic2"><img src="" alt=""><p></p></div>
-                    <div class="pic3"><img src="" alt=""><p></p></div>
-                    <div class="pic4"><img src="" alt=""><p></p></div>
+                    <div class="pic1"><img src="" alt="">
+                        <p></p>
+                    </div>
+                    <div class="pic2"><img src="" alt="">
+                        <p></p>
+                    </div>
+                    <div class="pic3"><img src="" alt="">
+                        <p></p>
+                    </div>
+                    <div class="pic4"><img src="" alt="">
+                        <p></p>
+                    </div>
                 </div>
                 <div class="word" hidden>
                     <p id="current-sentence" hidden></p>
@@ -61,9 +69,9 @@
             <div class="navigation-buttons">
                 <button id="prev-btn" type="button" onclick="prevLesson()">ย้อนกลับ</button>
                 <button id="next-btn" type="button" onclick="nextLesson()">ถัดไป</button>
-            </div>
-            <div class="submit-section" style="display: none; text-align: center; margin-top: 20px;">
-                <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                <div class="submit-section" style="display: none; text-align: center;">
+                    <button type="button" id="submit-button" onclick="submitAnswers()" disabled>ส่งคำตอบ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -80,23 +88,23 @@
     let currentIndex = 0;
     const sentenceEl = document.getElementById("current-sentence");
 
-    function updateLesson() {
-        const currentItem = tcContents[currentIndex];
-        const imageObj = JSON.parse(currentItem.imageurl);
-        const wordObj = JSON.parse(currentItem.sentence);
-        sentenceEl.textContent = wordObj.word1 + wordObj.word2 + wordObj.word3 + wordObj.word4;
-        console.log(sentenceEl.textContent);
+        function updateLesson() {
+            const currentItem = tcContents[currentIndex];
+            const imageObj = JSON.parse(currentItem.imageurl);
+            const wordObj = JSON.parse(currentItem.sentence);
+            sentenceEl.textContent = wordObj.word1 + wordObj.word2 + wordObj.word3 + wordObj.word4;
+            console.log(sentenceEl.textContent);
 
-        document.querySelector(".pic1 img").src = `/static/img/activities/${imageObj.image1}`;
+            document.querySelector(".pic1 img").src = `/static/img/activities/${imageObj.image1}`;
 
-        document.querySelector(".pic2 img").src = `/static/img/activities/${imageObj.image2}`;
+            document.querySelector(".pic2 img").src = `/static/img/activities/${imageObj.image2}`;
 
-        document.querySelector(".pic3 img").src = `/static/img/activities/${imageObj.image3}`;
+            document.querySelector(".pic3 img").src = `/static/img/activities/${imageObj.image3}`;
 
-        document.querySelector(".pic4 img").src = `/static/img/activities/${imageObj.image4}`;
+            document.querySelector(".pic4 img").src = `/static/img/activities/${imageObj.image4}`;
 
-        document.getElementById("progress-text").textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
-        document.getElementById("progress-fill").style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
+            document.getElementById("progress-text").textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
+            document.getElementById("progress-fill").style.width = `${((currentIndex + 1) / tcContents.length) * 100}%`;
 
         if (correctIndexes.has(currentIndex)) {
             speakButton.querySelector("p").textContent = "✅ ถูกต้อง!";
@@ -112,33 +120,45 @@
 
         const submitSection = document.querySelector(".submit-section");
 
-        if (currentIndex === tcContents.length - 1) {
-            submitSection.style.display = "block";
-            submitButton.disabled = correctIndexes.size !== tcContents.length;
-        } else {
-            submitSection.style.display = "none";
+            if (currentIndex === tcContents.length - 1) {
+                submitSection.style.display = "block";
+                submitButton.disabled = correctIndexes.size !== tcContents.length;
+            } else {
+                submitSection.style.display = "none";
+            }
+
+            // ✅ Navigation buttons state
+            if (currentIndex === 0) {
+                document.getElementById("prev-btn").style.display = "none";
+            }
+            else {
+                document.getElementById("prev-btn").style.display = "inline-block";
+            }
+            if (currentIndex === tcContents.length - 1) {
+                document.getElementById("next-btn").style.display = "none";
+            }
+            else {
+                document.getElementById("prev-btn").style.display = "inline-block";
+            }
+            // document.getElementById("prev-btn").disabled = currentIndex === 0;
+            // document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
         }
 
-        // ✅ Navigation buttons state
-        document.getElementById("prev-btn").disabled = currentIndex === 0;
-        document.getElementById("next-btn").disabled = currentIndex === tcContents.length - 1;
-    }
-
-    function nextLesson() {
-        if (currentIndex < tcContents.length - 1) {
-            currentIndex++;
-            updateLesson();
+        function nextLesson() {
+            if (currentIndex < tcContents.length - 1) {
+                currentIndex++;
+                updateLesson();
+            }
         }
-    }
 
-    function prevLesson() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLesson();
+        function prevLesson() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateLesson();
+            }
         }
-    }
 
-    function onSpeechEvaluated(isCorrect) {
+        function onSpeechEvaluated(isCorrect) {
             const currentItem = tcContents[currentIndex];
             const sentence = currentItem.sentence;
 
@@ -153,55 +173,56 @@
             }
         }
 
-    async function submitAnswers() {
-        const button = document.getElementById("submit-button");
-        if (correctIndexes.size !== tcContents.length) {
-            alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
-            return;
-        }
-
-        button.disabled = true;
-        button.textContent = "กำลังส่ง...";
-
-        const pathParts = window.location.pathname.split('/');
-        const activityid = parseInt(pathParts[pathParts.length - 1]);
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const assignmentid = parseInt(urlParams.get("assignment_id"));
-        const templateid = parseInt(urlParams.get("templateid"));
-
-        try {
-            const res = await fetch("/patient/finish/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    completed: true,
-                    wrong_summary: wrongAttempts,
-                    activityid: activityid,
-                    templateid: templateid,
-                    assignmentid: assignmentid
-                }),
-            });
-
-            if (!res.ok) {
-                throw new Error("ส่งข้อมูลไม่สำเร็จ");
+        async function submitAnswers() {
+            const button = document.getElementById("submit-button");
+            if (correctIndexes.size !== tcContents.length) {
+                alert("กรุณาทำให้ถูกต้องครบทุกข้อก่อนส่งคำตอบ");
+                return;
             }
 
-            window.location.href = "/patient/";
-        } catch (err) {
-            console.error("Error sending:", err);
-            alert("การเชื่อมต่อผิดพลาด กรุณาลองใหม่");
-            button.disabled = false;
-            button.textContent = "ส่งคำตอบ";
-        }
-    }
+            button.disabled = true;
+            button.textContent = "กำลังส่ง...";
 
-    window.onload = () => {
-        updateLesson();
-    };
-</script>
-<script src="/static/js/recordVoice.js"></script>
+            const pathParts = window.location.pathname.split('/');
+            const activityid = parseInt(pathParts[pathParts.length - 1]);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const assignmentid = parseInt(urlParams.get("assignment_id"));
+            const templateid = parseInt(urlParams.get("templateid"));
+
+            try {
+                const res = await fetch("/patient/finish/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        completed: true,
+                        wrong_summary: wrongAttempts,
+                        activityid: activityid,
+                        templateid: templateid,
+                        assignmentid: assignmentid
+                    }),
+                });
+
+                if (!res.ok) {
+                    throw new Error("ส่งข้อมูลไม่สำเร็จ");
+                }
+
+                window.location.href = "/patient/";
+            } catch (err) {
+                console.error("Error sending:", err);
+                alert("การเชื่อมต่อผิดพลาด กรุณาลองใหม่");
+                button.disabled = false;
+                button.textContent = "ส่งคำตอบ";
+            }
+        }
+
+        window.onload = () => {
+            updateLesson();
+        };
+    </script>
+    <script src="/static/js/recordVoice.js"></script>
 </body>
+
 </html>
