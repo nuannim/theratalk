@@ -38,8 +38,12 @@
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </div>
             <div class="namenuser">
-                <h3>{{ user_data[0].pfirstname }} {{ user_data[0].plastname }}</h3>
-                <p>{{ user_data[0].pusername }}</p>
+                {% if user_data and user_data|length > 0 %}
+                    <h3>{{ user_data[0].pfirstname }} {{ user_data[0].plastname }}</h3>
+                    <p>{{ user_data[0].pusername }}</p>
+                {% else %}
+                    <p>No user data available.</p>
+                {% endif %}
             </div>
         </div>
         <div class="content">
