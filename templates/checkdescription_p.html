@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/static/css/check_p.css">
     <link rel="stylesheet" href="/static/css/home_p.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Check</title>
 </head>
 
@@ -71,6 +72,11 @@
             </div>
         </div> -->
 
+        <div class="chart-container" style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 1rem;">
+            <canvas id="exerciseChart"></canvas>
+        </div>
+
+
         <table>
             <thead>
                 <tr>
@@ -120,6 +126,124 @@
         </table>
         
     </div>
+<script>
+    const rawData = {{ data | tojson | safe }};
+
+    const labels = [];
+    const values = [];
+
+    rawData.forEach(item => {
+        let sentence = item.sentence;
+        let retries = item.retries;
+
+        try {
+            if (typeof sentence === "string") {
+                sentence = JSON.parse(sentence);
+            }
+            if (sentence.title) {
+                sentence = sentence.title;
+            } else if (typeof sentence === "object") {
+                sentence = Object.values(sentence).join(" ");
+            }
+        } catch (e) {
+            sentence = typeof sentence === "string" ? sentence.replace(/\//g, '') : String(sentence);
+        }
+
+        let retryCount = 0;
+        try {
+            if (typeof retries === "string") {
+                retries = JSON.parse(retries);
+            }
+
+            if (typeof retries === "object" && retries !== null) {
+                const key = item.sentence;
+                retryCount = parseInt(retries[key]) || 0;
+            } else {
+                retryCount = parseInt(retries) || 0;
+            }
+
+        } catch (e) {
+            console.error("Error parsing retries:", e);
+            retryCount = parseInt(retries) || 0;
+        }
+
+        labels.push(sentence);
+        values.push(retryCount);
+    });
+
+    const ctx = document.getElementById('exerciseChart').getContext('2d');
+
+    // Gradient fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, '#4C9AFF');
+    gradient.addColorStop(1, '#A0C4FF');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'จำนวนครั้งที่ผู้ป่วยทำผิดพลาด',
+                data: values,
+                backgroundColor: gradient,
+                borderRadius: 8,
+                borderSkipped: false,
+                hoverBackgroundColor: '#3B82F6'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        font: {
+                            family: 'Kanit',
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: { family: 'Kanit', size: 14 },
+                    bodyFont: { family: 'Kanit', size: 13 },
+                    backgroundColor: '#ffffff',
+                    titleColor: '#333',
+                    bodyColor: '#444',
+                    borderColor: '#ccc',
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: 'Kanit'
+                        },
+                        color: '#333'
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            family: 'Kanit'
+                        },
+                        color: '#333'
+                    },
+                    grid: {
+                        borderDash: [4, 4],
+                        color: '#eee'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 
 </html>
