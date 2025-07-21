@@ -35,16 +35,18 @@
         <h2>ภารกิจประจำวัน</h2>
         <div class="mis">
             <div class="mission-box">
-                {% for mission in missions %}
-                    <div class="box">
-                    <p>{{ mission.task }}: {{ mission.value }} / {{ mission.max }} {{ ((mission.value / mission.max) * 100) | round(0) }}%</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: {{ (mission.value / mission.max) * 100 }}%;"></div>
-                    </div>
-                    </div>
+                {% if missions %}
+                    {% for mission in missions %}
+                        <div class="box">
+                        <p>{{ mission.task }}: {{ mission.value }} / {{ mission.max }} {{ ((mission.value / mission.max) * 100) | round(0) }}%</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ (mission.value / mission.max) * 100 }}%;"></div>
+                        </div>
+                        </div>
+                    {% endfor %}
                 {% else %}
-                    <p>ไม่มีภารกิจในขณะนี้</p>
-                {% endfor %}
+                    <p>วันนี้ไม่มีภารกิจให้คุณทำ</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/profile_patient.css">
     <link rel="stylesheet" href="/static/css/responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Profile</title>
 </head>
 
@@ -37,15 +38,15 @@
                 <img src="/static/img/audio-book_10089822.png" alt="">
             </div>
             <div class="namenuser">
-                <h3>{{ data[0].pfirstname }} {{ data[0].plastname }}</h3>
-                <p>{{ data[0].pusername }}</p>
+                <h3>{{ user_data[0].pfirstname }} {{ user_data[0].plastname }}</h3>
+                <p>{{ user_data[0].pusername }}</p>
             </div>
         </div>
         <div class="content">
             <div class="graph-box">
                 <h2>สถิติ</h2>
                 <div class="graph">
-        
+                    <canvas id="lessonChart"></canvas>
                 </div>
             </div>
             <div class="achi-box">
@@ -71,6 +72,38 @@
             </div>
         </div>
     </div>
+<script>
+    const labels = {{ chart_labels | tojson }};
+    const data = {{ chart_data | tojson }};
+
+    console.log(labels);
+    console.log(data);
+
+    const ctx = document.getElementById('lessonChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'ค่าเฉลี่ยความถูกต้องต่อแบบฝึก (%)',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 
 </html>

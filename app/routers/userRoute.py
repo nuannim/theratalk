@@ -1,3 +1,4 @@
+from datetime import date
 import json
 import os
 import subprocess
@@ -103,8 +104,10 @@ async def showMission(request: Request, resp=Depends(check_patient_role)):
     patient_response = supabase.table("patients").select("*").eq("patientid", userId).single().execute()
     patient = patient_response.data if patient_response.data else {}
 
-    response = supabase.table("mission").select("*").eq("patientid", userId).execute()
-    missions = response.data[0]["data"]
+    today_str = date.today().isoformat()
+
+    response = supabase.table("mission").select("*").eq("patientid", userId).eq("missionDay", today_str).execute()
+    missions = response.data[0]["data"] if response.data else []
 
     return templates.TemplateResponse("mission.html", {
         "request": request,
@@ -118,17 +121,54 @@ async def showProfile(request: Request, resp=Depends(check_patient_role)):
         return resp
 
     user_id = request.cookies.get("user_id")
+    history = []
+    lesson_scores = {}
+
     if user_id:
-        response3 = supabase.table("assignmentforanotherpage").select("*").eq("patientid", user_id).execute()
-        asganotherpage = response3.data
+        response3 = supabase.table("history_assignmenteachday_patient_templatecontents") \
+            .select("*") \
+            .eq("patientid", user_id) \
+            .eq("isdone", True) \
+            .execute()
+        history = response3.data
 
-        print("🤓🤓🤓lenasganotherpage:", len(asganotherpage))
-        print(f"😳😳😳😳 userid: {user_id} \nasganotherpage: {asganotherpage} 😳😳😳😳")  # Debugging line
+        ahids = list({h["ahid"] for h in history if h.get("ahid") is not None})
 
-    return templates.TemplateResponse("profile_patient.html", {
-        "request": request,
-        "data": asganotherpage
-    })
+        ahid_to_name = {}
+        if ahids:
+            response2 = supabase.table("assignmentforanotherpage") \
+                .select("ahid,activityname") \
+                .in_("ahid", ahids) \
+                .execute()
+            ahid_to_name = {item["ahid"]: item["activityname"] for item in response2.data}
+
+        for h in history:
+            h["activityname"] = ahid_to_name.get(h["ahid"], "ไม่ทราบชื่อแบบฝึก")
+
+        for row in history:
+            ahid = row.get("ahid")
+            retries = row.get("retries", {})
+            retry_count = sum(retries.values())
+            score = max(0, 100 - retry_count * 10)
+
+            if ahid is not None:
+                lesson_scores.setdefault(ahid, []).append(score)
+
+        avg_by_name = {
+            ahid_to_name.get(ahid, f"แบบฝึก {ahid}"): round(sum(scores) / len(scores), 2)
+            for ahid, scores in lesson_scores.items()
+        }
+
+        lesson_names = list(avg_by_name.keys())
+        avg_scores = list(avg_by_name.values())
+
+        return templates.TemplateResponse("profile_patient.html", {
+            "request": request,
+            "user_data": history,
+            "chart_labels": lesson_names,
+            "chart_data": avg_scores
+        })
+
 
 
 @router.get("/lesson/{assignment_id}")
