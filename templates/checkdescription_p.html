@@ -52,7 +52,7 @@
         </div>
         {% if data_assignmenteachday %}
             {% for i in data_assignmenteachday %}
-                <h1>{{i.activityname}} ({{i.templatename}})</h1>
+                <h2>{{i.activityname}} ({{i.templatename}})</h2>
             {% endfor %}
         {% else %}
             <h1>ไม่มีแบบฝึกหัด</h1>
@@ -72,7 +72,7 @@
             </div>
         </div> -->
 
-        <div class="chart-container" style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 1rem;">
+        <div class="chart-container" style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; background: #fff; border: 1.5px solid #ececec; border-radius: 1rem;">
             <canvas id="exerciseChart"></canvas>
         </div>
 
