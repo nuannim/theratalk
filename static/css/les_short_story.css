@@ -103,7 +103,7 @@ h4 {
 }
 
 .main {
-  padding-left: 50px;
+  /* padding-left: 50px; */
   padding-right: 50px;
   display: flex;
   flex-direction: column;
@@ -113,17 +113,17 @@ h4 {
   width: 90%;
 }
 
-.main h2{
+.main h2 {
   margin: 0;
   margin-bottom: 10px;
 }
-.bar{
+.bar {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
-.bar p{
+.bar p {
   margin: 0;
   font-size: 13px;
 }
@@ -133,7 +133,7 @@ h4 {
   background-color: #ececec;
   border-radius: 10px;
 }
-.exercise-fill{
+.exercise-fill {
   width: 10%;
   height: 13px;
   border-radius: 10px;
@@ -151,7 +151,7 @@ h4 {
   padding: 10px;
   cursor: pointer;
 }
-.listen-box:hover{
+.listen-box:hover {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
 }
@@ -171,34 +171,39 @@ h4 {
 .word {
   width: 90%;
 }
-.exercise-box{
+.exercise-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   /* height: 300px; */
 }
-#question{
+#question {
   display: flex;
   align-self: flex-start;
   margin: 0;
 }
-.choice{
-  width: 450px;
+.choice {
+  width: 700px;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  gap: 15px;
 }
-.choice input{
+.choice input {
   display: none;
 }
-.choice input:checked + label{
+.choice input:checked + label {
   border: 1.5px solid #dae5ff;
   color: #7293df;
   background-color: #f7f9fe;
 }
 .choice label {
-  width: 100px;
-  height: 50px;
+  min-width: 130px;
+  width: auto;
+  padding: 5px;
+  min-height: 50px;
+  height: auto;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -207,8 +212,9 @@ h4 {
   border: 1.5px solid #ececec;
   transition: ease-in-out 0.2s;
   color: #666666;
+  text-align: center;
 }
-.choice label:hover{
+.choice label:hover {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
   color: #7293df;
@@ -241,12 +247,14 @@ button {
   transition: ease-in-out 0.2s;
   cursor: pointer;
 }
-.fori i, .las i {
+.fori i,
+.las i {
   transition: ease-in-out 0.2s;
   color: #bec9d5;
   cursor: pointer;
 }
-.fori i:hover, .las i:hover {
+.fori i:hover,
+.las i:hover {
   color: #7293df;
 }
 @media screen and (min-width: 631px) and (max-width: 1024px) {
@@ -254,24 +262,25 @@ button {
     padding-right: 30px;
     gap: 30px;
   }
-  
+
   .mid {
     width: 65%;
     gap: 15px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 17.5%;
   }
-  
+
   .exercise-bar {
     width: 400px;
   }
-  
+
   /* .listen-box, .speak {
     width: 140px;
   } */
-  
+
   /* button {
     width: 140px;
   } */
@@ -282,7 +291,7 @@ button {
   .container {
     flex-direction: column;
   }
-  
+
   .main {
     width: 100%;
     padding-left: 20px;
@@ -290,43 +299,44 @@ button {
     /* margin-top: 60px; */
     gap: 20px;
   }
-  
+
   .fori {
     width: 100%;
     justify-content: start;
     padding-left: 15px;
   }
-  
+
   .mid {
     width: 60%;
     gap: 10px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 20%;
   }
-  
+
   .exercise-bar {
     width: 350px;
   }
-  
+
   /* .listen-box, .speak {
     width: 130px;
     height: 50px;
     padding-left: 15px;
     padding-right: 15px;
   } */
-  
+
   .exercise-box {
     align-items: center;
   }
-  
+
   .navigation-buttons {
     display: flex;
     gap: 10px;
     width: 60%;
   }
-  
+
   /* button {
     width: 130px;
     height: 35px;
@@ -338,7 +348,7 @@ button {
   .container {
     flex-direction: column;
   }
-  
+
   .main {
     width: 100%;
     padding-left: 15px;
@@ -346,70 +356,74 @@ button {
     /* margin-top: 60px; */
     gap: 15px;
   }
-  
+
   .fori {
     width: 100%;
     justify-content: start;
     padding-left: 15px;
   }
-  
+
   .mid {
     width: 50%;
     gap: 8px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 25%;
   }
-  
+
   .bar h2 {
     font-size: 18px;
     text-align: center;
   }
-  
+
   .exercise-bar {
     width: 280px;
   }
-  
+
   /* .listen-box, .speak {
     width: 100px;
     height: 45px;
     padding-left: 10px;
     padding-right: 10px;
   } */
-  
+
   .word p {
     font-size: 14px;
   }
-  
+
   .speak p {
     font-size: 14px;
   }
-  
+
   .exercise-box {
     align-items: center;
   }
-  
+
   .navigation-buttons {
     display: flex;
     gap: 8px;
   }
-  
+
   /* button {
     width: 120px;
     height: 35px;
     font-size: 14px;
   } */
-  h4, a {
+  h4,
+  a {
     font-size: 13px;
   }
-  .listen-box{
-      font-size: 20px;
-    }
-    .choice label{
-      font-size: 12px;
-    }
-    .choice{
-      width: 350px;
-    }
+  .listen-box {
+    font-size: 20px;
+  }
+  .choice label {
+    font-size: 12px;
+  }
+  .choice {
+    width: 350px;
+    gap: 5px;
+    justify-content: center;
+  }
 }
