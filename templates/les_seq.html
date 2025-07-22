@@ -229,9 +229,12 @@
                 });
 
                 item.addEventListener("click", function (e) {
-                    selected = e.target;
-                    moveToAnswerBox(selected);
-                });
+    const parent = e.target.parentElement;
+    if (parent && parent.id === "choice") {
+        selected = e.target;
+        moveToAnswerBox(selected);
+    }
+});
             }
 
             const choice = document.getElementById("choice");
@@ -399,6 +402,8 @@
         window.onload = () => {
             updateLesson();
         }
+
+
     </script>
 
 </body>
