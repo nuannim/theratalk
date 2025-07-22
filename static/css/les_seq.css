@@ -153,6 +153,11 @@ h4 {
   padding: 10px;
   cursor: pointer;
 }
+.forbtn{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
 .word {
   width: 90%;
 }
