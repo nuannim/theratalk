@@ -142,10 +142,11 @@ h4 {
   /* width: 450px; */
   /* height: 130px; */
   width: 555px;
-  min-height: 130px;
+  min-height: 55px;
   height: auto;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 13px;
   border: 1.5px solid #ececec;
   border-radius: 15px;
