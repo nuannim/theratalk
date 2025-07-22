@@ -76,12 +76,12 @@ for (let box of answerBoxes) {
     });
 }
 
-function delword() {
-    let answerBoxes = document.getElementsByClassName("ans");
-    for (let box of answerBoxes) {
-        if (box.firstChild) {
-            document.getElementById("choice").appendChild(box.firstChild);
-        }
-    }
-    checkCheckButtonState();
-}
+// function delword() {
+//     let answerBoxes = document.getElementsByClassName("ans");
+//     for (let box of answerBoxes) {
+//         if (box.firstChild) {
+//             document.getElementById("choice").appendChild(box.firstChild);
+//         }
+//     }
+//     checkCheckButtonState();
+// }
