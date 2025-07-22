@@ -318,16 +318,7 @@ i:hover {
   }
   
   .tooltip {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-  transform: translate(-50%, -50%);
-    margin-top: 10px;
-    margin-left: 0;
-    /* width: 100%; */
-    box-sizing: border-box;
-    padding: 10px;
-    text-align: start;
+    display: none;
   }
   
   .tooltip li {

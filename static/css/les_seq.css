@@ -141,6 +141,9 @@ h4 {
 .answer-box{
   /* width: 450px; */
   /* height: 130px; */
+  width: 555px;
+  min-height: 130px;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
@@ -167,7 +170,8 @@ h4 {
 }
 .choice{
   width: 555px;
-  height: 55px;
+  min-height: 55px;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -405,13 +409,15 @@ i:hover {
   }
   .answer-box{
     width: 350px;
-    height: 150px;
+    min-height: 150px;
+    height: auto;
     justify-content: center;
     align-items: center;
   }
   .choice{
     width: 350px;
-    height: 150px;
+    min-height: 150px;
+    height: auto;
     justify-content: center;
   }
 }
