@@ -21,7 +21,8 @@ body {
   width: 70%;
   background-color: white;
   border: 1.5px solid #ececec;
-  border-radius: 20px;
+  border-radius: 15px;
+  padding: 10px;
 }
 .mission-box p{
   color: #666666;
