@@ -164,7 +164,17 @@
                         confirmButtonText: "ลองอีกครั้ง",
                     });
                 }
-                window.location.href = "/patient/";
+                // window.location.href = "/patient/";
+
+                Swal.fire({
+                    icon: 'success',
+                    title: `เยี่ยมมาก!`,
+                    text: `คุณตอบถูกทั้งหมด ${correct}/${total} ข้อ`,
+                    confirmButtonText: 'ตกลง',
+                }).then(() => {
+                    window.location.href = "/patient/";
+                });
+
             } else {
                 // ❌ Show feedback in alert if any wrong
                 Swal.fire({
