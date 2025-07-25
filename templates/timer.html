@@ -197,19 +197,20 @@
         <div class="timer-box">
             <h2>การฝึกหายใจ</h2>
             <div class="options">
+                <button onclick="setDuration(5)">5 วินาที</button>
                 <button onclick="setDuration(7)">7 วินาที</button>
                 <button onclick="setDuration(10)">10 วินาที</button>
                 <button onclick="setDuration(13)">13 วินาที</button>
             </div>
             <div class="tim">
-                <h2 class="status" id="status">0 วินาที</h2>
+                <h2 class="status" id="status">5 วินาที</h2>
                 <h1 class="count" id="count">-</h1>
             </div>
             <button class="start-btn" onclick="startBreathing()">เริ่มต้น</button>
         </div>
     </div>
     <script>
-        let selectedDuration = 0;
+        let selectedDuration = 5;
         let phase = 0;
         let interval = null;
         const phases = ['หายใจเข้า', 'กลั้นหายใจ', 'หายใจออก'];
@@ -226,7 +227,7 @@
 
             phase = 0;
             let count = 1;
-            let max = Math.floor(selectedDuration / 3);
+            let max = Math.floor(selectedDuration);
             document.getElementById('status').textContent = phases[phase];
             document.getElementById('count').textContent = count;
 
