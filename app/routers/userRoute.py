@@ -334,3 +334,8 @@ async def finish_task(data: FinishRequest, request: Request):
     }).eq("ahid", ahid_value).execute()
 
     return {"status": "success"}
+
+
+@router.get("/timer/")
+async def timer(request: Request):
+    return templates.TemplateResponse("timer.html", {"request": request})
