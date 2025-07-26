@@ -228,23 +228,26 @@ i {
 i:hover {
   color: #7293df;
 }
-
+.navigation-buttons {
+  display: flex;
+  gap: 10px;
+}
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 630px) {
   .container {
     flex-direction: column;
   }
-  
+
   .main {
     gap: 30px;
   }
-  
+
   .fori {
     justify-content: start;
     padding-left: 15px;
   }
-  
+
   .exercise-box {
     align-items: center;
   }
@@ -257,20 +260,21 @@ i:hover {
   .main {
     gap: 30px;
   }
-  
+
   .mid {
     width: 65%;
     gap: 15px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 17.5%;
   }
-  
+
   .exercise-bar {
     width: 400px;
   }
-  
+
   /* .listen-box, .speak {
     width: 140px;
   }
@@ -288,33 +292,34 @@ i:hover {
     /* margin-top: 60px; */
     gap: 20px;
   }
-  
+
   .mid {
     width: 60%;
     gap: 10px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 20%;
   }
-  
+
   .exercise-bar {
     width: 350px;
   }
-  
+
   /* .listen-box, .speak {
     width: 130px;
     height: 50px;
     padding-left: 15px;
     padding-right: 15px;
   } */
-  
+
   .navigation-buttons {
     display: flex;
     gap: 10px;
     width: 60%;
   }
-  
+
   /* button {
     width: 130px;
     height: 35px;
@@ -329,51 +334,53 @@ i:hover {
     /* margin-top: 60px; */
     gap: 15px;
   }
-  
+
   .mid {
     width: 50%;
     gap: 8px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 25%;
   }
-  
+
   .bar h2 {
     font-size: 18px;
     text-align: center;
   }
-  
+
   .exercise-bar {
     width: 280px;
   }
-  
+
   /* .listen-box, .speak {
     width: 100px;
     height: 45px;
     padding-left: 10px;
     padding-right: 10px;
   } */
-  
+
   .word p {
     font-size: 14px;
   }
-  
+
   .speak p {
     font-size: 14px;
   }
-  
+
   .navigation-buttons {
     display: flex;
     gap: 8px;
   }
-  
+
   /* button {
     width: 120px;
     height: 35px;
     font-size: 14px;
   } */
-  h4, a {
+  h4,
+  a {
     font-size: 13px;
   }
 }
