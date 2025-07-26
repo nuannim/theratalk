@@ -148,11 +148,7 @@
     text-align: center;
     gap: 10px;
   }
-  
-  .image {
-    width: 80px;
-    height: 80px;
-  }
+
   
   /* Content Layout */
   .content {
@@ -169,16 +165,13 @@
 @media screen and (max-width: 480px) {
   /* Global Layout */
   .main {
-    padding-left: 15px;
-    padding-right: 15px;
-    /* margin-top: 60px; */
     gap: 10px;
   }
   
   /* Typography */
-  h2 {
+  /* h2 {
     font-size: 16px;
-  }
+  } */
   
   h3 {
     font-size: 15px;
@@ -292,11 +285,6 @@
     align-items: center;
     text-align: center;
     gap: 10px;
-  }
-  
-  .image {
-    width: 70px;
-    height: 70px;
   }
   
   /* Content Layout */

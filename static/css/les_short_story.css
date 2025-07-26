@@ -91,8 +91,6 @@ h4 {
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
   width: 100%;
   margin-top: 70px;
 }
@@ -103,14 +101,14 @@ h4 {
 }
 
 .main {
-  /* padding-left: 50px; */
+  padding-left: 50px;
   padding-right: 50px;
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
   align-items: center;
   gap: 50px;
-  width: 90%;
+  /* width: 90%; */
 }
 
 .main h2 {
@@ -288,12 +286,9 @@ button {
 
 /* Mobile (481px - 630px) */
 @media screen and (min-width: 481px) and (max-width: 630px) {
-  .container {
-    flex-direction: column;
-  }
 
   .main {
-    width: 100%;
+    /* width: 100%; */
     padding-left: 20px;
     padding-right: 20px;
     /* margin-top: 60px; */
@@ -301,7 +296,7 @@ button {
   }
 
   .fori {
-    width: 100%;
+    /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }
@@ -345,12 +340,9 @@ button {
 
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
-  .container {
-    flex-direction: column;
-  }
 
   .main {
-    width: 100%;
+    /* width: 100%; */
     padding-left: 15px;
     padding-right: 15px;
     /* margin-top: 60px; */
@@ -358,7 +350,7 @@ button {
   }
 
   .fori {
-    width: 100%;
+    /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }

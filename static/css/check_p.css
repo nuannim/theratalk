@@ -222,14 +222,13 @@ h2 {
   h1 {
     font-size: 24px;
   }
+  h2{
+    font-size: 18px;
+  }
 }
 
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
-  .main {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 
   .top {
     gap: 10px;
@@ -258,9 +257,6 @@ h2 {
   .nav,
   a {
     font-size: 13px;
-  }
-  .main {
-    width: 250px;
   }
   .mid {
     width: 60%;

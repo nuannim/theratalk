@@ -451,6 +451,9 @@ select {
     height: 35px;
     font-size: 12px;
   }
+  h2 {
+    font-size: 18px;
+  }
 }
 
 /* Small Mobile (320px - 480px) */
@@ -514,9 +517,7 @@ select {
   .nav, a{
       font-size: 13px;
     }
-  .main{
-    width: 250px;
-  }
+
   .mid {
     width: 60%;
     gap: 8px;

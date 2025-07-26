@@ -233,7 +233,7 @@ i:hover {
   }
   
   .node {
-    width: 100%;
+    /* width: 100%; */
     max-width: 400px;
     padding: 15px;
     flex-direction: column;
@@ -260,13 +260,7 @@ i:hover {
   }
   
   .tooltip {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    margin-left: 0;
-    width: 100%;
-    box-sizing: border-box;
+    display: none;
   }
   .nav {
     height: 60px;
@@ -292,7 +286,7 @@ i:hover {
   }
   
   .node {
-    width: 100%;
+    /* width: 100%; */
     padding: 12px;
     flex-direction: column;
     text-align: center;
