@@ -94,7 +94,6 @@ h4 {
 }
 
 .container {
-  display: flex;
   width: 100%;
   margin-top: 70px;
 }
@@ -105,14 +104,14 @@ h4 {
 }
 
 .main {
-  /* padding-left: 50px; */
+  padding-left: 50px;
   padding-right: 50px;
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
   align-items: center;
   gap: 50px;
-  width: 90%;
+  /* width: 90%; */
 }
 .main h2 {
   margin: 0;
@@ -162,11 +161,12 @@ h4 {
   justify-content: space-between;
   align-items: center;
   border: 1.5px solid #ececec;
-  width: 150px;
+  /* width: 150px; */
   height: 55px;
   border-radius: 15px;
   padding-left: 20px;
   padding-right: 20px;
+  gap: 15px;
 }
 .listen-box i {
   display: flex;
@@ -182,7 +182,7 @@ h4 {
   /* border-bottom: 1.5px solid #ececec; */
 }
 .word {
-  width: 85%;
+  /* width: 85%; */
   height: 33px;
   border-bottom: 1.5px solid #ececec;
 }
@@ -237,13 +237,10 @@ i:hover {
   }
   
   .main {
-    width: 100%;
-    padding-right: 0;
     gap: 30px;
   }
   
   .fori {
-    width: 100%;
     justify-content: start;
     padding-left: 15px;
   }
@@ -258,7 +255,6 @@ i:hover {
 /* Tablet/iPad (631px - 1024px) */
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
-    padding-right: 30px;
     gap: 30px;
   }
   
@@ -287,8 +283,8 @@ i:hover {
 /* Mobile (481px - 630px) - Enhancing existing mobile styles */
 @media screen and (min-width: 481px) and (max-width: 630px) {
   .main {
-    padding-left: 20px;
-    padding-right: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
     /* margin-top: 60px; */
     gap: 20px;
   }
@@ -328,8 +324,8 @@ i:hover {
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
   .main {
-    padding-left: 15px;
-    padding-right: 15px;
+    /* padding-left: 15px;
+    padding-right: 15px; */
     /* margin-top: 60px; */
     gap: 15px;
   }
