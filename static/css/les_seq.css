@@ -256,7 +256,9 @@ i {
 i:hover {
   color: #7293df;
 }
-
+.navigation-buttons{
+    display: flex;
+}
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
     padding-right: 30px;
@@ -329,7 +331,7 @@ i:hover {
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    width: 60%;
+    /* width: 60%; */
   }
   
   /* button {

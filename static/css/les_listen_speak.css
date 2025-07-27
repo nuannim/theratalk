@@ -317,7 +317,7 @@ i:hover {
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    width: 60%;
+    /* width: 60%; */
   }
 
   /* button {

@@ -226,6 +226,9 @@ i {
 i:hover {
   color: #7293df;
 }
+.navigation-buttons{
+    display: flex;
+}
 
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {

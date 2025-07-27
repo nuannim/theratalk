@@ -223,7 +223,9 @@ i:hover {
   color: #7293df;
 }
 
-
+.navigation-buttons{
+    display: flex;
+}
 /* Responsive Design */
 
 /* Tablet/iPad (631px - 1024px) */
@@ -296,7 +298,7 @@ i:hover {
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    width: 60%;
+    /* width: 60%; */
   }
   
   /* button {
