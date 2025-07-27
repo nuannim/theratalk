@@ -229,7 +229,10 @@ h2 {
 
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
-
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .top {
     gap: 10px;
   }
@@ -266,5 +269,8 @@ h2 {
   .las,
   .logo {
     width: 20%;
+  }
+    h2{
+    font-size: 18px;
   }
 }
