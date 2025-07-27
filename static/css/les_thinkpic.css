@@ -111,18 +111,18 @@ h4 {
   gap: 30px;
   /* width: 90%; */
 }
-.main h2{
+.main h2 {
   margin: 0;
   margin-bottom: 10px;
 }
-.bar{
+.bar {
   /* width: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
-.bar p{
+.bar p {
   margin: 0;
   font-size: 13px;
 }
@@ -132,7 +132,7 @@ h4 {
   background-color: #ececec;
   border-radius: 10px;
 }
-.exercise-fill{
+.exercise-fill {
   width: 10%;
   height: 13px;
   border-radius: 10px;
@@ -150,19 +150,19 @@ h4 {
   transition: ease-in-out 0.2s;
   cursor: pointer;
 }
-.speak:hover{
+.speak:hover {
   border: 1.5px solid #dae5ff;
   background-color: #f7f9fe;
 }
-.picture-box{
+.picture-box {
   display: flex;
   gap: 20px;
 }
-.picture-box img{
+.picture-box img {
   width: 100%;
   height: 100%;
 }
-.picture-box div{
+.picture-box div {
   width: 200px;
   height: 200px;
   border: 1.5px solid #ececec;
@@ -177,7 +177,7 @@ h4 {
   height: 33px;
   border-bottom: 1.5px solid #ececec;
 }
-.exercise-box{
+.exercise-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,34 +219,33 @@ i {
 i:hover {
   color: #7293df;
 }
-/* .forbutton{
+.navigation-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-} */
+}
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
     padding-right: 30px;
     gap: 30px;
   }
-  
+
   .mid {
     width: 65%;
     gap: 15px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 17.5%;
   }
-  
+
   .exercise-bar {
     width: 400px;
   }
-  
+
   /* .listen-box, .speak {
     width: 140px;
   } */
-  
+
   /* button {
     width: 140px;
   } */
@@ -257,7 +256,7 @@ i:hover {
   .container {
     flex-direction: column;
   }
-  
+
   .main {
     /* width: 100%;
     padding-left: 20px;
@@ -265,43 +264,44 @@ i:hover {
     /* margin-top: 60px; */
     gap: 20px;
   }
-  
+
   .fori {
     /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }
-  
+
   .mid {
     width: 60%;
     gap: 10px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 20%;
   }
-  
+
   .exercise-bar {
     width: 350px;
   }
-  
+
   /* .listen-box, .speak {
     width: 130px;
     height: 50px;
     padding-left: 15px;
     padding-right: 15px;
   } */
-  
+
   .exercise-box {
     align-items: center;
   }
-  
+
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    width: 60%;
+    /* width: 60%; */
   }
-  
+
   /* button {
     width: 130px;
     height: 35px;
@@ -313,7 +313,7 @@ i:hover {
   .container {
     flex-direction: column;
   }
-  
+
   .main {
     /* width: 100%;
     padding-left: 15px;
@@ -321,61 +321,63 @@ i:hover {
     /* margin-top: 60px; */
     gap: 15px;
   }
-  
+
   .fori {
     /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }
-  
+
   .mid {
     width: 50%;
     gap: 8px;
   }
-  
-  .las, .logo {
+
+  .las,
+  .logo {
     width: 25%;
   }
-  
+
   .bar h2 {
     font-size: 18px;
     text-align: center;
   }
-  
+
   .exercise-bar {
     width: 280px;
   }
-  
+
   /* .listen-box, .speak {
     width: 100px;
     height: 45px;
     padding-left: 10px;
     padding-right: 10px;
   } */
-  
+
   .word p {
     font-size: 14px;
   }
-  
+
   .speak p {
     font-size: 14px;
   }
-  
+
   .exercise-box {
     align-items: center;
   }
-  
+
   .navigation-buttons {
     display: flex;
     gap: 8px;
   }
-  
+
   /* button {
     width: 120px;
     height: 35px;
     font-size: 14px;
   } */
-  h4, a {
+  h4,
+  a {
     font-size: 13px;
   }
 }
