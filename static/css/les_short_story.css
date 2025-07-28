@@ -182,9 +182,7 @@ h4 {
   margin: 0;
 }
 .choice {
-  width: 700px;
   display: flex;
-  /* justify-content: space-between; */
   flex-wrap: wrap;
   gap: 15px;
 }
@@ -256,7 +254,8 @@ button {
   color: #7293df;
 }
 .navigation-buttons{
-    display: flex;
+  display: flex;
+  gap: 10px;
 }
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
