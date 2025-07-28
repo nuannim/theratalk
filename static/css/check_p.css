@@ -222,6 +222,9 @@ h2 {
   h1 {
     font-size: 24px;
   }
+  h2{
+    font-size: 18px;
+  }
 }
 
 /* Small Mobile (320px - 480px) */
@@ -230,7 +233,6 @@ h2 {
     padding-left: 15px;
     padding-right: 15px;
   }
-
   .top {
     gap: 10px;
   }
@@ -259,9 +261,6 @@ h2 {
   a {
     font-size: 13px;
   }
-  .main {
-    width: 250px;
-  }
   .mid {
     width: 60%;
     gap: 8px;
@@ -270,5 +269,8 @@ h2 {
   .las,
   .logo {
     width: 20%;
+  }
+    h2{
+    font-size: 18px;
   }
 }

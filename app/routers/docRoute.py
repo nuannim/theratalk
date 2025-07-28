@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from fastapi import APIRouter, Request, HTTPException, Depends, Form
 from fastapi.templating import Jinja2Templates
@@ -293,6 +294,16 @@ async def addNewPatient(
     try:
         response = supabase.table("patients").insert(data).execute()
         print("✅ Insert success:", response)
+
+        new_patient_id = response.data[0]["patientid"]
+        default_mission_data = {
+            "patientid": new_patient_id,
+            "data": [{"task": "เช็คขื่อรายวัน", "value": "1", "max": "1"}], #เพิ้ม mission ใหม่
+            "missionDay": datetime.utcnow().date().isoformat()
+        }
+
+        mission_response = supabase.table("mission").insert(default_mission_data).execute()
+        print("✅ Mission inserted:", mission_response)
     except Exception as e:
         print("❌ Insert error:", e)
 

@@ -14,6 +14,28 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Check</title>
+    <style>
+        table {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 5px;
+            background: #fff;
+            border: 1.5px solid #ececec;
+            border-radius: 1rem;
+        }
+
+        @media screen and (max-width: 630px) {
+            .chart-container {
+                max-width: 470px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -51,13 +73,13 @@
             {% endif %}
         </div>
         {% if data_assignmenteachday %}
-            {% for i in data_assignmenteachday %}
-                <h2>{{i.activityname}} ({{i.templatename}})</h2>
-            {% endfor %}
+        {% for i in data_assignmenteachday %}
+        <h2>{{i.activityname}} ({{i.templatename}})</h2>
+        {% endfor %}
         {% else %}
-            <h1>ไม่มีแบบฝึกหัด</h1>
+        <h1>ไม่มีแบบฝึกหัด</h1>
         {% endif %}
-<!-- 
+        <!-- 
         <div class="content">
             <div class="finish">
                 <div class="lesson">
@@ -72,7 +94,7 @@
             </div>
         </div> -->
 
-        <div class="chart-container" style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; background: #fff; border: 1.5px solid #ececec; border-radius: 1rem;">
+        <div class="chart-container">
             <canvas id="exerciseChart"></canvas>
         </div>
 
@@ -87,162 +109,162 @@
             </thead>
             <tbody>
                 {% if data %}
-                    {% for i in data %}
-                        <tr>
-                            <td></td>
-                            {% set sent = i.sentence | from_json %}
-                            {% set clean_sentence = i.sentence | replace("/", "") %}
-                            <td>
-                                {% if sent is mapping and sent.title is defined %}
-                                    {{ sent.title }}
-                                {% elif sent is mapping %}
-                                    {{ sent.values() | join(" ") }}
-                                {% else %}
-                                    {{ clean_sentence }}
-                                {% endif %}
-                            </td>
-                            {% set retry = i.retries %}
-                            {% if retry is string %}
-                                {% set retry = retry | from_json %}
-                            {% endif %}
-                            <td>
-                                {% if retry is mapping %}
-                                    {{ retry[i.sentence] | default('0') }}
-                                {% else %}
-                                    {{ retry }}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for i in data %}
+                <tr>
+                    <td></td>
+                    {% set sent = i.sentence | from_json %}
+                    {% set clean_sentence = i.sentence | replace("/", "") %}
+                    <td>
+                        {% if sent is mapping and sent.title is defined %}
+                        {{ sent.title }}
+                        {% elif sent is mapping %}
+                        {{ sent.values() | join(" ") }}
+                        {% else %}
+                        {{ clean_sentence }}
+                        {% endif %}
+                    </td>
+                    {% set retry = i.retries %}
+                    {% if retry is string %}
+                    {% set retry = retry | from_json %}
+                    {% endif %}
+                    <td>
+                        {% if retry is mapping %}
+                        {{ retry[i.sentence] | default('0') }}
+                        {% else %}
+                        {{ retry }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
                 {% else %}
-                    <tr>
-                        <td></td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <h2>ผู้ป่วยยังไม่ได้ทำแบบฝึกหัด</h2>
+                <tr>
+                    <td></td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <h2>ผู้ป่วยยังไม่ได้ทำแบบฝึกหัด</h2>
                 {% endif %}
             </tbody>
         </table>
-        
+
     </div>
-<script>
-    const rawData = {{ data | tojson | safe }};
+    <script>
+        const rawData = {{ data | tojson | safe }};
 
-    const labels = [];
-    const values = [];
+        const labels = [];
+        const values = [];
 
-    rawData.forEach(item => {
-        let sentence = item.sentence;
-        let retries = item.retries;
+        rawData.forEach(item => {
+            let sentence = item.sentence;
+            let retries = item.retries;
 
-        try {
-            if (typeof sentence === "string") {
-                sentence = JSON.parse(sentence);
-            }
-            if (sentence.title) {
-                sentence = sentence.title;
-            } else if (typeof sentence === "object") {
-                sentence = Object.values(sentence).join(" ");
-            }
-        } catch (e) {
-            sentence = typeof sentence === "string" ? sentence.replace(/\//g, '') : String(sentence);
-        }
-
-        let retryCount = 0;
-        try {
-            if (typeof retries === "string") {
-                retries = JSON.parse(retries);
+            try {
+                if (typeof sentence === "string") {
+                    sentence = JSON.parse(sentence);
+                }
+                if (sentence.title) {
+                    sentence = sentence.title;
+                } else if (typeof sentence === "object") {
+                    sentence = Object.values(sentence).join(" ");
+                }
+            } catch (e) {
+                sentence = typeof sentence === "string" ? sentence.replace(/\//g, '') : String(sentence);
             }
 
-            if (typeof retries === "object" && retries !== null) {
-                const key = item.sentence;
-                retryCount = parseInt(retries[key]) || 0;
-            } else {
+            let retryCount = 0;
+            try {
+                if (typeof retries === "string") {
+                    retries = JSON.parse(retries);
+                }
+
+                if (typeof retries === "object" && retries !== null) {
+                    const key = item.sentence;
+                    retryCount = parseInt(retries[key]) || 0;
+                } else {
+                    retryCount = parseInt(retries) || 0;
+                }
+
+            } catch (e) {
+                console.error("Error parsing retries:", e);
                 retryCount = parseInt(retries) || 0;
             }
 
-        } catch (e) {
-            console.error("Error parsing retries:", e);
-            retryCount = parseInt(retries) || 0;
-        }
+            labels.push(sentence);
+            values.push(retryCount);
+        });
 
-        labels.push(sentence);
-        values.push(retryCount);
-    });
+        const ctx = document.getElementById('exerciseChart').getContext('2d');
 
-    const ctx = document.getElementById('exerciseChart').getContext('2d');
+        // Gradient fill
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#4C9AFF');
+        gradient.addColorStop(1, '#A0C4FF');
 
-    // Gradient fill
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, '#4C9AFF');
-    gradient.addColorStop(1, '#A0C4FF');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'จำนวนครั้งที่ผู้ป่วยทำผิดพลาด',
-                data: values,
-                backgroundColor: gradient,
-                borderRadius: 8,
-                borderSkipped: false,
-                hoverBackgroundColor: '#3B82F6'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        font: {
-                            family: 'Kanit',
-                            size: 14
-                        }
-                    }
-                },
-                tooltip: {
-                    titleFont: { family: 'Kanit', size: 14 },
-                    bodyFont: { family: 'Kanit', size: 13 },
-                    backgroundColor: '#ffffff',
-                    titleColor: '#333',
-                    bodyColor: '#444',
-                    borderColor: '#ccc',
-                    borderWidth: 1
-                }
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'จำนวนครั้งที่ผู้ป่วยทำผิดพลาด',
+                    data: values,
+                    backgroundColor: gradient,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                    hoverBackgroundColor: '#3B82F6'
+                }]
             },
-            scales: {
-                x: {
-                    ticks: {
-                        font: {
-                            family: 'Kanit'
-                        },
-                        color: '#333'
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            font: {
+                                family: 'Kanit',
+                                size: 14
+                            }
+                        }
                     },
-                    grid: {
-                        display: false
+                    tooltip: {
+                        titleFont: { family: 'Kanit', size: 14 },
+                        bodyFont: { family: 'Kanit', size: 13 },
+                        backgroundColor: '#ffffff',
+                        titleColor: '#333',
+                        bodyColor: '#444',
+                        borderColor: '#ccc',
+                        borderWidth: 1
                     }
                 },
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            family: 'Kanit'
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                family: 'Kanit'
+                            },
+                            color: '#333'
                         },
-                        color: '#333'
+                        grid: {
+                            display: false
+                        }
                     },
-                    grid: {
-                        borderDash: [4, 4],
-                        color: '#eee'
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            font: {
+                                family: 'Kanit'
+                            },
+                            color: '#333'
+                        },
+                        grid: {
+                            borderDash: [4, 4],
+                            color: '#eee'
+                        }
                     }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
 </body>
 

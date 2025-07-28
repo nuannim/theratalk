@@ -91,8 +91,6 @@ h4 {
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
   width: 100%;
   margin-top: 70px;
 }
@@ -110,7 +108,7 @@ h4 {
   margin-bottom: 50px;
   align-items: center;
   gap: 50px;
-  width: 90%;
+  /* width: 90%; */
 }
 .main h2{
   margin: 0;
@@ -258,7 +256,9 @@ i {
 i:hover {
   color: #7293df;
 }
-
+.navigation-buttons{
+    display: flex;
+}
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
     padding-right: 30px;
@@ -289,12 +289,9 @@ i:hover {
 
 /* Mobile (481px - 630px) */
 @media screen and (min-width: 481px) and (max-width: 630px) {
-  .container {
-    flex-direction: column;
-  }
   
   .main {
-    width: 100%;
+    /* width: 100%; */
     padding-left: 20px;
     padding-right: 20px;
     /* margin-top: 60px; */
@@ -302,7 +299,7 @@ i:hover {
   }
   
   .fori {
-    width: 100%;
+    /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }
@@ -334,7 +331,7 @@ i:hover {
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    width: 60%;
+    /* width: 60%; */
   }
   
   /* button {
@@ -345,12 +342,9 @@ i:hover {
 
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
-  .container {
-    flex-direction: column;
-  }
   
   .main {
-    width: 100%;
+    /* width: 100%; */
     padding-left: 15px;
     padding-right: 15px;
     /* margin-top: 60px; */
@@ -358,7 +352,7 @@ i:hover {
   }
   
   .fori {
-    width: 100%;
+    /* width: 100%; */
     justify-content: start;
     padding-left: 15px;
   }
@@ -414,14 +408,14 @@ i:hover {
     font-size: 13px;
   }
   .answer-box{
-    width: 350px;
+    width: 300px;
     min-height: 150px;
     height: auto;
     justify-content: center;
     align-items: center;
   }
   .choice{
-    width: 350px;
+    width: 300px;
     min-height: 150px;
     height: auto;
     justify-content: center;

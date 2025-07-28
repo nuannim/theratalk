@@ -5,13 +5,18 @@
   color: #7293df;
   font-weight: 550;
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   overflow-x: hidden;
 }
 .main {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
   display: flex;
   flex-direction: column;
   margin-top: 70px;
@@ -23,10 +28,6 @@ body {
   gap: 20px;
   border-bottom: 1.5px solid #ececec;
   padding-bottom: 20px;
-}
-.pro img {
-  width: 70px;
-  height: 70px;
 }
 .pro h3,
 p {
@@ -156,7 +157,6 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
   height: 230px;
 }
 .content{
@@ -211,7 +211,7 @@ h2{
 
 @media screen and (min-width: 631px) and (max-width: 1024px) {
   .main {
-    padding-right: 30px;
+    /* padding-right: 30px; */
     gap: 30px;
   }
   
@@ -230,20 +230,7 @@ h2{
   .container {
     flex-direction: column;
   }
-  
-  .main {
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    /* margin-top: 60px; */
-    gap: 20px;
-  }
-  
-  .fori {
-    width: 100%;
-    justify-content: start;
-    padding-left: 15px;
-  }
+
   
   .mid {
     width: 60%;
@@ -259,8 +246,23 @@ h2{
   .graph-box, .achi-box{
     width: 100%;
   }
-  .graph{
-    width: 94%;
+  .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .graph {
+    width: 100%;
+  }
+
+  .graph-box,
+  .achi-box {
+    width: 100%;
   }
 }
 
@@ -268,14 +270,6 @@ h2{
 @media screen and (max-width: 480px) {
   .container {
     flex-direction: column;
-  }
-  
-  .main {
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    /* margin-top: 60px; */
-    gap: 15px;
   }
   
   .fori {
@@ -300,8 +294,5 @@ h2{
   }
   .graph-box, .achi-box{
     width: 100%;
-  }
-  .graph{
-    width: 94%;
   }
 }

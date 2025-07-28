@@ -1,8 +1,10 @@
+import asyncio
 from datetime import date
 import json
 import os
 import subprocess
 import tempfile
+import time
 from typing import Dict
 from fastapi import APIRouter, File, Request, Depends, HTTPException, UploadFile
 from fastapi import params
@@ -267,9 +269,12 @@ asr = pipeline(
     device=device
 )
 
+async def run_asr(wav_path):
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(None, lambda: asr(wav_path, generate_kwargs={"language": "<|th|>", "task": "transcribe"}))
+
 @router.post("/transcribe/")
 async def transcribe(file: UploadFile = File(...)):
-    # Save uploaded file temporarily
     with tempfile.NamedTemporaryFile(delete=False, suffix=".webm") as temp_webm:
         temp_webm.write(await file.read())
         webm_path = temp_webm.name
@@ -277,14 +282,24 @@ async def transcribe(file: UploadFile = File(...)):
     wav_path = webm_path.replace(".webm", ".wav")
     subprocess.run(["ffmpeg", "-i", webm_path, "-ar", "16000", "-ac", "1", wav_path], check=True)
 
-    result = asr(wav_path, generate_kwargs={"language": "<|th|>", "task": "transcribe"})
+    try:
+        # Timeout ASR after 15 seconds
+        result = await asyncio.wait_for(run_asr(wav_path), timeout=30)#เปลี่ยน timeout หน่วยเป็นวินาที
+        text = result.get("text", "").strip()
+        print(f"Transcription result: {text}")
+        if len(text) > 50:
+            return {"text": "เราได้ยินไม่ชัด ลองพูดใหม่ดูนะ"}
+    except asyncio.TimeoutError:
+        print("ASR process timed out.")
+        return {"text": "เราได้ยินไม่ชัด ลองพูดใหม่ดูนะ"}
 
-    os.remove(webm_path)
-    os.remove(wav_path)
+    finally:
+        if os.path.exists(webm_path):
+            os.remove(webm_path)
+        if os.path.exists(wav_path):
+            os.remove(wav_path)
 
-    print(f"Transcription result: {result['text']}")
-
-    return {"text": result["text"]}
+    return {"text": text}
 
 
 @router.post("/check_answer/")
@@ -293,7 +308,7 @@ async def check_answer(request: Request):
     answer = data.get("answer", "").strip().lower().replace(" ", "")
     word = data.get("word", "").strip().lower()
     print(f"🔍 Checking: '{answer}' vs '{word}'")
-    isCorrect = answer == word
+    isCorrect = word in answer
     
 
     if isCorrect:
