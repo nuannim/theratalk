@@ -141,7 +141,7 @@ h4 {
   display: flex;
   justify-content: center;
   border: 1.5px solid #ececec;
-  width: 150px;
+  min-width: 150px;
   height: 55px;
   border-radius: 15px;
   padding-left: 20px;

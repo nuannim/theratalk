@@ -140,7 +140,7 @@ h4 {
   display: flex;
   justify-content: center;
   border: 1.5px solid #ececec;
-  width: 150px;
+  min-width: 150px;
   height: 55px;
   border-radius: 15px;
   padding-left: 20px;
@@ -183,6 +183,7 @@ h4 {
 .exercise-box{
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 button:disabled {
@@ -284,13 +285,6 @@ i:hover {
     width: 350px;
   }
   
-  /* .listen-box, .speak {
-    width: 130px;
-    height: 50px;
-    padding-left: 15px;
-    padding-right: 15px;
-  } */
-  
   .exercise-box {
     align-items: center;
   }
@@ -298,13 +292,7 @@ i:hover {
   .navigation-buttons {
     display: flex;
     gap: 10px;
-    /* width: 60%; */
   }
-  
-  /* button {
-    width: 130px;
-    height: 35px;
-  } */
 }
 
 /* Small Mobile (320px - 480px) */
@@ -356,12 +344,7 @@ i:hover {
     display: flex;
     gap: 8px;
   }
-  
-  /* button {
-    width: 120px;
-    height: 35px;
-    font-size: 14px;
-  } */
+
   h4, a {
     font-size: 13px;
   }

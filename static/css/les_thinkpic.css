@@ -91,7 +91,6 @@ h4 {
 }
 
 .container {
-  /* display: flex; */
   width: 100%;
   margin-top: 70px;
 }
@@ -109,7 +108,6 @@ h4 {
   margin-bottom: 50px;
   align-items: center;
   gap: 30px;
-  /* width: 90%; */
 }
 .main h2 {
   margin: 0;
@@ -142,7 +140,7 @@ h4 {
   display: flex;
   justify-content: center;
   border: 1.5px solid #ececec;
-  width: 150px;
+  min-width: 150px;
   height: 55px;
   border-radius: 15px;
   padding-left: 20px;
@@ -253,9 +251,6 @@ i:hover {
 
 /* Mobile (481px - 630px) */
 @media screen and (min-width: 481px) and (max-width: 630px) {
-  .container {
-    flex-direction: column;
-  }
 
   .main {
     /* width: 100%;
@@ -310,9 +305,6 @@ i:hover {
 
 /* Small Mobile (320px - 480px) */
 @media screen and (max-width: 480px) {
-  .container {
-    flex-direction: column;
-  }
 
   .main {
     /* width: 100%;

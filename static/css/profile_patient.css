@@ -172,9 +172,6 @@ h4 {
   flex-direction: column;
   gap: 10px;
 }
-.graph-box{
-  border-right: 1.5px solid #ececec;
-}
 
 #out {
   transition: ease-in-out 0.2s;
@@ -223,6 +220,16 @@ h2{
   .las, .logo {
     width: 17.5%;
   }
+  .content {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .graph-box, .achi-box{
+    width: 100%;
+  }
+  .graph {
+    width: 100%;
+  }
 }
 
 /* Mobile (481px - 630px) */
@@ -246,6 +253,9 @@ h2{
   .graph-box, .achi-box{
     width: 100%;
   }
+  .graph {
+    width: 100%;
+  }
   .main {
     padding-left: 15px;
     padding-right: 15px;
@@ -256,14 +266,6 @@ h2{
     gap: 10px;
   }
 
-  .graph {
-    width: 100%;
-  }
-
-  .graph-box,
-  .achi-box {
-    width: 100%;
-  }
 }
 
 /* Small Mobile (320px - 480px) */
