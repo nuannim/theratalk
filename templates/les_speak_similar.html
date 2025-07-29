@@ -86,6 +86,39 @@
 
 <script>
     const tcContents = {{ tc_contents | tojson }};
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCache = new Map();
+
+    async function preloadAudio(words) {
+        for (const word of words) {
+            if (!audioCache.has(word)) {
+                const res = await fetch("/api/tts/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: word })
+                });
+                const data = await res.json();
+                const audioUrl = data.audio_url;
+                if (!audioUrl) continue;
+                const audioRes = await fetch(audioUrl);
+                const arrayBuffer = await audioRes.arrayBuffer();
+                const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                audioCache.set(word, buffer);
+            }
+        }
+    }
+
+    function playCachedAudio(word) {
+        const buffer = audioCache.get(word);
+        if (!buffer) {
+            console.warn("Audio not cached:", word);
+            return;
+        }
+        const source = audioCtx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioCtx.destination);
+        source.start();
+    }
     const wrongAttempts = {};
     let currentIndex = 0;
     const sentenceEl = document.getElementById("current-sentence");
@@ -94,15 +127,35 @@
             const currentItem = tcContents[currentIndex];
             const imageObj = JSON.parse(currentItem.imageurl);
             const wordObj = JSON.parse(currentItem.sentence);
+            const words = [wordObj.word1, wordObj.word2, wordObj.word3, wordObj.word4];
+            document.querySelectorAll(".picture-box div").forEach((picDiv, index) => {
+                // picDiv.querySelector("p").textContent = words[index];
+                picDiv.onclick = () => {
+                    const word = words[index];
+                    if (audioCache.has(word)) {
+                        playCachedAudio(word);
+                    } else {
+                        // If not cached, fetch and play
+                        fetch("/api/tts/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ text: word })
+                        }).then(res => res.json())
+                        .then(async data => {
+                            const audioRes = await fetch(data.audio_url);
+                            const arrayBuffer = await audioRes.arrayBuffer();
+                            const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                            audioCache.set(word, buffer);
+                            playCachedAudio(word);
+                        });
+                    }
+                };
+            });
             sentenceEl.textContent = wordObj.word1 + wordObj.word2 + wordObj.word3 + wordObj.word4;
             console.log(sentenceEl.textContent);
-
             document.querySelector(".pic1 img").src = `/static/img/activities/${imageObj.image1}`;
-
             document.querySelector(".pic2 img").src = `/static/img/activities/${imageObj.image2}`;
-
             document.querySelector(".pic3 img").src = `/static/img/activities/${imageObj.image3}`;
-
             document.querySelector(".pic4 img").src = `/static/img/activities/${imageObj.image4}`;
 
             document.getElementById("progress-text").textContent = `ข้อ ${currentIndex + 1} จาก ${tcContents.length}`;
@@ -222,7 +275,12 @@
             }
         }
 
-        window.onload = () => {
+        window.onload = async () => {
+            const allWords = tcContents.flatMap(item => {
+                const w = JSON.parse(item.sentence);
+                return [w.word1, w.word2, w.word3, w.word4];
+            });
+            await preloadAudio(allWords);
             updateLesson();
         };
     </script>
