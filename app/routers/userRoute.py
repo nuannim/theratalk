@@ -108,7 +108,7 @@ async def showMission(request: Request, resp=Depends(check_patient_role)):
 
     today_str = date.today().isoformat()
 
-    response = supabase.table("mission").select("*").eq("patientid", userId).eq("missionDay", today_str).execute()
+    response = supabase.table("mission").select("*").eq("patientid", userId).execute()
     missions = response.data[0]["data"] if response.data else []
 
     return templates.TemplateResponse("mission.html", {

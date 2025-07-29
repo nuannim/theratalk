@@ -298,7 +298,7 @@ async def addNewPatient(
         new_patient_id = response.data[0]["patientid"]
         default_mission_data = {
             "patientid": new_patient_id,
-            "data": [{"task": "เช็คขื่อรายวัน", "value": "1", "max": "1"}], #เพิ้ม mission ใหม่
+            "data": [{"task": "เช็คชื่อรายวัน", "value": 1, "max": 1}], #เพิ้ม mission ใหม่
             "missionDay": datetime.utcnow().date().isoformat()
         }
 
