@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Login</title>
 </head>
+
+<!-- <style>
+
+</style> -->
+
 <body>
     <div class="main">
         <h2>Login</h2>
         {% if error %}
-            <p style="color: red;">{{ error }}</p>
+        <p style="color: red;">{{ error }}</p>
         {% endif %}
         <form method="post" action="/login">
             <label>Username</label>
             <input type="text" name="username" required>
-    
+
             <label>Password</label>
             <input type="password" name="password" required>
             <!-- <div id="password-error" style="color: red; display: none; margin-top: 5px;"></div> -->
-    
+
             <button type="submit">Login</button>
             <div style="margin-top: 20px; text-align: center;">
                 <p>(for SLPs) Don't have an account? <a href="/signup">Sign up</a></p>
@@ -32,4 +38,5 @@
         </form>
     </div>
 </body>
+
 </html>

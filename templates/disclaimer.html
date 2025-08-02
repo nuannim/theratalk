@@ -2,219 +2,740 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <title>Disclaimer</title>
-    <style>
-        * {
-            font-family: "Prompt";
-            text-decoration: none;
-            scroll-behavior: smooth;
-            color: #666666;
-            font-weight: 550;
-        }
+  <title>Disclaimer</title>
+  <style>
+    * {
+      font-family: "Prompt", sans-serif;
+      text-decoration: none;
+      scroll-behavior: smooth;
+      color: #666666;
+      font-weight: 550;
+      box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #f7f9fe 0%, #e8f2ff 100%);
+      min-height: 100vh;
+    }
 
-        .main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* vertical center */
-            align-items: center;
-            /* horizontal center */
-            gap: 20px;
-            height: 100vh;
-            /* full screen height */
-            padding: 20px;
-            /* ensure padding on small screens */
-            box-sizing: border-box;
-            text-align: center;
-        }
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+    
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      height: 100vh;
+      position: relative;
+    }
+    
+    .top::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+    
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 5.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #7293df 0%, #5a7bd8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 20px rgba(114, 147, 223, 0.3);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #goto {
+      width: 220px;
+      height: 55px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #7293df 0%, #5a7bd8 100%);
+      border: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(114, 147, 223, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    #goto::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    #goto:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(114, 147, 223, 0.4);
+    }
+
+    #goto:hover::before {
+      left: 100%;
+    }
+
+    #goto:active {
+      transform: translateY(0);
+    }
+
+    #seemore {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      width: 85%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.4s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-content h2 {
+      color: #7293df;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .modal-content p {
+      line-height: 1.6;
+      color: #555;
+      text-align: justify;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      background: rgba(114, 147, 223, 0.1);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #7293df;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn:hover {
+      background: rgba(114, 147, 223, 0.2);
+      transform: rotate(90deg);
+    }
 
 
-        h1{
-            font-size: 60px;
-        }
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        h1,
-        h2,
-        p {
-            margin: 0;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        p {
-            text-align: start;
-        }
+    .features-section {
+      padding: 80px 0;
+      background: white;
+    }
 
-        #goto {
-            width: 200px;
-            height: 50px;
-            border-radius: 15px;
-            background-color: white;
-            border: 1.5px solid #ececec;
-            transition: ease-in-out 0.2s;
-            cursor: pointer;
-            color: #7293df;
-            font-size: 15px;
-        }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #7293df;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
 
-        #goto:hover {
-            border: 1.5px solid #dae5ff;
-            background-color: #f7f9fe;
-        }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
 
-        #myBtn {
-            border: 0;
-            color: #666666;
-            transition: ease-in-out 0.2s;
-            background-color: white;
-            font-size: 15px;
-            cursor: pointer;
-        }
+    .feature-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(114, 147, 223, 0.1);
+    }
 
-        #myBtn:hover {
-            color: #7293df;
-        }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(114, 147, 223, 0.2);
+    }
 
-        /* === MODAL STYLES === */
-        #seemore {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-        }
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #7293df 0%, #5a7bd8 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: white;
+    }
 
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            width: 80%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
 
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: ease-in-out 0.2s;
-            color: #666666;
-        }
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
 
-        .close-btn:hover {
-            color: #7293df;
-        }
+    .about-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f7f9fe 0%, #e8f2ff 100%);
+    }
 
-        #login:hover {
-            border: 1.5px solid #dae5ff;
-            background-color: #f7f9fe;
-            color: #7293df;
-            transition: ease-in-out 0.2s;
-        }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-        #login {
-            width: 260px;
-            height: 40px;
-            border-radius: 15px;
-            background-color: white;
-            color: #7293df;
-            border: 1.5px solid #ececec;
-            transition: ease-in-out 0.2s;
-            cursor: pointer;
-            font-size: 15px;
-        }
-    </style>
+    .about-text h2 {
+      font-size: 2.2rem;
+      color: #7293df;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #7293df;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .about-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-placeholder {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #7293df 0%, #5a7bd8 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: white;
+      box-shadow: 0 20px 40px rgba(114, 147, 223, 0.3);
+    }
+
+    #myBtn {
+      border: none;
+      color: #7293df;
+      transition: all 0.3s ease;
+      background: rgba(114, 147, 223, 0.1);
+      font-size: 15px;
+      cursor: pointer;
+      padding: 12px 24px;
+      border-radius: 20px;
+      font-weight: 500;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    #myBtn:hover {
+      background: rgba(114, 147, 223, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(114, 147, 223, 0.2);
+    }
+
+
+    @media (max-width: 768px) {
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .stats {
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .image-placeholder {
+        width: 250px;
+        height: 250px;
+        font-size: 4rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      #goto {
+        width: 200px;
+        height: 50px;
+        font-size: 15px;
+      }
+      
+      .modal-content {
+        width: 95%;
+        padding: 30px 20px;
+      }
+      
+      .top {
+        gap: 30px;
+      }
+    }
+
+
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #7293df;
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb:hover {
+      background: #5a7bd8;
+    }
+
+    .bg-wave {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .wave-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .wave-bar {
+       width: 15px;
+       height: 120px;
+       background: rgba(114, 147, 223, 0.7);
+       margin: 0 2px;
+       border-radius: 7px;
+       transform-origin: bottom;
+       filter: blur(0.3px);
+     }
+     
+     @media (max-width: 480px) {
+       .wave-bar {
+         width: 12px;
+         height: 70px;
+         margin: 0 1.8px;
+         border-radius: 6px;
+         background: rgba(114, 147, 223, 0.75);
+       }
+       
+       .wave-container {
+         padding-bottom: 0;
+       }
+     }
+     
+     @media (max-width: 768px) {
+       .wave-bar {
+         width: 30px;
+         height: 100px;
+         margin: 0 1.8px;
+         border-radius: 6px;
+         background: rgba(114, 147, 223, 0.75);
+       }
+       
+       .wave-container {
+         padding-bottom: 0;
+       }
+     }
+     
+     
+     @media (max-width: 1200px) {
+       .wave-bar {
+         width: 100px;
+         height: 100px;
+         border-radius: 9px;
+       }
+       
+       .wave-container {
+         padding-bottom: 0;
+       }
+     }
+  </style>
 </head>
 
 <body>
-    <div class="main">
-        <h1 style="color: #7293df;">TheraTalk</h1>
-        <button id="login" onclick="window.location.href='/login'">เข้าสู่เว็บไซต์</button>
-        <button onclick="myFunction()" id="myBtn">ข้อตกลงในการใช้ซอฟต์แวร์ (Disclaimer)</button>
-        <div id="seemore">
-            <div class="modal-content">
-                <button class="close-btn" onclick="myFunction()"><i class="fa-solid fa-xmark"></i></button>
-                <h2>ข้อตกลงในการใช้ซอฟต์แวร์</h2>
-                <p>ข้อตกลงในการใช้ซอฟต์แวร์ ซอฟต์แวร์นี้เป็นผลงานที่พัฒนาขึ้นโดย นางสาว อินทิรา ธนัพประภัศร์ นางสาว
-                    ปนัสยา
-                    บุญประกอบ และ นาย สรวิชญ์ กาญจนสันติศักดิ์ จากสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
-                    ภายใต้การดูแลของ ดร. ศิรสิทธิ์ โล่ห์ชนะจิต ภายใต้โครงการ เทอร่า ทอล์ก ซึ่งสนับสนุนโดย
-                    สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
-                    โดยมีวัตถุประสงค์เพื่อส่งเสริมให้นักเรียนและนักศึกษาได้เรียนรู้และฝึกทักษะในการพัฒนาซอฟต์แวร์
-                    ลิขสิทธิ์ของซอฟต์แวร์นี้จึงเป็นของผู้พัฒนา
-                    ซึ่งผู้พัฒนาได้อนุญาตให้สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ เผยแพร่ซอฟต์แวร์นี้ตาม
-                    “ต้นฉบับ”
-                    โดยไม่มีการแก้ไขดัดแปลงใด ๆ ทั้งสิ้น
-                    ให้แก่บุคคลทั่วไปได้ใช้เพื่อประโยชน์ส่วนบุคคลหรือประโยชน์ทางการศึกษาที่ไม่มีวัตถุประสงค์ในเชิงพาณิชย์
-                    โดยไม่คิดค่าตอบแทนการใช้ซอฟต์แวร์ ดังนั้นสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
-                    จึงไม่มีหน้าที่ในการดูแล บำรุงรักษา จัดการอบรมการใช้งาน หรือพัฒนาประสิทธิภาพซอฟต์แวร์
-                    รวมทั้งไม่รับรองความถูกต้องหรือประสิทธิภาพการทำงานของซอฟต์แวร์ ตลอดจนไม่รับประกันความเสียหายต่าง ๆ
-                    อันเกิดจากการใช้ซอฟต์แวร์นี้ทั้งสิ้น</p>
-                <br>
-                <h2>License Agreement</h2>
-                <p>License Agreement This software is a work developed by Indira Thanabpraphas, Panatsaya Boonprakob,
-                    and
-                    Sorawit
-                    Kanjanasantisak from King Mongkut's Institute of Technology Ladkrabang under the provision of Dr.
-                    Sirasit
-                    Lochanachit under TheraTalk Project, which has been supported by the National Science and Technology
-                    Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their
-                    skills in
-                    developing software. Therefore, the intellectual property of this software shall belong to the
-                    developer and
-                    the developer gives NSTDA a permission to distribute this software as an “as is” and non-modified
-                    software
-                    for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or
-                    academic
-                    purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to
-                    the user
-                    for taking care, maintaining, training, or developing the efficiency of this software. Moreover,
-                    NSTDA shall
-                    not be liable for any error, software efficiency and damages in connection with or arising out of
-                    the use of
-                    the software.</p>
-            </div>
-        </div>
+  <!-- <div class="bg-wave">
+    <div class="wave-container" id="waveContainer">
+
     </div>
+  </div> -->
+  <div class="top">
+      <!-- <div class="bg-wave" id="waveContainer"></div> -->
+      <h1 style="color: #7293df;">TheraTalk</h1>
+      <div class="hero-buttons">
+        <a href="/login"><button id="goto">เข้าสู่เว็บไซต์</button></a>
+        <button onclick="myFunction()" id="myBtn">ข้อตกลงในการใช้ซอฟต์แวร์ (Disclaimer)</button>
+      </div>
+    </div>
+    
+
+    <div class="features-section">
+      <div class="container">
+        <h2 class="section-title">คุณสมบัติหลัก</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <h3>ผู้ป่วยฝึกการออกเสียง</h3>
+            <p>ระบบฝึกการออกเสียงคำและประโยคต่าง ๆ พร้อมการตรวจสอบความถูกต้อง</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>ติดตามความก้าวหน้า</h3>
+            <p>อำนวยความสะดวกให้นักแก้ไขการพูด ด้วย ระบบติดตามและประเมินผลความก้าวหน้าในการฝึกพูดของผู้ป่วย</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3>บำบัดเฉพาะบุคคล</h3>
+            <p>นักแก้ไขการพูดจัดโปรแกรมฟื้นฟูตามความต้องการของผู้ป่วยแต่ละคน</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>ระบบจัดการผู้ป่วย</h3>
+            <p>นักแก้ไขการพูดจัดการข้อมูลง่ายได้ง่ายขึ้น! ด้วยระบบจัดการผู้ป่วย</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="about-section">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>เกี่ยวกับ TheraTalk</h2>
+            <p>TheraTalk เป็นระบบที่พัฒนาขึ้นเพื่อช่วยเหลือผู้ป่วยในการฟื้นฟูการพูด ด้วยเทคโนโลยีที่ทันสมัยและวิธีการบำบัดที่มีประสิทธิภาพ</p>
+            <p>โดย <br>นักศึกษาคณะเทคโนโลยีสารสนเทศ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+            <div class="stats">
+              <!-- <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">ความพึงพอใจ</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">ผู้ใช้งาน</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">พร้อมใช้งาน</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="about-image">
+            <div class="image-placeholder">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="seemore">
+      <div class="modal-content">
+        <button class="close-btn" onclick="myFunction()"><i class="fa-solid fa-xmark"></i></button>
+
+        <h2>ข้อตกลงในการใช้ซอฟต์แวร์</h2>
+        <p>ข้อตกลงในการใช้ซอฟต์แวร์ ซอฟต์แวร์นี้เป็นผลงานที่พัฒนาขึ้นโดย นางสาว อินทิรา ธนัพประภัศร์ นางสาว ปนัสยา
+          บุญประกอบ และ นาย สรวิชญ์ กาญจนสันติศักดิ์ จากสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+          ภายใต้การดูแลของ ดร. ศิรสิทธิ์ โล่ห์ชนะจิต ภายใต้โครงการ เทอร่า ทอล์ก ซึ่งสนับสนุนโดย
+          สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
+          โดยมีวัตถุประสงค์เพื่อส่งเสริมให้นักเรียนและนักศึกษาได้เรียนรู้และฝึกทักษะในการพัฒนาซอฟต์แวร์
+          ลิขสิทธิ์ของซอฟต์แวร์นี้จึงเป็นของผู้พัฒนา
+          ซึ่งผู้พัฒนาได้อนุญาตให้สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ เผยแพร่ซอฟต์แวร์นี้ตาม “ต้นฉบับ”
+          โดยไม่มีการแก้ไขดัดแปลงใด ๆ ทั้งสิ้น
+          ให้แก่บุคคลทั่วไปได้ใช้เพื่อประโยชน์ส่วนบุคคลหรือประโยชน์ทางการศึกษาที่ไม่มีวัตถุประสงค์ในเชิงพาณิชย์
+          โดยไม่คิดค่าตอบแทนการใช้ซอฟต์แวร์ ดังนั้นสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ
+          จึงไม่มีหน้าที่ในการดูแล บำรุงรักษา จัดการอบรมการใช้งาน หรือพัฒนาประสิทธิภาพซอฟต์แวร์
+          รวมทั้งไม่รับรองความถูกต้องหรือประสิทธิภาพการทำงานของซอฟต์แวร์ ตลอดจนไม่รับประกันความเสียหายต่าง ๆ
+          อันเกิดจากการใช้ซอฟต์แวร์นี้ทั้งสิ้น</p>
+          <br>
+        <h2>License Agreement</h2>
+        <p>License Agreement This software is a work developed by Indira Thanabpraphas, Panatsaya Boonprakob, and
+          Sorawit
+          Kanjanasantisak from King Mongkut's Institute of Technology Ladkrabang under the provision of Dr. Sirasit
+          Lochanachit under TheraTalk Project, which has been supported by the National Science and Technology
+          Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills in
+          developing software. Therefore, the intellectual property of this software shall belong to the developer and
+          the developer gives NSTDA a permission to distribute this software as an “as is” and non-modified software
+          for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or academic
+          purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user
+          for taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall
+          not be liable for any error, software efficiency and damages in connection with or arising out of the use of
+          the software.</p>
+
+    </div>
+  </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script>
-    const modal = document.getElementById("seemore");
-    let status = 0;
+  let status = 0;
+  const modal = document.getElementById("seemore");
 
-    function myFunction() {
-        if (status === 0) {
-            modal.style.display = "flex";
-            status = 1;
-        } else {
-            modal.style.display = "none";
-            status = 0;
-        }
+  modal.addEventListener("click", function () {
+    modal.style.display = "none";
+    status = 0;
+  });
+
+  
+  const tl = anime.timeline({
+  easing: 'easeOutExpo',
+  duration: 750
+});
+
+
+   const waveContainer = document.getElementById('waveContainer');
+   
+   function createWaveBars() {
+     waveContainer.innerHTML = '';
+
+      let divisor = 7;
+     
+     const numberOfBars = Math.floor(window.innerWidth / divisor);
+     
+     for (let i = 0; i < numberOfBars; i++) {
+       const bar = document.createElement('div');
+       bar.className = 'wave-bar';
+       waveContainer.appendChild(bar);
+     }
+   }
+  
+
+  createWaveBars();
+  
+
+   window.addEventListener('resize', createWaveBars);
+
+
+  let animationTime = 0;
+  let speechPattern = [];
+  
+
+  function generateSpeechPattern() {
+    speechPattern = [];
+    for (let i = 0; i < 100; i++) {
+
+      const intensity = Math.random() > 0.3 ? Math.random() * 0.8 + 0.2 : Math.random() * 0.1;
+      speechPattern.push(intensity);
     }
+  }
+  
+  generateSpeechPattern();
+  
+  function createWaveAnimation() {
+     animationTime += 0.01;
+     
+     anime({
+       targets: '.wave-bar',
+       scaleY: function(el, i) {
 
-    modal.addEventListener("click", function () {
+         const baseWave = Math.sin((i * 0.12) + animationTime) * 0.4;
+         const speechWave = Math.sin((i * 0.06) + (animationTime * 0.6)) * 0.5;
+         const gentleWave = Math.sin((i * 0.03) + (animationTime * 0.3)) * 0.25;
+         const ultraSmoothWave = Math.sin((i * 0.02) + (animationTime * 0.2)) * 0.15;
+         
+         const patternIndex = Math.floor((i + animationTime * 2) % speechPattern.length);
+         const speechIntensity = speechPattern[patternIndex] * 0.6 + 0.4; // ลดความแรงอีก
+         
+
+         const combinedWave = (baseWave + speechWave + gentleWave + ultraSmoothWave + 1.0) * speechIntensity;
+         return Math.max(0.2, Math.min(2.0, combinedWave)); // ลดช่วงการเคลื่อนไหวอีก
+       },
+       opacity: function(el, i) {
+
+         const patternIndex = Math.floor((i + animationTime * 2) % speechPattern.length);
+         const speechIntensity = speechPattern[patternIndex] * 0.3 + 0.7;
+         const opacityWave = Math.sin((i * 0.08) + animationTime) * 0.1 + 0.75;
+         return Math.max(0.5, Math.min(0.85, opacityWave * speechIntensity));
+       },
+       duration: 600,
+       easing: 'easeInOutCubic',
+       complete: function() {
+
+         if (Math.floor(animationTime * 1.5) % 100 === 0) {
+           generateSpeechPattern();
+         }
+         createWaveAnimation();
+       }
+     });
+   }
+  
+
+  createWaveAnimation();
+
+    
+
+  function myFunction() {
+      if (status === 0) {
+        modal.style.display = "flex";
+        status = 1;
+      } else {
         modal.style.display = "none";
         status = 0;
-    });
+      }
+    }
+
+
 </script>
 
 </html>
