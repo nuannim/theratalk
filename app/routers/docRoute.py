@@ -272,14 +272,19 @@ async def addNewPatient(
     ppassword: str = Form(...)
 ):
 
-    print(f'😭😭😭 @router.post("/addnewpatient")')
-    print('😭 pfirstname:', pfirstname)
-    print('😭 plastname:', plastname)
-    print('😭 pbirthday:', pbirthday)
-    print('😭 pusername:', pusername)
-    print('😭 ppassword:', ppassword)
+
 
     user_id = request.cookies.get("user_id")
+
+    existing_user = supabase.table("patients").select("pusername").eq("pusername", pusername).execute()
+
+    if existing_user.data:
+        print(f'😭😭😭 @router.post("/addnewpatient")')
+        print('ไม่เข้าเว้ย')
+        return templates.TemplateResponse("addnewpatient_p.html", {
+            "request": request,
+            "error": "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว กรุณาใช้ชื่ออื่น"
+        })
 
     data = {
         "pfirstname": pfirstname,
@@ -290,15 +295,21 @@ async def addNewPatient(
         "slpid": user_id
     }
 
-
     try:
+        print(f'😭😭😭 @router.post("/addnewpatient")')
+        print('😭 pfirstname:', pfirstname)
+        print('😭 plastname:', plastname)
+        print('😭 pbirthday:', pbirthday)
+        print('😭 pusername:', pusername)
+        print('😭 ppassword:', ppassword)
+
         response = supabase.table("patients").insert(data).execute()
         print("✅ Insert success:", response)
 
         new_patient_id = response.data[0]["patientid"]
         default_mission_data = {
             "patientid": new_patient_id,
-            "data": [{"task": "เช็คชื่อรายวัน", "value": 1, "max": 1}], #เพิ้ม mission ใหม่
+            "data": [{"task": "เช็คชื่อรายวัน", "value": 1, "max": 1}],
             "missionDay": datetime.utcnow().date().isoformat()
         }
 
@@ -308,6 +319,7 @@ async def addNewPatient(
         print("❌ Insert error:", e)
 
     return RedirectResponse(url="/slp/", status_code=302)
+
 
 
 @router.post("/assign/")

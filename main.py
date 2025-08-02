@@ -128,6 +128,17 @@ async def create_user(
     slppassword: str = Form(...),
     slphospital: str = Form(...)
 ):
+    
+    existing_user = supabase.table("slp").select("slpusername").eq("slpusername", slpusername).execute()
+
+    if existing_user.data:
+        print(f'😭😭😭 @router.post("/signup")')
+        print('ไม่เข้าเว้ย')
+        return templates.TemplateResponse("signup.html", {
+            "request": request,
+            "error": "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว กรุณาใช้ชื่ออื่น"
+        })
+
 
     print('😭😭😭 /signup debug')
     print('😭 slpfirstname: ', slpfirstname)
