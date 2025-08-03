@@ -75,7 +75,7 @@ p {
   justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 5px #0000001a;
-  background-color: white;
+  background-color: #7293df;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -84,11 +84,14 @@ p {
 .mid {
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 60%;
   gap: 20px;
 }
 
-.mid a,
+.mid a {
+  color: #ffffff;
+}
+
 .txt p {
   color: #bec9d5;
 }
@@ -99,7 +102,32 @@ p {
 }
 
 .mid a:hover {
-  color: #7293df;
+  color: #bec9d5;
+}
+
+.las i {
+  transition: ease-in-out 0.2s;
+  color: #ffffff;
+  cursor: pointer;
+}
+.las i:hover {
+  color: #bec9d5;
+}
+
+#home {
+  color: #ffffff;
+}
+#home:hover {
+  color: #bec9d5;
+}
+
+.logo {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.logo h4 {
+  color: #ffffff;
 }
 
 .las {
@@ -110,22 +138,11 @@ p {
   align-items: center;
   gap: 15px;
   padding-right: 12px;
+
+  flex-direction: row;
 }
 
-.las i {
-  color: #7293df;
-  cursor: pointer;
-}
-
-#out {
-  transition: ease-in-out 0.2s;
-  color: #bec9d5;
-  margin-left: 10px;
-}
-#out:hover {
-  color: #7293df;
-}
-/* .las img {
+.las img {
   height: 40px;
   width: 40px;
 }
@@ -140,26 +157,19 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: end;
-} */
-
-/* .las a {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  text-align: end;
-  gap: 10px;
-} */
-
-.logo {
-  padding-left: 12px;
-  width: 20%;
 }
 
 .txt p {
   font-weight: 400;
   font-size: 13px;
+}
+i {
+  transition: ease-in-out 0.2s;
+  color: #bec9d5;
+  cursor: pointer;
+}
+i:hover {
+  color: #7293df;
 }
 
 .namenuser p {

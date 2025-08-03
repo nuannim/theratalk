@@ -68,7 +68,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 5px #0000001a;
-  background-color: white;
+  background-color: #7293df;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -81,7 +81,10 @@ button:hover {
   gap: 20px;
 }
 
-.mid a,
+.mid a {
+  color: #ffffff;
+}
+
 .txt p {
   color: #bec9d5;
 }
@@ -92,7 +95,23 @@ button:hover {
 }
 
 .mid a:hover {
-  color: #7293df;
+  color: #bec9d5;
+}
+
+#home {
+  color: #ffffff;
+}
+#home:hover {
+  color: #bec9d5;
+}
+
+.logo {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.logo h4 {
+  color: #ffffff;
 }
 
 .las {
@@ -120,11 +139,6 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: end;
-}
-
-.logo {
-  padding-left: 12px;
-  width: 20%;
 }
 
 .txt p {

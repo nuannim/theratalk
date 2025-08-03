@@ -118,7 +118,7 @@ h4{
   justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 5px #0000001a;
-  background-color: white;
+  background-color: #7293df;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -131,18 +131,24 @@ h4{
   gap: 20px;
 }
 
-.mid a,
-.txt p {
-  color: #bec9d5;
-}
-
 .mid a {
+  color: #ffffff;
   cursor: pointer;
   transition: ease-in-out 0.2s;
 }
 
 .mid a:hover {
-  color: #7293df;
+  color: #bec9d5;
+}
+
+#home {
+  color: #ffffff;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+#home:hover {
+  color: #bec9d5;
 }
 
 .las {
@@ -177,18 +183,24 @@ h4 {
   width: 20%;
 }
 
+.logo h4 {
+  color: #ffffff;
+}
+
 .txt p {
   font-weight: 400;
   font-size: 13px;
+  color: #ffffff;
 }
-i {
+.las i {
   transition: ease-in-out 0.2s;
-  color: #bec9d5;
+  color: #ffffff;
   cursor: pointer;
 }
-i:hover {
-  color: #7293df;
+.las i:hover {
+  color: #bec9d5;
 }
+
 .top {
   width: 100%;
   display: flex;
