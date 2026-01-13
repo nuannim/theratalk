@@ -1,7 +1,15 @@
+# What is TheraTalk?
+A web application designed for Aphasia to help them practice speaking anytime, anywhere. 
+<!-- This project reached the semifinal round in the Healthcare track of the 27th National Software Contest (NSC) in 2025. -->
+
+# Honors & Awards
+- Semifinalist in Healthcare track, 27th National Software Contest (NSC) 2025
+- Honorable Award, AI Thailand Hackathon 2024 EP.2
+
 # ชี้แจง เรื่อง วิธีการติดตั้งเว็บแอปพลิเคชัน
 เนื่องจากเว็บแอปพลิเคชันมีการใช้บริการ API ทั้งในฐานข้อมูลและโมเดล AI จำเป็นต้องใช้ API Key ในการเข้าถึงบริการนั้น ซึ่ง **API Key เป็นข้อมูลที่ไม่สามารถเผยแพร่ได้** จึง**ไม่สามารถติดตั้งได้** ขออภัยในความไม่สะดวกมา ณ ที่นี้
 
-### เข้าสู่หน้าเว็บได้ที่ https://trusted-trout-internal.ngrok-free.app
+~~### เข้าสู่หน้าเว็บได้ที่ https://trusted-trout-internal.ngrok-free.app~~
 
 # ข้อตกลงในการใช้ซอฟต์แวร์
 ### ข้อตกลงในการใช้ซอฟต์แวร์ 
