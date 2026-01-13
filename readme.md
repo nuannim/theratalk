@@ -4,7 +4,7 @@ A web application designed for Aphasia to help them practice speaking anytime, a
 
 # Honors & Awards
 - Semifinalist in Healthcare track, 27th National Software Contest (NSC) 2025
-- Honorable Award, AI Thailand Hackathon 2024 EP.2
+- [Honorable Award, AI Thailand Hackathon 2024 EP.2](https://www.kmitl.ac.th/article/%E0%B8%99%E0%B8%A8%E0%B9%84%E0%B8%AD%E0%B8%97%E0%B8%B5-%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%A5%E0%B8%8A%E0%B8%A1%E0%B9%80%E0%B8%8A%E0%B8%A2-ai-thailand-hackathon-2024)
 
 # สำหรับ NSC 2025 
 ## ชี้แจง เรื่อง วิธีการติดตั้งเว็บแอปพลิเคชัน
